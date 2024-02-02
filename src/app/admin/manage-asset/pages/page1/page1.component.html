@@ -1,0 +1,11 @@
+<!-- page1.component.html -->
+<form [formGroup]="form">
+    <label for="landId">Land ID:</label>
+    <input type="text" id="landId" formControlName="landId" />
+    <br>
+    <label for="barcode">Barcode:</label>
+    <input type="text" id="barcode" formControlName="barcode" />
+    <!-- Add more form fields based on your form group -->
+  </form>
+  <button (click)="nextPage()" [disabled]="!form.valid">Next</button>
+  

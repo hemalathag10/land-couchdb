@@ -1,0 +1,26 @@
+/* src/styles.css or your component-specific styles */
+
+.container-fluid {
+    margin-top: 20px;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .search-add-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .asset-table {
+    overflow-x: auto;
+  }
+  
+  .table th, .table td {
+    text-align: center;
+  }
+  
+  /* Add more specific styles as needed */
+  
