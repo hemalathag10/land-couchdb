@@ -6,7 +6,7 @@
     <app-page2 *ngIf="currentPage === 2" [form]="page2Form"></app-page2>
     <!-- Include other pages as needed -->
 
-    <button *ngIf="currentPage === 1" type="button" (click)="nextPage()">Next</button>
+    <button *ngIf="currentPage === 1" type="button" [disabled]="!page1Form.valid" (click)="nextPage()">Next</button>
     <button *ngIf="currentPage > 1" type="button" (click)="previousPage()">Previous</button>
     <button *ngIf="currentPage === 2" type="submit">Submit</button>
   </form>

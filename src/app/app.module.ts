@@ -33,7 +33,8 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    BrowserAnimationsModule,MatDialogModule,HttpClientModule
+    BrowserAnimationsModule,MatDialogModule,HttpClientModule,
+    FormsModule
   ],
   providers: [AssetService],
   bootstrap: [AppComponent]

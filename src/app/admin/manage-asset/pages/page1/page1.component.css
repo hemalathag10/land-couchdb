@@ -1,0 +1,59 @@
+/* page1.component.css */
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #333;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #fdfcfc;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
+  button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+  }
+  
+  /* Optional: Style for disabled input/select */
+  input:disabled,
+  select:disabled {
+    background-color: #ecf0f1;
+  }
+  /* page1.component.css */
+
+.form-container {
+  height: 400px; /* Set the desired height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  /* Add any other styling as needed */
+}
+
+  

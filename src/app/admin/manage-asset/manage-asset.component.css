@@ -1,26 +1,72 @@
-/* src/styles.css or your component-specific styles */
+/* manage-asset.component.css */
 
 .container-fluid {
-    margin-top: 20px;
-  }
-  
-  h2 {
-    color: #333;
-  }
-  
-  .search-add-section {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .asset-table {
-    overflow-x: auto;
-  }
-  
-  .table th, .table td {
-    text-align: center;
-  }
-  
-  /* Add more specific styles as needed */
-  
+  margin: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #f0f0f0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+button {
+  margin-bottom: 20px;
+}
+
+/* Add the following styles to your existing CSS */
+
+.table-container {
+  overflow-x: auto;
+}
+
+.action-buttons {
+  white-space: nowrap; /* Prevent buttons from wrapping to the next line */
+}
+
+/* Add the following styles to your existing CSS */
+
+.search-bar {
+  margin-bottom: 20px; /* Adjust the margin as needed */
+  display: flex;
+  align-items: center;
+}
+
+label {
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+select, input {
+  margin-right: 10px; /* Adjust the margin as needed */
+  padding: 5px; /* Adjust the padding as needed */
+}
+
+button {
+  padding: 5px 10px; /* Adjust the padding as needed */
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+/* Add other styles as needed */

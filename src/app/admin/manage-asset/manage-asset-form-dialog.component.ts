@@ -9,10 +9,15 @@ import { AssetService } from 'src/app/services/asset.service'; // Update the pat
 @Component({
   selector: 'app-manage-asset-form-dialog',
   templateUrl: './manage-asset-form-dialog.component.html',
+  styleUrls: ['./manage-asset-form-dialog.component.css']
+
 })
 export class ManageAssetFormDialogComponent implements AfterViewInit {
   page1Form: FormGroup;
   page2Form: FormGroup;
+
+  // Array to hold form groups for each page
+  pageForms: FormGroup[] = [];
 
   // Use 'any' type for dynamic page components
   pageComponents: { [key: string]: QueryList<any> } = {};
@@ -35,6 +40,11 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
     this.page1Form = this.fb.group({
       landId: ['', Validators.required],
       barcode: ['', Validators.required],
+      landArea: ['', Validators.required],
+    selectedDistrict: ['', Validators.required],
+    selectedTaluk: ['', Validators.required],
+    state: ['', Validators.required],
+   
       // Add more controls as needed
     });
 
@@ -44,8 +54,12 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
       // Add more controls as needed
     });
 
-    // Initially, set the values of page2Form to an empty state
-    this.page2Form.reset();
+    // Set the values of the current page form to the data received
+    this.page1Form.patchValue(data);
+
+    // Push the form groups into the array
+    this.pageForms.push(this.page1Form);
+    this.pageForms.push(this.page2Form);
   }
 
   // Function to set page components
@@ -60,16 +74,24 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
     this.setPageComponents(1, this.page1Components);
     this.setPageComponents(2, this.page2Components);
     // Set page components for other pages as needed
+
+    // Set the values of the current page form to the data received after view initialization
+    this.pageForms[this.currentPage - 1].patchValue(this.data);
   }
 
   // Function to move to the next page
   nextPage() {
     // Validate the current page's form before moving to the next page
-    const currentComponents = this.pageComponents[`page${this.currentPage}Components`];
-    if (currentComponents && this.isPageValid(currentComponents)) {
+    const currentForm = this.pageForms[this.currentPage - 1];
+  
+    if (currentForm.valid) {
       this.currentPage++;
+    } else {
+      // Handle invalid form (show error message, mark invalid fields, etc.)
+      console.log('Current page form is not valid.');
     }
   }
+  
 
   // Function to move to the previous page
   previousPage() {
@@ -86,17 +108,14 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
   // Function to handle form submission
   onSubmit() {
     // Combine form data from all pages
-    const formData = {
-      page1: this.page1Form.value,
-      page2: this.page2Form.value,
-      // Add more pages as needed
-    };
+    // Combine form data from all pages
+        const formData = this.pageForms.map(form => form.value);
 
     // Log combined form data to the console
     console.log('All page data:', formData);
-
+  
     // Assuming you want to store the data in your database using the AssetService
-    this.assetService.createAsset(formData).subscribe(
+    this.assetService.createAsset(formData, '9d33b28b729f95638256ab8722005263').subscribe(
       (response: any) => {
         console.log('Data stored in the database successfully:', response);
         // Optionally, you can navigate to another page or perform other actions after successful storage
@@ -104,8 +123,7 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
       (error) => {
         console.error('Error storing data in the database:', error);
         // Handle error (show error message, log, etc.)
-      }
-    );
+      });
 
     // Close the dialog
     this.dialogRef.close();

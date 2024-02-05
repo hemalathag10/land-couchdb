@@ -1,9 +1,60 @@
-<!-- manage-asset.component.html -->
-
 <div class="container-fluid">
   <h2>Manage Assets</h2>
+  <div class="search-bar">
+    <label for="searchOption">Search By:</label>
+    <select id="searchOption">
+      <option value="landId">Land ID</option>
+      <option value="barcode">Barcode</option>
+    </select>
+    <input type="text" placeholder="Enter...">
+    <button class="btn btn-primary">Search</button>
+    <button class="btn btn-success" (click)="showAddNewForm()">Add New Asset</button>
 
-  <button class="btn btn-success" (click)="showAddNewForm()">Add New Asset</button>
+  </div>
 
 
+  <div class="table-container">
+    <table *ngIf="page1Data && page1Data.length > 0" class="table">
+      <thead>
+        <tr>
+          <th>Land Area</th>
+          <th>District</th>
+          <th>Taluk</th>
+          <th>Ward</th>
+          <th>State</th>
+          <th>Survey Number</th>
+          <th>Subdivision Number</th>
+          <th>Type of Ownership</th>
+          <th>Land Use Type</th>
+          <th>Actions</th>
+          <th>Ownership</th>
+          <!-- Add other headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let assetArray of page1Data">
+          <!-- Display properties from the first JSON object in each inner array -->
+          <tr *ngIf="assetArray.length > 0">
+            <td>{{ assetArray[0]?.landArea }}</td>
+            <td>{{ assetArray[0]?.selectedDistrict }}</td>
+            <td>{{ assetArray[0]?.selectedTaluk }}</td>
+            <td>{{ assetArray[0]?.ward }}</td>
+            <td>{{ assetArray[0]?.state }}</td>
+            <td>{{ assetArray[0]?.surveyNumber }}</td>
+            <td>{{ assetArray[0]?.subdivisionNumber }}</td>
+            <td>{{ assetArray[0]?.ownership }}</td>
+            <td>{{ assetArray[0]?.landUseType }}</td>
+            <td class="action-buttons">
+              <button class="btn btn-primary btn-sm">Update</button>
+              <button class="btn btn-info btn-sm">View</button>
+            </td>
+            <td>
+              <button class="btn btn-primary btn-sm">View</button>
+            </td>
+            <!-- Add other columns as needed -->
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,11 +1,71 @@
 <!-- page1.component.html -->
+<div class="form-container" [formGroup]="form">
+
 <form [formGroup]="form">
-    <label for="landId">Land ID:</label>
-    <input type="text" id="landId" formControlName="landId" />
-    <br>
-    <label for="barcode">Barcode:</label>
-    <input type="text" id="barcode" formControlName="barcode" />
-    <!-- Add more form fields based on your form group -->
-  </form>
-  <button (click)="nextPage()" [disabled]="!form.valid">Next</button>
+  <label for="landId">Land ID:</label>
+  <input type="number" id="landId" formControlName="landId" min="0" />
   
+  <br>
+
+  <label for="barcode">Barcode:</label>
+  <input type="text" id="barcode" formControlName="barcode" />
+  <br>
+
+  <label for="landArea">Land Area:</label>
+  <input type="number" id="landArea" formControlName="landArea" min="0"/>
+  <br>
+
+  <label for="ward">Ward Number:</label>
+  <input type="number" id="ward" formControlName="ward" min="0"/>
+  <br>
+
+  <label for="selectedDistrict">District:</label>
+  <select id="selectedDistrict" formControlName="selectedDistrict" (change)="onDistrictChange()">
+    <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+  </select>
+  <br>
+
+  <label for="selectedTaluk">Taluk:</label>
+  <select id="selectedTaluk" formControlName="selectedTaluk">
+    <option *ngFor="let taluk of taluks[form.get('selectedDistrict')?.value]" [value]="taluk">{{ taluk }}</option>
+  </select>
+  <br>
+
+  <label for="state">State:</label>
+  <select id="state" formControlName="state">
+    <option *ngFor="let s of states" [value]="s">{{ s }}</option>
+  </select>
+  <br>
+
+  <label for="surveyNumber">Survey Number:</label>
+  <input type="number" id="surveyNumber" formControlName="surveyNumber" min="0"/>
+  <br>
+
+  <label for="subdivisionNumber">Subdivision Number:</label>
+  <input type="number" id="subdivisionNumber" formControlName="subdivisionNumber" min="0"/>
+  <br>
+
+  <label for="ownership">Type of Ownership:</label>
+  <select id="ownership" formControlName="ownership">
+    <option value="Government">Government</option>
+    <option value="Mitta">Mitta</option>
+    <option value="Zamindari">Zamindari</option>
+    <option value="Inam">Inam</option>
+    <option value="Other">Other</option>
+  </select>
+  <br>
+
+  <label for="landUseType">Land Use Type:</label>
+  <select id="landUseType" formControlName="landUseType">
+    <option value="Residential">Residential</option>
+    <option value="Agricultural">Agricultural</option>
+    <option value="Commercial">Commercial</option>
+    <option value="Industrial">Industrial</option>
+    <option value="Other">Other</option>
+  </select>
+  <br>
+
+  <!-- Add other form fields as needed -->
+
+</form>
+</div>
