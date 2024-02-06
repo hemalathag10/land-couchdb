@@ -1,0 +1,57 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <!-- Remove the ownershipType select input -->
+  
+  <div>
+    <input type="date" id="ownershipDurationFrom" formControlName="ownershipDurationFrom" required>
+    <span>to</span>
+    <input type="date" id="ownershipDurationTo" formControlName="ownershipDurationTo" [min]="form.get('ownershipDurationFrom')?.value" required>
+    
+    <!-- Details for multiple owners -->
+    <label for="numOwners">Number of Owners:</label>
+    <input type="number" id="numOwners" formControlName="numOwners" required>
+
+    <!-- Add button to dynamically add owners -->
+    <button type="button" (click)="addOwners()">Add Owners</button>
+
+    <!-- Display details for each owner using formArray -->
+    <div formArrayName="owners">
+      <div *ngFor="let owner of owners.controls; let i = index">
+        <h2>Owner {{ i + 1 }}</h2>
+        <div [formGroupName]="i">
+          <label for="ownerName">Owner's Name:</label>
+          <input type="text" id="ownerName" formControlName="name" required>
+
+          <label for="contactInformation">Contact Information:</label>
+          <input type="text" id="contactInformation" formControlName="contactInformation" required>
+
+          <label for="address">Address:</label>
+          <input type="text" id="address" formControlName="address" required>
+
+          <label for="purchasePrice">Purchase Price:</label>
+          <input type="text" id="purchasePrice" formControlName="purchasePrice" required>
+
+          <label for="dateOfTransaction">Date of Transaction:</label>
+          <input type="date" id="dateOfTransaction" formControlName="dateOfTransaction" required>
+
+          <label for="transactionType">Type of Transaction:</label>
+          <select id="transactionType" formControlName="transactionType" required>
+            <option value="purchase">Purchase</option>
+            <option value="sale">Sale</option>
+            <option value="inheritance">Inheritance</option>
+          </select>
+
+          <label for="landUsageHistory">Land Usage History:</label>
+          <textarea id="landUsageHistory" formControlName="landUsageHistory" required></textarea>
+
+          <label for="buyerSellerDetails">Buyer/Seller Details:</label>
+          <input type="text" id="buyerSellerDetails" formControlName="buyerSellerDetails" required>
+        </div>
+
+        <!-- Include more input fields for other owner details here -->
+
+      </div>
+    </div>
+  </div>
+
+  </form>
+  <button (click)="nextPage()" [disabled]="!isValid()">Next</button>

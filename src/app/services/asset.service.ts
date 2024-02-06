@@ -45,14 +45,72 @@ export class AssetService {
       })
     );
   }
+  searchAssetByLandId(documentId: string, landId: number): Observable<any> {
+    const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
+    return this.http.get(url,{ headers: this.getHeaders() });
+  }
   
+
+  // updateOwnersArray(documentId: string, landId: number, updatedOwners: any[]): Observable<any> {
+  //   const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
+
+  //   // Create the updated data structure
+  //   const updatedData = {
+  //     $patch: {
+  //       asset: [
+  //         {
+  //           $each: [
+  //             {
+  //               landId: landId,
+  //               owners: updatedOwners
+  //             }
+  //           ],
+  //           $where: {
+  //             "landId": landId
+  //           }
+  //         }
+  //       ]
+  //     }
+  //   };
+
+  //   return this.http.patch(url, updatedData, { headers: this.getHeaders() });
+  // }
   
  
-
-  updateAsset(updatedData: any): Observable<any> {
-    const url = `${this.baseUrl}/${updatedData._id}?rev=${updatedData._rev}`; // Include _id and _rev in the URL
-    return this.http.put(url, updatedData, { headers: this.getHeaders() });
+  updateAsset(documentId: string, formData: any): Observable<any> {
+    const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
+  
+    return this.http.get(url, { headers: this.getHeaders() }).pipe(
+      switchMap((existingData: any) => {
+        // Flatten the inner arrays to make it easier to find and update
+        const flattenedAsset = existingData.asset.flat();
+  
+        // Find the index of the object based on landId
+        const indexToUpdate = flattenedAsset.findIndex((obj: any) => obj.landId === formData.landId);
+  
+        if (indexToUpdate !== -1) {
+          // Update the object within the flattened array
+          flattenedAsset[indexToUpdate] = formData;
+        }
+  
+        // Reorganize the flattened array back into the nested structure
+        existingData.asset = [flattenedAsset.slice(0, 2), flattenedAsset.slice(2)];
+  
+        // Update the existing document
+        return this.http.put(url, existingData, { headers: this.getHeaders() });
+      }),
+      catchError((error: any) => {
+        console.error('Error updating data:', error);
+        throw error;
+      })
+    );
   }
+  
+  
+  
+  
+
+  
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({

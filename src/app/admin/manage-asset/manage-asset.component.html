@@ -1,3 +1,4 @@
+<!-- manage-asset.component.html -->
 <div class="container-fluid">
   <h2>Manage Assets</h2>
   <div class="search-bar">
@@ -8,7 +9,7 @@
     </select>
     <input type="text" placeholder="Enter...">
     <button class="btn btn-primary">Search</button>
-    <button class="btn btn-success" (click)="showAddNewForm()">Add New Asset</button>
+    <button class="btn btn-success" (click)="showAddNewForm();">Add New Asset</button>
 
   </div>
 
@@ -45,7 +46,7 @@
             <td>{{ assetArray[0]?.ownership }}</td>
             <td>{{ assetArray[0]?.landUseType }}</td>
             <td class="action-buttons">
-              <button class="btn btn-primary btn-sm">Update</button>
+              <button class="btn btn-primary btn-sm" (click)="showAddNewForm(assetArray[0]); ">Update</button>
               <button class="btn btn-info btn-sm">View</button>
             </td>
             <td>
