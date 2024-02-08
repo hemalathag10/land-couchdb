@@ -14,6 +14,14 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./manage-asset-form-dialog.component.css']
 })
 export class ManageAssetFormDialogComponent implements AfterViewInit {
+  formData: any; // Assuming formData is populated in some way
+
+
+  ngOnInit() {
+      // Use the updated formData in your component logic
+      // Update your local formData property or perform necessary operations
+  
+  }
   page1Form: FormGroup;
   page2Form: FormGroup;
   assetForm!: FormGroup;
@@ -33,7 +41,7 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-
+    private AssetService: AssetService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ManageAssetFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,    
@@ -56,7 +64,7 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
       ownershipDurationFrom: ['', []],
       ownershipDurationTo: ['', Validators.required],
       numOwners: ['', Validators.required],
-      owners: this.fb.array([]),
+      owners: this.fb.array([]), // Ensure this is initialized correctly
       // Add more controls as needed
     });
 
@@ -154,16 +162,11 @@ onSubmitting() {
   console.log(page2Data)
 
   // If the existing data has an 'owners' field, append the new owners as an array
-  if(this.data){
-  if (existingData.owners) {
-    existingData.owners.push(page2Data);
-  } else {
-    // If 'owners' field doesn't exist, create it as an array with the new data
-    existingData.owners = [page2Data];
-  }
+  if(existingData){
+  
  
   // Use the updateAsset method instead of createAsset
-  this.assetService.updateAsset(existingData._id, existingData).subscribe(
+  this.assetService.updateAsset(this.data.landId, page2Data).subscribe(
     (response: any) => {
       console.log('Data updated in the database successfully:', response);
       
@@ -177,6 +180,8 @@ onSubmitting() {
   );
   }
   else{
+    console.log("ex",existingData)
+
     const page1=this.page1Form.value;
     // const formData = this.pageForms.map(form => form.value);
     page1.owners=[page2Data]
@@ -203,64 +208,6 @@ this.assetService.createAsset([page1], '9d33b28b729f95638256ab8722005263').subsc
 }
 
 
-
-// updateAsset(landId: number, formData: any[]) {
-//   // Find the corresponding asset based on the landId
-//   const clickedAsset = this.page1Data.find(asset => asset.some((a: any) => a.landId === landId));
-//   console.log(clickedAsset)
-//   console.log(this.page1Data)
-
-//   if (clickedAsset) {
-//     // Get the index of the asset array where the landId is located
-//     const assetIndex = clickedAsset.findIndex((a: any) => a.landId === landId);
-
-//     // Assuming you have the page2 data stored in page2Form.value
-//     const page2Data = this.assetForm.value;
-
-//     // Extract only the page2 data from the form value
-//     const ownersData = page2Data.owners;
-
-//     // Check if 'owners' array is present in the clickedAsset at the correct index
-//     if (clickedAsset[assetIndex].owners) {
-//       // Append new owners to the existing array
-//       clickedAsset[assetIndex].owners.push(...ownersData);
-//     } else {
-//       // Create 'owners' array if it doesn't exist
-//       clickedAsset[assetIndex].owners = [...ownersData];
-//     }
-
-//     // Optionally, you can update other properties in clickedAsset if needed
-//     // clickedAsset.someOtherProperty = page2Data.someOtherValue;
-
-//     // Optionally, you can update the form with the modified clickedAsset
-//     // this.form.patchValue(clickedAsset);
-
-//     // Optionally, you can perform other actions or update the database
-//     // ...
-
-//     // Update the page1Data array (if you're using it elsewhere in your component)
-//     // this.page1Data[assetIndex] = clickedAsset;
-
-//     // Call the updateAsset method instead of createAsset
-//     this.assetService.updateAsset(this.data._id, formData[0]).subscribe(
-//       (response: any) => {
-//         console.log('Data updated in the database successfully:', response);
-//         // Optionally, you can navigate to another page or perform other actions after successful update
-//         this.dialogRef.close();
-//       },
-//       (error) => {
-//         console.error('Error updating data in the database:', error);
-//         // Handle error (show error message, log, etc.)
-//       });
-
-//   } else {
-//     console.error('Clicked asset not found. Cannot update.');
-//   }
-// }
-
-
-
-// }
 
 
 }

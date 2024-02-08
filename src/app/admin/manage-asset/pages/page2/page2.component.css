@@ -1,0 +1,68 @@
+/* Apply general styling to the form container */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Add vertical scrollbar if needed */
+    max-height: 400px; /* Set a fixed height for the form container */
+  }
+  
+  /* Style the input fields and labels */
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  
+  /* Style the "Add Owners" button */
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Style the Next button */
+  button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Style the owner details section */
+  h2 {
+    color: #333;
+  }
+  
+  /* Style the owner details container */
+  div[formArrayName="owners"] {
+    padding: 1px;
+    margin-top: 1px;
+    border-radius: 8px;
+  }
+  
+  /* Style the individual owner section */
+  div[formGroupName] {
+    margin-bottom: 20px;
+  }
+  
+  /* Add more styling as needed for other owner details */
+  
+  /* Add styling for other sections or components as needed */
+  

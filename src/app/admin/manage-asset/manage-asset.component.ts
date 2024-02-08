@@ -66,6 +66,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageAssetFormDialogComponent } from './manage-asset-form-dialog.component';
 import { AssetService } from 'src/app/services/asset.service';
+import { OwnersDetailsDialogComponent } from './owners-details-dialog/owners-details-dialog.component';
 
 @Component({
   selector: 'app-manage-asset',
@@ -75,18 +76,18 @@ import { AssetService } from 'src/app/services/asset.service';
 export class ManageAssetComponent implements OnInit {
   assetForm!: FormGroup;
   page1Data: any[] = [];
-  page2Form!: FormGroup; // Add this line
+  page2Form!: FormGroup; 
 
-
+  
   constructor(private dialog: MatDialog, private fb: FormBuilder, private assetService: AssetService) {
     this.assetForm = this.fb.group({
       landArea: [''],
       selectedDistrict: [''],
-      // Add other form controls based on your data structure
     });
   }
 
   ngOnInit(): void {
+   
     this.fetchAssets();
   }
 
@@ -146,29 +147,29 @@ export class ManageAssetComponent implements OnInit {
         clickedAsset[assetIndex].owners = [...ownersData];
       }
   
-      // Optionally, you can update other properties in clickedAsset if needed
-      // clickedAsset.someOtherProperty = page2Data.someOtherValue;
-  
-      // Optionally, you can update the form with the modified clickedAsset
-      // this.form.patchValue(clickedAsset);
-  
-      // Optionally, you can perform other actions or update the database
-      // ...
-  
-      // Update the page1Data array (if you're using it elsewhere in your component)
-      // this.page1Data[assetIndex] = clickedAsset;
+     
   
     } else {
       console.error('Clicked asset not found. Cannot update.');
     }
   }
   
-
+  showOwnersDetailsDialog(assetArray: any[]) {
+    // Open the dialog with the assetArray data
+    const dialogRef = this.dialog.open(OwnersDetailsDialogComponent, {
+      width: '600px',
+      height:'400px',
+     
+      data: assetArray[0],
+      
+    });
   
+    // You can handle the dialog result if needed
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Owners View dialog closed:', result);
+    });
+  }
   
-
-  // manage-asset.component.ts
-
 
 
 }

@@ -13,7 +13,7 @@ import { Page2Component } from './admin/manage-asset/pages/page2/page2.component
 
 import { AssetService } from './services/asset.service'; // Update the path
 import { HttpClientModule } from '@angular/common/http';
-
+import { OwnersDetailsDialogComponent } from './admin/manage-asset/owners-details-dialog/owners-details-dialog.component';
 
 const routes: Routes = [
   { path: 'manage-asset', component: ManageAssetComponent },
@@ -27,7 +27,9 @@ const routes: Routes = [
     ManageAssetComponent,
     ManageAssetFormDialogComponent,
     Page1Component,
-    Page2Component
+    Page2Component,
+    OwnersDetailsDialogComponent,
+
   ],
   imports: [
     BrowserModule,

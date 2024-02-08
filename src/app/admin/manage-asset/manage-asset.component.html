@@ -47,10 +47,10 @@
             <td>{{ assetArray[0]?.landUseType }}</td>
             <td class="action-buttons">
               <button class="btn btn-primary btn-sm" (click)="showAddNewForm(assetArray[0]); ">Update</button>
-              <button class="btn btn-info btn-sm">View</button>
+              <!-- <button class="btn btn-info btn-sm">View</button> -->
             </td>
             <td>
-              <button class="btn btn-primary btn-sm">View</button>
+              <button class="btn btn-primary btn-sm" (click)="showOwnersDetailsDialog(assetArray);">View</button>
             </td>
             <!-- Add other columns as needed -->
           </tr>

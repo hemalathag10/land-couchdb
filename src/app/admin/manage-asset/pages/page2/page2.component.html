@@ -2,9 +2,6 @@
   <!-- Remove the ownershipType select input -->
   
   <div>
-    <input type="date" id="ownershipDurationFrom" formControlName="ownershipDurationFrom" required>
-    <span>to</span>
-    <input type="date" id="ownershipDurationTo" formControlName="ownershipDurationTo" [min]="form.get('ownershipDurationFrom')?.value" required>
     
     <!-- Details for multiple owners -->
     <label for="numOwners">Number of Owners:</label>
@@ -18,8 +15,14 @@
       <div *ngFor="let owner of owners.controls; let i = index">
         <h2>Owner {{ i + 1 }}</h2>
         <div [formGroupName]="i">
-          <label for="ownerName">Owner's Name:</label>
-          <input type="text" id="ownerName" formControlName="name" required>
+          <span>From :</span>
+
+          <input type="date" id="ownershipDurationFrom" formControlName="ownershipDurationFrom" max=[today] required>
+    <span>To :</span>
+    <input type="date" id="ownershipDurationTo" formControlName="ownershipDurationTo" [min]="form.get('ownershipDurationFrom')?.value" required>
+    
+          <label for="name">Owner's Name:</label>
+          <input type="text" id="name" formControlName="name" required>
 
           <label for="contactInformation">Contact Information:</label>
           <input type="text" id="contactInformation" formControlName="contactInformation" required>

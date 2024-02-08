@@ -77,34 +77,78 @@ export class AssetService {
   // }
   
  
-  updateAsset(documentId: string, formData: any): Observable<any> {
-    const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
+  // updateAsset(Id: string, formData: any): Observable<any> {
+  //   const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
   
-    return this.http.get(url, { headers: this.getHeaders() }).pipe(
-      switchMap((existingData: any) => {
-        // Flatten the inner arrays to make it easier to find and update
-        const flattenedAsset = existingData.asset.flat();
+  //   return this.http.get(url, { headers: this.getHeaders() }).pipe(
+  //     switchMap((existingData: any) => {
+  //       // Flatten the inner arrays to make it easier to find and update
+  //       const flattenedAsset = existingData.asset.flat();
   
-        // Find the index of the object based on landId
-        const indexToUpdate = flattenedAsset.findIndex((obj: any) => obj.landId === formData.landId);
+  //       // Find the index of the object based on landId
+  //       const indexToUpdate = flattenedAsset.findIndex((obj: any) => obj.landId === formData.landId);
   
-        if (indexToUpdate !== -1) {
-          // Update the object within the flattened array
-          flattenedAsset[indexToUpdate] = formData;
-        }
+  //       if (indexToUpdate !== -1) {
+  //         // Update the object within the flattened array
+  //         flattenedAsset[indexToUpdate] = formData;
+  //       }
   
-        // Reorganize the flattened array back into the nested structure
-        existingData.asset = [flattenedAsset.slice(0, 2), flattenedAsset.slice(2)];
+  //       // Reorganize the flattened array back into the nested structure
+  //       existingData.asset = [flattenedAsset.slice(0, 2), flattenedAsset.slice(2)];
   
-        // Update the existing document
-        return this.http.put(url, existingData, { headers: this.getHeaders() });
-      }),
-      catchError((error: any) => {
-        console.error('Error updating data:', error);
-        throw error;
-      })
-    );
+  //       // Update the existing document
+  //       return this.http.put(url, existingData, { headers: this.getHeaders() });
+  //     }),
+  //     catchError((error: any) => {
+  //       console.error('Error updating data:', error);
+  //       throw error;
+  //     })
+  //   );
+  // }
+
+
+  updateAsset(Id: string, formData: any): Observable<any> {
+  const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
+
+  return this.http.get(url, { headers: this.getHeaders() }).pipe(
+    switchMap((existingData: any) => {
+      // Find the correct landId within both outer and inner arrays
+     const indexToUpdate = existingData.asset
+  .findIndex((outerArray: any[]) => outerArray.some((obj: any) => obj.landId === Id));
+
+console.log('formData:', formData);
+console.log('existingData.asset:', existingData.asset);
+console.log('indexToUpdate:', indexToUpdate);
+
+if (indexToUpdate !== -1) {
+  // Navigate to the outermost owners array of the clicked asset
+  const ownersArray = existingData.asset[indexToUpdate][0]?.owners;
+
+  console.log('ownersArray:', ownersArray);
+
+  if (ownersArray) {
+    // Append formData to the existing data inside the outermost owners array
+    ownersArray.push(formData);
+    console.log('Updated ownersArray:', ownersArray);
+  } else {
+    console.error('Owners array is undefined or null');
   }
+} else {
+  console.error('Index not found for landId:', Id);
+}
+
+
+      // Update the existing document
+      return this.http.put(url, existingData, { headers: this.getHeaders() });
+    }),
+    catchError((error: any) => {
+      console.error('Error updating data:', error);
+      throw error;
+    })
+  );
+}
+
+  
   
   
   

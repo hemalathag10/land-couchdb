@@ -1,0 +1,47 @@
+<!-- owners-details-dialog.component.html -->
+<div>
+  <h2>Owners Details</h2>
+  <div id="slickGridContainer" style="max-height: 300px; overflow-y: auto;">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Ownership Duration</th>
+          <th>Owner Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Display details for each owner in the 'owners' array -->
+        <ng-container *ngFor="let owner of data.owners">
+          <tr>
+            <!-- Ownership Duration Column -->
+            <td>
+              <p>From: {{ owner?.ownershipDurationFrom }}</p>
+              <p>To: {{ owner?.ownershipDurationTo }}</p>
+              <p>Number of Owners: {{ owner?.numOwners }}</p>
+            </td>
+
+            <!-- Other Details Column -->
+            <td>
+              <!-- Display details for each owner in the 'owners' array -->
+              <ng-container *ngFor="let ownerDetails of owner?.owners">
+                <div>
+                  <p>Owner name: {{ ownerDetails?.name }}</p>
+
+                  <p>Contact Information: {{ ownerDetails?.contactInformation }}</p>
+                  <p>Address: {{ ownerDetails?.address }}</p>
+                  <p>Purchase Price: {{ ownerDetails?.purchasePrice }}</p>
+                  <p>Date of Transaction: {{ ownerDetails?.dateOfTransaction }}</p>
+                  <p>Transaction Type: {{ ownerDetails?.transactionType }}</p>
+                  <p>Land Usage History: {{ ownerDetails?.landUsageHistory }}</p>
+                  <p>Buyer/Seller Details: {{ ownerDetails?.buyerSellerDetails }}</p>
+                  <!-- Add a line break between each set of details -->
+                  <br>
+                </div>
+              </ng-container>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

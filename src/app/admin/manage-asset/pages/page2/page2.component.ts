@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators ,FormArray} from '@angular/forms';
 @Component({
   selector: 'app-page2',
   templateUrl:'./page2.component.html',
+  styleUrls: ['./page2.component.css']
+
 })
 export class Page2Component  {
   @Input() form: FormGroup = this.fb.group({
@@ -12,7 +14,8 @@ export class Page2Component  {
     ownershipDurationTo: ['', []],
     numOwners: ['', []],
     name: [''],
-      contactInformation: [''],
+    contactInformation: [''],
+
       address: [''],
       purchasePrice: [''],
       dateOfTransaction: [''],
@@ -32,6 +35,7 @@ export class Page2Component  {
     this.form.addControl('ownershipDurationFrom', this.fb.control('', Validators.required));
     this.form.addControl('ownershipDurationTo', this.fb.control('', Validators.required));
     this.form.addControl('numOwners', this.fb.control('', Validators.required));
+
     
     
   }
@@ -53,6 +57,7 @@ export class Page2Component  {
 
   addOwner() {
     this.owners.push(this.fb.group({
+      name:[''],
       contactInformation: [''],
       address: [''],
       purchasePrice: [''],
