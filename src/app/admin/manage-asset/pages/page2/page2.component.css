@@ -31,7 +31,7 @@ form {
   
   /* Style the "Add Owners" button */
   button {
-    background-color: #4caf50;
+    background-color: rgb(170, 168, 168);
     color: #fff;
     padding: 10px;
     border: none;

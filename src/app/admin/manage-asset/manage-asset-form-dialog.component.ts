@@ -1,7 +1,7 @@
 // manage-asset-form-dialog.component.ts
 import { Component, Inject, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Page1Component } from './pages/page1/page1.component';
 import { Page2Component } from './pages/page2/page2.component';
 import { AssetService } from 'src/app/services/asset.service';
@@ -125,6 +125,8 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
 
   // Function to handle form submission
  // Function to handle form submission
+ 
+
  // Inside onSubmit method in ManageAssetFormDialogComponent
 onSubmit() {
   // Get the existing data from the dialog component
@@ -132,6 +134,7 @@ onSubmit() {
 
   // Combine form data from all pages
   const formData = this.pageForms.map(form => form.value);
+
 
   // Use the updateAsset method instead of createAsset
   this.assetService.updateAsset(existingData._id, formData[0]).subscribe(
@@ -159,11 +162,14 @@ onSubmitting() {
   // Extract Page 2 data specifically
   const page2Data = this.page2Form.value;
  
-  console.log(page2Data)
+  if (!page2Data.ownershipDurationTo) {
+    page2Data.ownershipDurationTo = 'present';
+  }
+
 
   // If the existing data has an 'owners' field, append the new owners as an array
   if(existingData){
-  
+
  
   // Use the updateAsset method instead of createAsset
   this.assetService.updateAsset(this.data.landId, page2Data).subscribe(
@@ -180,11 +186,11 @@ onSubmitting() {
   );
   }
   else{
-    console.log("ex",existingData)
 
     const page1=this.page1Form.value;
     // const formData = this.pageForms.map(form => form.value);
     page1.owners=[page2Data]
+    page1.created_at = new Date();
 
   
   //     // Log combined form data to the console

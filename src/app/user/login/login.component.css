@@ -1,0 +1,43 @@
+/* Apply some basic styling to the form */
+form {
+    max-width: 300px;
+    margin: auto;
+    height:300px;
+  }
+  h4{
+    margin-left: 85px;
+  }
+  
+  /* Style labels for better readability */
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  /* Style input fields */
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Style the submit button */
+  button {
+    background-color: #4caf50; /* Green background color */
+    color: white; /* White text color */
+    padding: 10px 15px; /* Add some padding to the button */
+    border: none; /* Remove borders */
+    border-radius: 4px; /* Add border radius */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    margin-left:105px;
+
+  }
+  
+  /* Disable the button when the form is not valid */
+  button:disabled {
+    background-color: #cccccc; /* Grey background color */
+    cursor: not-allowed; /* Change cursor to not-allowed when disabled */
+  }
+  
+ 

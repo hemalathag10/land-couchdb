@@ -1,0 +1,53 @@
+<!-- src/app/app.component.html or your specific component HTML -->
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar">
+          <div class="sidebar-heading text-primary">Admin Dashboard</div>
+          <div class="list-group list-group-flush">
+            <a routerLink="/stats" class="list-group-item">Dashboard</a>
+            <a routerLink="/manage-asset" class="list-group-item">Manage Asset</a>
+            <a routerLink="/manage-user" class="list-group-item">Manage User</a>
+            <a routerLink="/reports-analytics" class="list-group-item">Reports & Analytics</a>
+            <a routerLink="/settings" class="list-group-item">Settings</a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-9">
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fa fa-user"></i> Profile
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fa fa-sign-out"></i> Logout
+                </a>
+              </li>
+            
+            </ul>
+          </div>
+        </nav>
+  
+        <!-- Router Outlet for displaying components -->
+        <div class="main-content">
+          <router-outlet></router-outlet>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

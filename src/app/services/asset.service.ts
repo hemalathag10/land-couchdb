@@ -51,61 +51,6 @@ export class AssetService {
   }
   
 
-  // updateOwnersArray(documentId: string, landId: number, updatedOwners: any[]): Observable<any> {
-  //   const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
-
-  //   // Create the updated data structure
-  //   const updatedData = {
-  //     $patch: {
-  //       asset: [
-  //         {
-  //           $each: [
-  //             {
-  //               landId: landId,
-  //               owners: updatedOwners
-  //             }
-  //           ],
-  //           $where: {
-  //             "landId": landId
-  //           }
-  //         }
-  //       ]
-  //     }
-  //   };
-
-  //   return this.http.patch(url, updatedData, { headers: this.getHeaders() });
-  // }
-  
- 
-  // updateAsset(Id: string, formData: any): Observable<any> {
-  //   const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
-  
-  //   return this.http.get(url, { headers: this.getHeaders() }).pipe(
-  //     switchMap((existingData: any) => {
-  //       // Flatten the inner arrays to make it easier to find and update
-  //       const flattenedAsset = existingData.asset.flat();
-  
-  //       // Find the index of the object based on landId
-  //       const indexToUpdate = flattenedAsset.findIndex((obj: any) => obj.landId === formData.landId);
-  
-  //       if (indexToUpdate !== -1) {
-  //         // Update the object within the flattened array
-  //         flattenedAsset[indexToUpdate] = formData;
-  //       }
-  
-  //       // Reorganize the flattened array back into the nested structure
-  //       existingData.asset = [flattenedAsset.slice(0, 2), flattenedAsset.slice(2)];
-  
-  //       // Update the existing document
-  //       return this.http.put(url, existingData, { headers: this.getHeaders() });
-  //     }),
-  //     catchError((error: any) => {
-  //       console.error('Error updating data:', error);
-  //       throw error;
-  //     })
-  //   );
-  // }
-
 
   updateAsset(Id: string, formData: any): Observable<any> {
   const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
@@ -116,7 +61,7 @@ export class AssetService {
      const indexToUpdate = existingData.asset
   .findIndex((outerArray: any[]) => outerArray.some((obj: any) => obj.landId === Id));
 
-console.log('formData:', formData);
+console.log('formData:', formData.ownershipDurationFrom);
 console.log('existingData.asset:', existingData.asset);
 console.log('indexToUpdate:', indexToUpdate);
 
@@ -128,6 +73,20 @@ if (indexToUpdate !== -1) {
 
   if (ownersArray) {
     // Append formData to the existing data inside the outermost owners array
+    let previousOwners=ownersArray[ownersArray.length-1]
+    console.log("pre",previousOwners)
+    if (previousOwners.ownershipDurationTo==="present")
+    {
+      const ownershipFromDate = new Date(formData.ownershipDurationFrom);
+      
+      // Subtract one day from ownershipFromDate
+      ownershipFromDate.setDate(ownershipFromDate.getDate() - 1);
+
+      previousOwners.ownershipDurationTo = ownershipFromDate.toISOString().split('T')[0];
+
+    }
+    console.log("after",previousOwners)
+
     ownersArray.push(formData);
     console.log('Updated ownersArray:', ownersArray);
   } else {
@@ -193,6 +152,14 @@ if (indexToUpdate !== -1) {
     return this.http.get<any>(`${this.baseUrl}/9d33b28b729f95638256ab8722005263`, { headers });
   }
 
+  getAllUsers(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(this.credentials)
+    });
+
+    return this.http.get<any>(`${this.baseUrl}/form`, { headers });
+  }
 
   
   

@@ -1,0 +1,15 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <h4>SIGNUP FORM</h4>
+
+  <label for="emailId">Email:</label>
+  <input type="email" id="emailId" formControlName="emailId">
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" formControlName="password">
+
+  <button type="submit" [disabled]="!myForm.valid">Submit</button>
+
+  <!-- Success and Error Messages -->
+  <div *ngIf="successMessage" style="color: green;">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+</form>

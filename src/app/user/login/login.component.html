@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="field">
+    <h4>LOGIN FORM</h4>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+    <br>
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+
+    <!-- Message area for success or error messages -->
+    <div class="message" *ngIf="isFormSubmitted && loginForm.dirty && !loginForm.valid">
+      Please enter valid email and password.
+    </div>
+    
+    <div class="message success" *ngIf="isFormSubmitted && loginForm.valid && isLoginSuccess">
+      Login successful!
+    </div>
+    
+    <div class="message error" *ngIf="isFormSubmitted && loginForm.valid && !isLoginSuccess">
+      Invalid email or password. Please try again.
+    </div>
+  </div>
+</form>

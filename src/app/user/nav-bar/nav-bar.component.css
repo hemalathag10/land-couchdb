@@ -1,0 +1,28 @@
+/* styles.css */
+
+nav {
+    background-color: black;
+height:45px;
+  }
+
+  ul {
+    list-style-type: none;
+    float:right;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: gray;
+  }
+  

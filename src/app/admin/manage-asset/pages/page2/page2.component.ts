@@ -43,6 +43,7 @@ export class Page2Component  {
   isValid(): boolean {
     return this.form.valid;
   }
+  today: string = new Date().toISOString().split('T')[0];
 
   get owners() {
     return this.form.get('owners') as FormArray;
@@ -57,6 +58,7 @@ export class Page2Component  {
 
   addOwner() {
     this.owners.push(this.fb.group({
+      
       name:[''],
       contactInformation: [''],
       address: [''],
@@ -88,6 +90,8 @@ export class Page2Component  {
           name: owner.name || 'Unknown Owner',
           duration: `${ownershipFrom.toLocaleDateString()} to ${ownershipTo.toLocaleDateString()} (${ownershipYears} years)`,
           // Add more details as needed
+          ownershipDurationFrom: owner.ownershipDurationFrom || '',
+          ownershipDurationTo: owner.ownershipDurationTo || '',
           contactInformation: owner.contactInformation || '',
           address: owner.address || '',
           purchasePrice: owner.purchasePrice || '',
@@ -97,5 +101,33 @@ export class Page2Component  {
           buyerSellerDetails: owner.buyerSellerDetails || '',
         };
       });
+      this.updatePreviousOwnerToDate();
+
     }
+
+    private updatePreviousOwnerToDate() {
+      const owners = this.form.get('owners') as FormArray;
+      const numOwners = owners.length;
+  
+      // Iterate through owners array
+      for (let i = 1; i < numOwners; i++) {
+        const currentOwner = owners.at(i) as FormGroup | null;
+  
+        // Ensure that currentOwner is not null or undefined
+        if (currentOwner && currentOwner instanceof FormGroup) {
+          const previousOwner = owners.at(i - 1) as FormGroup;
+  
+          // Use optional chaining to safely access properties
+          const fromValue = currentOwner.get('ownershipDurationFrom')?.value;
+          const toValue = currentOwner.get('ownershipDurationTo')?.value;
+  
+          // Check if current owner's "From Date" is provided and "To Date" is not provided
+          if (fromValue && !toValue) {
+            // Use optional chaining to safely set the value
+            currentOwner.get('ownershipDurationTo')?.setValue(this.today);
+          }
+        }
+      }
+    
   }
+}

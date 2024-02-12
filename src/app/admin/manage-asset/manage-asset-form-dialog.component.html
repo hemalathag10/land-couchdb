@@ -9,6 +9,6 @@
 
     <button *ngIf="currentPage === 1" type="button" [disabled]="!page1Form.valid" (click)="nextPage()">Next</button>
     <button *ngIf="currentPage > 1" type="button" (click)="previousPage()">Previous</button>
-    <button *ngIf="currentPage === 2" type="submit">Submit</button>
+    <button *ngIf="currentPage === 2" type="submit" class="right">Submit</button>
   </form>
 </div>
