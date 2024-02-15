@@ -1,15 +1,28 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <h4>SIGNUP FORM</h4>
 
-  <label for="emailId">Email:</label>
-  <input type="email" id="emailId" formControlName="emailId">
 
-  <label for="password">Password:</label>
-  <input type="password" id="password" formControlName="password">
+
+  <label for="emailId">Email:</label>
+   <input type="email" id="emailId" formControlName="emailId" (blur)="checkEmailExists()" />
+
+    <!-- Display error message for invalid email format -->
+  <div *ngIf="myForm.get('emailId')?.hasError('email') && myForm.get('emailId')?.touched" class="error-message" style="color: red;">
+    Invalid email format
+  </div>
+  
+      <!-- Display error message if email already exists -->
+      <div *ngIf="errorMessage && myForm.get('emailId')?.hasError('emailExists')" class="error-message" style="color: red;">
+        {{ errorMessage }}
+      </div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" (blur)="checkPasswordValidity()" />
+      <div *ngIf="myForm.get('password')?.hasError('passwordInvalid') && myForm.get('password')?.touched" class="error-message" style="color: red;">
+        {{ this.errorPasswordMessage }}
+      </div>
 
   <button type="submit" [disabled]="!myForm.valid">Submit</button>
 
   <!-- Success and Error Messages -->
   <div *ngIf="successMessage" style="color: green;">{{ successMessage }}</div>
-  <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
 </form>

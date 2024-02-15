@@ -30,7 +30,10 @@
           <label for="address">Address:</label>
           <input type="text" id="address" formControlName="address" required>
 
-          <label for="purchasePrice">Purchase Price:</label>
+          <label for="marketPrice">Market Value:</label>
+          <input type="text" id="marketPrice" formControlName="marketPrice" required>
+
+          <label for="purchasePrice">Consideration Value:</label>
           <input type="text" id="purchasePrice" formControlName="purchasePrice" required>
 
           <label for="dateOfTransaction">Date of Transaction:</label>
@@ -46,8 +49,26 @@
           <label for="landUsageHistory">Land Usage History:</label>
           <textarea id="landUsageHistory" formControlName="landUsageHistory" required></textarea>
 
-          <label for="buyerSellerDetails">Buyer/Seller Details:</label>
-          <input type="text" id="buyerSellerDetails" formControlName="buyerSellerDetails" required>
+          <label for="buyerDetails">Name of Claimant/Buyer:</label>
+          <input type="text" id="buyerDetails" formControlName="buyerDetails" required>
+
+          <label for="sellerDetails">Name of Executant/Seller:</label>
+          <input type="text" id="sellerDetails" formControlName="sellerDetails" required>
+
+          <label for="boundaryDetails">Boundary Details:</label>
+
+          <label for="north">North:</label>
+          <input type="text" id="north" formControlName="north" required>
+
+          <label for="south">South:</label>
+          <input type="text" id="south" formControlName="south" required>
+
+          <label for="east">East:</label>
+          <input type="text" id="east" formControlName="east" required>
+
+          <label for="west">West:</label>
+          <input type="text" id="west" formControlName="west" required>
+
         </div>
 
         <!-- Include more input fields for other owner details here -->

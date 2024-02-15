@@ -40,4 +40,14 @@ form {
     cursor: not-allowed; /* Change cursor to not-allowed when disabled */
   }
   
- 
+  .success-message {
+    color: green;
+    margin-left:70px;
+
+  }
+  
+  .error-message {
+    color: red;
+    margin-left:50px;
+  }
+  

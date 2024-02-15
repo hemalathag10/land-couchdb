@@ -1,0 +1,30 @@
+<div id="body">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <h4>LOGIN FORM</h4>
+  
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+  
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password">
+      <br>
+      <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  
+      <!-- Message area for success or error messages -->
+    
+      
+      <div *ngIf="isFormSubmitted && loginForm.valid && isLoginSuccess; else errorTemplate" class="message success">
+        {{ successMessage }}
+    </div>
+    
+    <ng-template #errorTemplate>
+        <div class="message error">
+            {{ errorMessage }}
+        </div>
+    </ng-template>
+      
+     
+    </div>
+  </form>
+</div>

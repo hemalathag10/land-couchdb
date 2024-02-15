@@ -13,6 +13,7 @@ export class StatsComponent implements OnInit {
   recentRegistrations: number = 0;
   newAssetsToday: number = 0;
   newUsersToday: number = 0;
+  recentRegistrationsData: any[] = [];
 
   constructor(private assetService: AssetService) {}
 
@@ -22,7 +23,7 @@ export class StatsComponent implements OnInit {
       // Ensure that the response structure matches your expectations
       const assetsArrays: any[][] = response.asset || []; // Adjust this based on the actual structure
 
-    console.log(assetsArrays.length);
+    console.log("response",response);
     this.totalAssets = assetsArrays.length;
 
 
@@ -37,12 +38,27 @@ export class StatsComponent implements OnInit {
     // Calculate recent registrations (within last 7 days)
     const last7Days = new Date();
     last7Days.setDate(last7Days.getDate() - 7);
+
+    this.recentRegistrationsData = assetsArrays
+    .flatMap(assetArray => assetArray.filter(asset =>
+      asset.created_at && new Date(asset.created_at) > last7Days
+    ));
+
+  console.log('Recent Registrations Data:', this.recentRegistrationsData);
+
+  
     this.recentRegistrations = assetsArrays.filter(assetArray =>
       assetArray.some(asset =>
         asset.created_at &&
         new Date(asset.created_at) > last7Days
       )
     ).length;
+    console.log("recent",assetsArrays.filter(assetArray =>
+      assetArray.some(asset =>
+        asset.created_at &&
+        new Date(asset.created_at) > last7Days
+      )
+    ))
     console.log(this.recentRegistrations);
   
   });

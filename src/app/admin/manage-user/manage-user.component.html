@@ -1,0 +1,22 @@
+<div>
+    <h2>User Management</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Email ID</th>
+          <th>Created At</th>
+          <th>Last Login</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.emailId }}</td>
+          <td>{{ user.createdAt | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ user.lastLogin ? (user.lastLogin | date: 'yyyy-MM-dd HH:mm:ss') : 'N/A' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -18,10 +18,35 @@
       </div>
 
       <!-- Bar Chart -->
-      <div class="chart-section">
-        <h3>Bar Chart</h3>
-        <canvas id="barChart" width="400" height="400"></canvas>
-      </div>
+      <div class="chart-section-line">
+        <div id="select-option">
+          <!-- Your line chart goes here -->
+          <label for="lineChartDistrict">Select District:</label>
+          <select id="lineChartDistrict" [(ngModel)]="searchDistrict" (change)="onDistrictChange()">
+            <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+          </select>
+        
+          <label for="lineChartTaluk">Select Taluk:</label>
+          <select id="lineChartTaluk" [(ngModel)]="searchTaluk">
+            <option *ngFor="let taluk of taluks[searchDistrict]" [value]="taluk">{{ taluk }}</option>
+          </select>
+        
+          <button (click)="search()">Search</button>
+        
+          <!-- Your line chart canvas goes here -->
+        </div>
+        
+        
+        <div>
+        <div>
+          <canvas id="lineChart" width="400" height="400"></canvas>
+        </div>      </div>
     </div>
+
+
+    <div style="width: 80%;">
+      <canvas id="barChart"></canvas>
+    </div>
+    
   </div>
 </div>

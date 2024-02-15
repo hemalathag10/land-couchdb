@@ -18,10 +18,19 @@ export class Page2Component  {
 
       address: [''],
       purchasePrice: [''],
+      marketPrice: [''],
+
       dateOfTransaction: [''],
       transactionType: [''],
       landUsageHistory: [''],
-      buyerSellerDetails: [''],
+      buyerDetails: [''],
+      sellerDetails: [''],
+      north: [''],
+      south: [''],
+      east: [''],
+      west: [''],
+
+
     owners: this.fb.array([]),
   });
 
@@ -62,11 +71,18 @@ export class Page2Component  {
       name:[''],
       contactInformation: [''],
       address: [''],
+      marketPrice: [''],
+
       purchasePrice: [''],
       dateOfTransaction: [''],
       transactionType: [''],
       landUsageHistory: [''],
-      buyerSellerDetails: [''],
+      buyerDetails: [''],
+      sellerDetails: [''],
+      north: [''],
+      south: [''],
+      east: [''],
+      west: [''],
       // Add more form controls for other owner details here
     }));
   }
@@ -94,11 +110,21 @@ export class Page2Component  {
           ownershipDurationTo: owner.ownershipDurationTo || '',
           contactInformation: owner.contactInformation || '',
           address: owner.address || '',
+          marketPrice: owner.marketPrice || '',
+
           purchasePrice: owner.purchasePrice || '',
           dateOfTransaction: owner.dateOfTransaction || '',
           transactionType: owner.transactionType || '',
           landUsageHistory: owner.landUsageHistory || '',
           buyerSellerDetails: owner.buyerSellerDetails || '',
+          sellerDetails: owner.sellerDetails || '',
+          north: owner.north || '',
+          south: owner.south || '',
+          east: owner.east || '',
+          west: owner.west || '',
+
+
+
         };
       });
       this.updatePreviousOwnerToDate();

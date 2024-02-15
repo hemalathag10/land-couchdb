@@ -1,6 +1,6 @@
 // owners-details-dialog.component.ts
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-owners-details-dialog',
@@ -8,5 +8,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./owners-details-dialog.component.css']
 })
 export class OwnersDetailsDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
-}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<OwnersDetailsDialogComponent>
+  ) { }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }}

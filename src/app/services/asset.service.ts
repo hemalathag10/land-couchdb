@@ -1,10 +1,10 @@
 // asset.service.ts
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { map} from 'rxjs/operators';
+import { map, } from 'rxjs/operators';
 
 
 @Injectable({
@@ -46,14 +46,14 @@ export class AssetService {
     );
   }
   searchAssetByLandId(documentId: string, landId: number): Observable<any> {
-    const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
+    const url = `${this.baseUrl}/doc_asset`;
     return this.http.get(url,{ headers: this.getHeaders() });
   }
   
 
 
   updateAsset(Id: string, formData: any): Observable<any> {
-  const url = `${this.baseUrl}/9d33b28b729f95638256ab8722005263`;
+  const url = `${this.baseUrl}/doc_asset`;
 
   return this.http.get(url, { headers: this.getHeaders() }).pipe(
     switchMap((existingData: any) => {
@@ -148,16 +148,19 @@ if (indexToUpdate !== -1) {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ' + btoa(this.credentials)
     });
-
-    return this.http.get<any>(`${this.baseUrl}/9d33b28b729f95638256ab8722005263`, { headers });
+console.log(headers)
+    return this.http.get<any>(`${this.baseUrl}/doc_asset`, { headers });
   }
+
+
+
 
   getAllUsers(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Basic ' + btoa(this.credentials)
     });
-
+console.log("user",headers)
     return this.http.get<any>(`${this.baseUrl}/form`, { headers });
   }
 

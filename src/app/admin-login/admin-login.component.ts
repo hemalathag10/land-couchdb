@@ -1,24 +1,24 @@
+// login.component.ts
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup,FormBuilder,Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.css']
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class AdminLoginComponent {
+    loginForm!: FormGroup;
   isLoginSuccess?: boolean;
   isFormSubmitted: boolean = false; // Add this flag
-  successMessage:string=''
+  successMessage : string=''
   errorMessage:string=''
 
-
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -27,12 +27,14 @@ export class LoginComponent {
     this.isFormSubmitted = true;
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe(
+      this.authService.adminLogin(email, password).subscribe(
         (isValidUser) => {
           this.isLoginSuccess = isValidUser;
           if (isValidUser) {
-            this.successMessage='Login successful'
             console.log('Login successful');
+            this.successMessage='Login Success';
+            this.router.navigate(['./admin']);
+
             // Redirect or display a success message
           } else {
             this.errorMessage='Invalid email or password'
@@ -41,8 +43,6 @@ export class LoginComponent {
           }
         },
         (error) => {
-          this.errorMessage='Invalid email or password'
-
           console.error('Login failed:', error);
           // Display an error message to the user
         }

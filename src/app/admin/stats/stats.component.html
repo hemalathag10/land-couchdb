@@ -29,3 +29,50 @@
     <div class="stat-value">{{ newUsersToday }}</div>
   </div>
 </div>
+
+
+<!-- Recent Registrations Table -->
+<div class="recent-registrations-container">
+  <h2>Recent Registrations</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+         <th>Land Id</th>
+         <th>Land Area</th>
+          <th>District</th>
+          <th>Taluk</th>
+          <th>Ward</th>
+          <th>State</th>
+          <th>Survey Number</th>
+          <th>Subdivision Number</th>
+          <th>Type of Ownership</th>
+          <th>Land Use Type</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registration of recentRegistrationsData let i=index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ registration.landId }}</td>
+        <td>{{ registration.landArea }}</td>
+        <td>{{ registration.selectedDistrict}}</td>
+        <td>{{ registration.selectedTaluk}}</td>
+        <td>{{ registration.ward}}</td>
+        <td>{{ registration.state}}</td>
+        <td>{{ registration.surveyNumber}}</td>
+        <td>{{ registration.subdivisionNumber}}</td>
+        <td>{{ registration.ownership}}</td>
+        <td>{{ registration.landUseType}}</td>
+
+
+
+
+
+
+
+        <!-- Add more cells for additional columns -->
+      </tr>
+    </tbody>
+  </table>
+</div>

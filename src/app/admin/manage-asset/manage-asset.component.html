@@ -18,11 +18,14 @@
     <table *ngIf="page1Data && page1Data.length > 0" class="table">
       <thead>
         <tr>
+          <th>S.No</th>
+          <th>Land Id</th>
           <th>Land Area</th>
+          <th>State</th>
+
           <th>District</th>
           <th>Taluk</th>
           <th>Ward</th>
-          <th>State</th>
           <th>Survey Number</th>
           <th>Subdivision Number</th>
           <th>Type of Ownership</th>
@@ -33,14 +36,17 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let assetArray of page1Data">
+        <ng-container *ngFor="let assetArray of page1Data let i=index" >
           <!-- Display properties from the first JSON object in each inner array -->
           <tr *ngIf="assetArray.length > 0">
+            <td>{{ i + 1 }}</td>
+            <td>{{assetArray[0]?.landId}}</td>
             <td>{{ assetArray[0]?.landArea }}</td>
+            <td>{{ assetArray[0]?.state }}</td>
+
             <td>{{ assetArray[0]?.selectedDistrict }}</td>
             <td>{{ assetArray[0]?.selectedTaluk }}</td>
             <td>{{ assetArray[0]?.ward }}</td>
-            <td>{{ assetArray[0]?.state }}</td>
             <td>{{ assetArray[0]?.surveyNumber }}</td>
             <td>{{ assetArray[0]?.subdivisionNumber }}</td>
             <td>{{ assetArray[0]?.ownership }}</td>
@@ -57,5 +63,6 @@
         </ng-container>
       </tbody>
     </table>
+    
   </div>
 </div>

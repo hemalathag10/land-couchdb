@@ -10,6 +10,7 @@ height:45px;
     float:right;
     padding: 0;
     overflow: hidden;
+    margin-top: 15px;
   }
   
   li {
@@ -25,4 +26,6 @@ height:45px;
   a:hover {
     color: gray;
   }
-  
+  .signup{
+    color:white;
+  }

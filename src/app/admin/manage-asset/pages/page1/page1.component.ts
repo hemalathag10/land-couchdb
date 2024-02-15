@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 export class Page1Component implements OnInit {
   @Input() form!: FormGroup;
 
-  states: string[] = ['Andhra Pradesh', 'Karnataka', 'Kerala', 'Maharashtra', 'Tamil Nadu', 'Telangana'];
+  states: string[] = ['Andhra Pradesh', 'Karnataka', 'Kerala', 'Maharashtra', 'TamilNadu', 'Telangana'];
 
   districts: string[] = ['Ariyalur', 'Chennai', 'Madurai'];
   taluks: { [key: string]: string[] } = {

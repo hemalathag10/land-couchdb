@@ -29,11 +29,22 @@
 
                   <p>Contact Information: {{ ownerDetails?.contactInformation }}</p>
                   <p>Address: {{ ownerDetails?.address }}</p>
-                  <p>Purchase Price: {{ ownerDetails?.purchasePrice }}</p>
+                  <p>Market Value: {{ ownerDetails?.marketPrice }}</p>
+
+                  <p>Consideration Value: {{ ownerDetails?.purchasePrice }}</p>
                   <p>Date of Transaction: {{ ownerDetails?.dateOfTransaction }}</p>
                   <p>Transaction Type: {{ ownerDetails?.transactionType }}</p>
                   <p>Land Usage History: {{ ownerDetails?.landUsageHistory }}</p>
-                  <p>Buyer/Seller Details: {{ ownerDetails?.buyerSellerDetails }}</p>
+                  <p>Name of Claimant/Buyer: {{ ownerDetails?.buyerDetails }}</p>
+                  <p>Name of Executant/Seller: {{ ownerDetails?.sellerDetails }}</p>
+                  <p>Boundary Details :</p>
+                  <p>North: {{ ownerDetails?.north }}</p>
+                  <p>South: {{ ownerDetails?.south }}</p>
+                  <p>East: {{ ownerDetails?.east }}</p>
+                  <p>West: {{ ownerDetails?.west }}</p>
+
+
+
                   <!-- Add a line break between each set of details -->
                   <br>
                 </div>
@@ -43,5 +54,9 @@
         </ng-container>
       </tbody>
     </table>
+    <button (click)="closeDialog()">Back</button>
+    <!-- <button >Download</button> -->
+
   </div>
+
 </div>

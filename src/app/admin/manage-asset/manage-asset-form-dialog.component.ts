@@ -161,6 +161,7 @@ onSubmitting() {
 
   // Extract Page 2 data specifically
   const page2Data = this.page2Form.value;
+  console.log("page2",page2Data)
  
   if (!page2Data.ownershipDurationTo) {
     page2Data.ownershipDurationTo = 'present';
@@ -169,7 +170,7 @@ onSubmitting() {
 
   // If the existing data has an 'owners' field, append the new owners as an array
   if(existingData){
-
+console.log("exist")
  
   // Use the updateAsset method instead of createAsset
   this.assetService.updateAsset(this.data.landId, page2Data).subscribe(
@@ -197,7 +198,7 @@ onSubmitting() {
  console.log('All page data:', [page1]);
     
   //     // Assuming you want to store the data in your database using the AssetService
-this.assetService.createAsset([page1], '9d33b28b729f95638256ab8722005263').subscribe(
+this.assetService.createAsset([page1], 'doc_asset').subscribe(
     (response: any) => {
    console.log('Data stored in the database successfully:', response);
   //         // Optionally, you can navigate to another page or perform other actions after successful storage
