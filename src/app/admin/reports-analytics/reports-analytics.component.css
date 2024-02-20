@@ -100,3 +100,76 @@ button {
 #select-option{
   margin-left: 100px;
 }
+
+/* Add your styling for ng-select */
+.ng-select {
+  width: 100px;
+  font-size: 14px;
+  border:1px solid #111111;
+}
+
+/* Optional: Style the dropdown arrow */
+.ng-select .ng-arrow-wrapper {
+  display: none; /* Hide the default arrow */
+}
+
+/* Optional: Style the dropdown options */
+.ng-dropdown-panel {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #111111;
+}
+
+/* Optional: Style the selected option */
+.ng-value-container {
+  padding: 8px;
+}
+
+/* Optional: Style the search input */
+.ng-input {
+  height: 30px;
+  padding: 4px;
+  border: 1px solid #111111;
+  border-radius: 4px;
+}
+
+/* Optional: Style the dropdown option on hover */
+.ng-option.ng-option-marked {
+  background-color: #858383;
+}
+
+/* Optional: Style the placeholder text */
+.ng-placeholder {
+  color: #888;
+}
+
+/* Optional: Style the selected value (tag-like appearance) */
+.ng-value {
+  background-color: #d3e0f2;
+  border: 1px solid #4285f4;
+  color: #4285f4;
+  border-radius: 3px;
+  margin: 2px;
+}
+
+/* Optional: Style the clear icon */
+.ng-clear-wrapper {
+  display: none; /* Hide the clear icon */
+}
+
+/* Optional: Add some transition for a smoother appearance */
+.ng-select {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.ng-dropdown-panel {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.select-container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+}
+
+.select-wrapper {
+  margin-right: 20px; /* Adjust as needed for spacing between selects */
+}

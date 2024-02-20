@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { AssetService } from 'src/app/services/asset.service';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -12,9 +12,31 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 export class ReportsAnalyticsComponent implements OnInit {
   form!: FormGroup;
   assetData: any;
-    searchDistrict: string = ''; 
-    searchTaluk: string = ''; 
+  searchDistrict: string = '';
+  searchTaluk: string = '';
+  selectedDistrict: string = '';
+  selectedTaluk: string = '';
+  filteredDistricts: string[] = [];
+  filteredTaluks: string[] = [];
 
+ 
+  onDistrictSearch() {
+    this.filteredDistricts = this.filterItems(this.districts, this.searchDistrict);
+  }
+
+  onTalukSearch() {
+    this.filteredTaluks = this.filterItems(this.taluks[this.selectedDistrict], this.searchTaluk);
+  }
+
+  filterItems(items: string[] | undefined, searchTerm: string): string[] {
+    if (!items) {
+      return [];
+    }
+    return items.filter(item =>
+      item.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+    
 
     constructor(private assetService: AssetService) { }
 
@@ -125,7 +147,8 @@ export class ReportsAnalyticsComponent implements OnInit {
 
 
 private drawLineChart() {
-  const landValueRange = this.extractLandValueFromDatabase(this.searchDistrict, this.searchTaluk);
+  console.log(this.selectedDistrict,this.selectedTaluk)
+  const landValueRange = this.extractLandValueFromDatabase(this.selectedDistrict, this.selectedTaluk);
 
   // Convert the data to arrays for labels and data
   const years = Object.keys(landValueRange).map(Number);
@@ -437,14 +460,13 @@ console.log(landUseTypeCount)
     'Ariyalur': ['none', 'Andimadam', 'Ariyalur', 'Sendurai', 'Udayarpalayam'],
     'Chennai': ['none', 'Alandur', 'Ambattur', 'Aminjikarai', 'Ayanavaram', 'Egmore', 'Guindy', 'Madhavaram', 'Maduravoyal', 'Mambalam', 'Mylapore', 'Perambur', 'Purasawalkam', 'Sholinganallur', 'Thiruvottiyur', 'Tondiarpet', 'Velachery'],
     'Madurai': ['none', 'Kalligudi', 'Madurai East', 'Madurai North', 'Madurai(South)', 'Madurai West', 'Melur', 'Peraiyur', 'Thirupparankundram', 'Tirumangalam', 'Usilampatti', 'Vadipatti'],
-    // Add other districts with taluks
   };
   onDistrictChange() {
     const selectedDistrict = this.form.get('selectedDistrict')?.value;
     this.form.get('selectedTaluk')?.setValue(this.taluks[selectedDistrict][0]);
   }
 
- 
+  
  
 }
 

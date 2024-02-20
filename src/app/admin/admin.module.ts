@@ -20,6 +20,11 @@ import { ReportsAnalyticsComponent } from './reports-analytics/reports-analytics
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { AdminLoginComponent } from '../admin-login/admin-login.component';
 import { AdminRoutingModule } from './admin-routing.module';
+import { AuthService } from '../services/auth.service';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { SentimentAnalysisService } from '../services/sentimentAnalysis.service';
+import { ChartComponent } from './feedback/chart.component';
 
 
 @NgModule({
@@ -30,10 +35,11 @@ import { AdminRoutingModule } from './admin-routing.module';
     Page2Component,
     OwnersDetailsDialogComponent,
     StatsComponent,
-   
     AdminComponent,
     ReportsAnalyticsComponent,
     ManageUserComponent,
+    FeedbackComponent,
+    ChartComponent
 
   ],
   imports: [
@@ -44,9 +50,11 @@ import { AdminRoutingModule } from './admin-routing.module';
     FormsModule,
     AdminRoutingModule,
     HttpClientModule,
+    NgSelectModule
+
 
   ],
-  providers: [AssetService],
+  providers: [AssetService, AuthService,SentimentAnalysisService],
   bootstrap: []
 })
 export class AdminModule { }

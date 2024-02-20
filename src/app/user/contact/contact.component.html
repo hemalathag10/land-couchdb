@@ -1,0 +1,47 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="center-container">
+  <div class="contact-container">
+    <div class="contact-info">
+      <h2>Contact Us</h2>
+      <p>Location: No.1, Survey House, Kamarajar Salai, Chepauk, Chennai-600005
+      </p>
+      <p>Phone:  044-28591662</p>
+      <p>Email: dir-sur[at]nic[dot]in</p>
+    </div>
+    <div class="feedback-form">
+      <h2>Feedback Form</h2>
+      <form (ngSubmit)="submitForm()" #feedbackForm="ngForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="formData.email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+        <div *ngIf="feedbackForm && (submitted || feedbackForm.controls['email'].touched) && feedbackForm.controls['email'].invalid" class="error-message">
+            <div *ngIf="feedbackForm.controls['email'].hasError('required')">Email is required.</div>
+            <div *ngIf="feedbackForm.controls['email'].hasError('pattern')">Enter a valid email address.</div>
+        </div>
+        
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" [(ngModel)]="formData.phone" required pattern="[0-9]{10}">
+        <div *ngIf="(submitted || feedbackForm.controls['phone'].touched) && feedbackForm.controls['phone'].invalid"  class="error-message">
+            <div *ngIf="feedbackForm.controls['phone'].hasError('required')">Phone number is required.</div>
+            <div *ngIf="feedbackForm.controls['phone'].hasError('pattern')">Enter a valid 10-digit phone number.</div>
+        </div>
+        
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" name="feedback" [(ngModel)]="formData.feedback" required></textarea>
+        <div *ngIf="(submitted || feedbackForm.controls['feedback'].touched) && feedbackForm.controls['feedback'].invalid"  class="error-message">
+            <div *ngIf="feedbackForm.controls['feedback'].hasError('required')">Feedback is required.</div>
+        </div>
+        
+        <button type="submit" [disabled]="!feedbackForm.valid" [ngClass]="{'disabled-button': !feedbackForm.valid}">Submit</button>
+        <div *ngIf="successMessage" class="success-message">
+            {{ successMessage }}
+        </div>
+        
+          
+        </form>
+    </div>
+  </div>
+</div>

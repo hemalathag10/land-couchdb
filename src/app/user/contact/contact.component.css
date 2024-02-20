@@ -1,0 +1,88 @@
+.center-container {
+    margin-left: 150px;
+    width:80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .contact-container {
+    display: flex;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 60%; /* Adjust the width as needed */
+  }
+
+  .contact-info, .feedback-form {
+    flex: 1;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-right: 20px;
+  }
+
+  .contact-info {
+    border-right: 2px solid #ccc;
+  }
+
+  h2 {
+    color: #333;
+  }
+
+  p {
+    color: #555;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  label {
+    color: #333;
+  }
+
+  input, textarea {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  /* Add this to your component's CSS file or global styles */
+
+.disabled-button {
+    background-color: grey;
+    color: #999; /* You can adjust the color as needed */
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: red;
+  }
+
+  /* Add this to your component's CSS file or global styles */
+
+.success-message {
+    color: green; /* You can adjust the color as needed */
+    margin-top: 10px; /* Adjust the margin as needed */
+  }
+  
+  

@@ -14,7 +14,13 @@ import { AssetService } from '../services/asset.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRoutingModule } from './user-routing.module';
 import { landRecordsComponent } from './land-records/land-records.component';
-
+import { aboutComponent} from './about/about.component';
+import { contactComponent } from './contact/contact.component';
+import { DataService } from '../services/data.service';
+import { PageComponent } from './land-records/page/page.component';
+import { CommonModule } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { WarningDialogComponent } from './warning-dialog.component';
 
 
 @NgModule({
@@ -22,7 +28,12 @@ import { landRecordsComponent } from './land-records/land-records.component';
 NavbarComponent,
 LoginComponent,
 RegistrationComponent,
-landRecordsComponent
+landRecordsComponent,
+aboutComponent,
+contactComponent,
+PageComponent,
+WarningDialogComponent
+
 
   ],
   imports: [
@@ -31,11 +42,13 @@ landRecordsComponent
     ReactiveFormsModule,
     BrowserAnimationsModule,MatDialogModule,HttpClientModule,
     FormsModule,
-    UserRoutingModule
+    UserRoutingModule,
+    CommonModule,
+    NgSelectModule
 
 
   ],
-  providers: [AssetService],
+  providers: [AssetService,DataService],
   bootstrap: []
 })
 export class UserModule { }

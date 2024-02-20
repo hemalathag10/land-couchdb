@@ -1,0 +1,12 @@
+/* Adjust the size of the chart container */
+:host {
+    display: block; /* Ensure the component is a block element */
+    max-width: 500px; /* Set the maximum width */
+    margin-right:50px; /* Center the chart */
+  }
+  
+  /* Optionally, add some padding for better appearance */
+  canvas {
+    padding: 10px;
+  }
+  

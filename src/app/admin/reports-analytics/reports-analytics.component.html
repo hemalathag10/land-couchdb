@@ -19,22 +19,24 @@
 
       <!-- Bar Chart -->
       <div class="chart-section-line">
-        <div id="select-option">
-          <!-- Your line chart goes here -->
-          <label for="lineChartDistrict">Select District:</label>
-          <select id="lineChartDistrict" [(ngModel)]="searchDistrict" (change)="onDistrictChange()">
-            <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
-          </select>
-        
-          <label for="lineChartTaluk">Select Taluk:</label>
-          <select id="lineChartTaluk" [(ngModel)]="searchTaluk">
-            <option *ngFor="let taluk of taluks[searchDistrict]" [value]="taluk">{{ taluk }}</option>
-          </select>
-        
-          <button (click)="search()">Search</button>
-        
-          <!-- Your line chart canvas goes here -->
-        </div>
+       <div id="select-option" style="display: flex; align-items: center;">
+  <!-- Your line chart goes here -->
+
+  <div class="select-container" style="display: flex; gap: 10px;">
+    <div class="select-wrapper">
+      <label for="lineChartDistrict">Select District:</label>
+      <ng-select class="district" [(ngModel)]="selectedDistrict" [items]="districts" bindLabel="name"></ng-select>
+    </div>
+
+    <div class="select-wrapper">
+      <label for="lineChartTaluk">Select Taluk:</label>
+      <ng-select class="taluk" [(ngModel)]="selectedTaluk" [items]="taluks[selectedDistrict]" bindLabel="name"></ng-select>
+    </div>
+  </div>
+
+  <button (click)="search()">Search</button>
+</div>
+
         
         
         <div>
@@ -43,10 +45,5 @@
         </div>      </div>
     </div>
 
-
-    <div style="width: 80%;">
-      <canvas id="barChart"></canvas>
-    </div>
-    
   </div>
 </div>

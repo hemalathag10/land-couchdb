@@ -1,0 +1,59 @@
+/* app.component.css */
+.about-us-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #f8faf8, #f7f9f7);
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-section {
+  flex: 1;
+}
+
+img{
+  height:500px
+}
+
+.website-image {
+  width: 100%; /* Adjust the width as needed */
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-section {
+  flex: 2;
+  padding: 0 20px;
+  color: #0e0d0d; /* Text color */
+}
+
+.headline {
+  color: #4C4C4C; /* Headline color */
+}
+
+.description,
+.section-content {
+  color: #090909; /* Text color */
+}
+
+.section-title {
+  color: #4C4C4C; /* Section title color */
+}
+
+.values {
+  margin-top: 30px;
+}
+
+.value-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.value-item {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #0c0c0b; /* Value item color */
+}

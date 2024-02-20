@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders ,HttpErrorResponse} from '@angular/common/http';
+import { DialogService } from 'src/app/services/dialog.service';
+import { Inject } from '@angular/core';
+import * as CryptoJS from 'crypto-js';
+
+
+import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 
 
 interface User {
@@ -22,13 +29,22 @@ export class RegistrationComponent {
   errorPasswordMessage: string = '';
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+    
+
+
+  constructor(private fb: FormBuilder, private http: HttpClient,private dialogService: DialogService, public dialogRef: MatDialogRef<RegistrationComponent> ) {
     this.myForm = this.fb.group({
       emailId: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
  
+
+  openRegistrationDialog() {
+    this.dialogService.openRegistrationDialog().subscribe(result => {
+      // Handle the result if needed
+    });
+  }
   onSubmit() {
     this.successMessage = '';
     this.errorMessage = '';
@@ -36,6 +52,11 @@ export class RegistrationComponent {
     if (this.myForm.valid) {
       const formData = this.myForm.value as User;
   
+      const encryptedPassword = CryptoJS.AES.encrypt(formData.password, 'secret key').toString();
+  
+      // Replace the plain text password with the encrypted password
+      formData.password = encryptedPassword;
+    
       formData.createdAt = new Date();
   
       const headers = new HttpHeaders({
@@ -61,6 +82,7 @@ export class RegistrationComponent {
                 .subscribe(
                   response => {
                     this.successMessage = 'successfully registered';
+                    this.dialogRef.close();
                     console.log('Data stored successfully:', response);
                   },
                   (error: HttpErrorResponse) => {

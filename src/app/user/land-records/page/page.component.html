@@ -1,0 +1,74 @@
+<!-- page.component.html -->
+<app-nav-bar></app-nav-bar>
+<div *ngIf="fetchedData">
+  <!-- Land Details Table -->
+  <h2>Land Details</h2>
+  <table>
+    <thead>
+      <tr>
+       
+        <th>Land Area</th>
+        <th>District</th>
+        <th>Taluk</th>
+        <th>State</th>
+        <th>Ward</th>
+        <th>Survey Number</th>
+        <th>Subdivision Number</th>
+        <th>Ownership</th>
+        <th>Land Use Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let asset of fetchedData">
+       
+        <td>{{ asset.landArea }}</td>
+        <td>{{ asset.selectedDistrict }}</td>
+        <td>{{ asset.selectedTaluk }}</td>
+        <td>{{ asset.state }}</td>
+        <td>{{ asset.ward }}</td>
+        <td>{{ asset.surveyNumber }}</td>
+        <td>{{ asset.subdivisionNumber }}</td>
+        <td>{{ asset.ownership }}</td>
+        <td>{{ asset.landUseType }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Owners Table -->
+  <h2>Owners</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ownership Details</th>
+        <th>Owner Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let asset of fetchedData">
+        <ng-container *ngFor="let owner of asset.owners">
+          <ng-container *ngFor="let individualOwner of owner.owners">
+            <tr>
+              <!-- Ownership Details -->
+              <td>
+                <p>Ownership Duration From: {{ owner.ownershipDurationFrom }}</p>
+                <p>Ownership Duration To: {{ owner.ownershipDurationTo }}</p>
+                <p>Number of Owners: {{ owner.numOwners }}</p>
+              </td>
+              <!-- Owner Details -->
+              <td>
+                <p>Owner Name: {{ individualOwner.ownername }}</p>
+                <p>Contact Information: {{ individualOwner.contactInformation }}</p>
+                <p>Address: {{ individualOwner.address }}</p>
+                <p>Purchase Price: {{ individualOwner.purchasePrice }}</p>
+                <p>Date of Transaction: {{ individualOwner.dateOfTransaction }}</p>
+                <p>Transaction Type: {{ individualOwner.transactionType }}</p>
+                <p>Land Usage History: {{ individualOwner.landUsageHistory }}</p>
+                <p>Buyer Seller Details: {{ individualOwner.buyerSellerDetails }}</p>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

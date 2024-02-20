@@ -1,0 +1,28 @@
+<table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Feedback</th>
+        <!-- Add other table headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbackData">
+        <td>{{ feedback.email }}</td>
+        <td>{{ feedback.feedback }}</td>
+        <!-- Add other table cells as needed -->
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    
+  
+    <!-- <div *ngIf="sentimentScores.length > 0">
+      <h2>Sentiment Analysis</h2>
+      <div style="text-align: center;">
+        <! Use the correct property name: [sentimentScores] -->
+        <!-- <app-chart [feedbackData]="feedbackData" [sentimentScores]="sentimentScores"></app-chart> -->
+      <!-- </div> -->
+    <!-- </div> --> 
+  </div>
+  

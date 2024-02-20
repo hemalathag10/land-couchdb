@@ -3,9 +3,12 @@
     <li><a routerLink="/nav-bar">Home</a></li>
     <li><a routerLink="/about">About Us</a></li>
     <li><a routerLink="/contact">Contact</a></li>
-    <li><a routerLink="/land-records">Land Records</a></li>
+    <li> <a  routerLink="/land-records">Land Records</a></li>
+    <li><a class="signup"(click)="openLoginDialog()">Sign In/Sign up</a></li>
 
-    <li><a class="signup"(click)="openRegistrationDialog()">Sign Up</a></li>
-    <li><a class="signup"(click)="openLoginDialog()">Sign In</a></li>
+    <!-- <a *ngIf="authService.isAuthenticated()" routerLink="/signin">Sign In/Sign Up</a> -->
+   <li> <a class="signup" (click)="logout()">Logout</a></li>
+    <!-- <li><a class="signup"(click)="openRegistrationDialog()">Sign Up</a></li> -->
+    <!-- <li><a class="signup"(click)="openLoginDialog()">Sign In/Sign up</a></li> -->
   </ul>
 </nav>

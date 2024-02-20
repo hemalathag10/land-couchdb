@@ -152,7 +152,14 @@ console.log(headers)
     return this.http.get<any>(`${this.baseUrl}/doc_asset`, { headers });
   }
 
-
+  getFeedback(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(this.credentials)
+    });
+console.log(headers)
+    return this.http.get<any>(`${this.baseUrl}/feedback`, { headers });
+  }
 
 
   getAllUsers(): Observable<any> {
@@ -164,6 +171,36 @@ console.log("user",headers)
     return this.http.get<any>(`${this.baseUrl}/form`, { headers });
   }
 
-  
+  getLandRecordByDetails(district: string, taluk: string, surveyNumber: string): Observable<any> {
+    // Replace this with your actual API call or data retrieval logic
+    const url = `${this.baseUrl}/doc_asset`;
+    // Include headers in the request
+    const headers = this.getHeaders();
+
+    return this.http.get(url, { headers }).pipe(
+      map((response: any) => {
+        // Search for the specific index in the 'asset' array
+        const index = response.asset.findIndex((outerArray: any[]) =>
+          outerArray.some((obj: any) =>
+            obj.selectedDistrict == district &&
+            obj.selectedTaluk == taluk &&
+            obj.surveyNumber == surveyNumber
+          )
+        );
+        if (index !== -1) {
+          // If the index is found, return the data at that index
+          return response.asset[index];
+        } else {
+          // If not found, return an appropriate message or handle accordingly
+          return { error: 'Data not found for the specified details.' };
+        }
+      }),
+      catchError((error: any) => {
+        console.error('Error fetching data:', error);
+        throw error;
+      })
+    );
+}
+
   
 }

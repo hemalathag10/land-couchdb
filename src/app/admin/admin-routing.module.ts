@@ -9,6 +9,7 @@ import { AdminComponent } from './admin.component';
 import { ReportsAnalyticsComponent } from './reports-analytics/reports-analytics.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { AssetService } from '../services/asset.service';
+import { FeedbackComponent} from './feedback/feedback.component';
 const routes: Routes = [
     {
       path: '',
@@ -18,6 +19,8 @@ const routes: Routes = [
         { path: 'stats', component: StatsComponent },
         { path: 'reports-analytics', component: ReportsAnalyticsComponent },
         { path: 'manage-user', component: ManageUserComponent },
+        { path: 'feedback', component: FeedbackComponent },
+
         { path: '', redirectTo: 'stats', pathMatch: 'full' },
       ]
     }
