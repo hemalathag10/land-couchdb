@@ -63,86 +63,6 @@ export class ReportsAnalyticsComponent implements OnInit {
 
 
 
-// private drawLineChart() {
-//   const landValueRange = this.extractLandValueFromDatabase(this.searchDistrict, this.searchTaluk);
-
-//   // Convert the data to arrays for labels and data
-//   const years = Object.keys(landValueRange).map(Number);
-//   const purchasePricesArray = Object.values(landValueRange);
-
-//   // Create a single dataset with points sorted by x-axis (year)
-//   const dataset: { x: number; y: number }[] = [];
-
-//   purchasePricesArray.forEach((prices, index) => {
-//     // Add each point to the dataset
-//     prices.forEach((price: number) => {
-//       dataset.push({ x: years[index], y: price });
-//     });
-//   });
-
-//   // Sort dataset points based on the x-axis values (years)
-//   dataset.sort((a, b) => a.x - b.x);
-
-//   new Chart(document.getElementById("lineChart") as HTMLCanvasElement, {
-//     type: 'line',
-//     data: {
-//       labels: years,
-//       datasets: [{
-//         label: 'Land Value Range (Rs)',
-//         data: dataset,
-//         borderColor: 'rgb(255, 99, 132)',
-//         backgroundColor: 'rgba(255, 99, 132, 0.2)',
-//         borderWidth: 2,
-//         pointBackgroundColor: 'rgb(255, 99, 132)',
-//       }],
-//     },
-//     options: {
-//       aspectRatio: 2.0,
-//       scales: {
-//         y: {
-//           title: {
-//             display: true,
-//             text: 'Price per square feet(Rs.)',
-//           },
-//           beginAtZero: true,
-//           grid: {
-//             color: 'rgba(0, 0, 0, 0.1)',
-//           }
-//         },
-//         x: {
-//           title: {
-//             display: true,
-//             text: 'Years',
-//           },
-//           grid: {
-//             color: 'rgba(0, 0, 0, 0.1)',
-//           }
-//         }
-//       },
-//       plugins: {
-//         tooltip: {
-//           backgroundColor: 'rgba(0, 0, 0, 0.7)',
-//           bodyFont: {
-//             size: 14,
-//           },
-//           titleFont: {
-//             size: 16,
-//             weight: 'bold',
-//           }
-//         },
-//         legend: {
-//           labels: {
-//             font: {
-//               size: 14,
-//             }
-//           }
-//         },
-//       }
-//     }
-//   });
-// }
-
-
   
 
 
@@ -219,7 +139,7 @@ private drawLineChart() {
               const index = context.dataIndex;
               const previousValue = Math.abs(index > 0 ? context.dataset.data[index - 1].y : null);
               const currentYear = context.dataset.data[context.dataIndex].x;
-              const previousYear = index > 0 ? context.dataset.data[index - 1].x : null;
+              // const previousYear = index > 0 ? context.dataset.data[index - 1].x : null;
           console.log("current",currentValue)
           console.log("previous",previousValue)
               let Change = previousValue !== 0 ? (((currentValue - previousValue)).toFixed(2)) : '0.00';

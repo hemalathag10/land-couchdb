@@ -19,7 +19,7 @@ export class LoginComponent {
   errorMessage:string=''
   
 
-  openRegistrationDialog() {
+  openLoginDialog() {
     this.dialogService.openRegistrationDialog().subscribe(result => {
       // Handle the result if needed
     });

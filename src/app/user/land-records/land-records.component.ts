@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { WarningDialogComponent } from '../warning-dialog.component';
+import { LoginComponent } from '../login/login.component';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 @Component({
@@ -18,19 +20,26 @@ export class landRecordsComponent {
   showScanCard = true;
   showScanningSection = false;
   showForm = false;
-  district: string = ''; // Declare district property
-  taluk: string = ''; // Declare taluk property
-  surveyNumber: string = ''; // Declare surveyNumber property
+  district: string = ''; 
+  taluk: string = ''; 
+  surveyNumber: string = ''; 
 
   // Inject AssetService in the constructor
-  constructor(private assetService: AssetService, private dataService:DataService,  private router: Router, private dialog: MatDialog, private authService:AuthService) {}
-
-  // Add the method to fetch data based on entered values
-  private openWarningDialog(): void {
-    this.dialog.open(WarningDialogComponent, {
+  constructor(private assetService: AssetService, private dataService:DataService,  
+    private router: Router, private dialog: MatDialog, private authService:AuthService,private sharedService: SharedService) {}
+ 
+    ngOnInit() {
+      this.sharedService.showScanningSection$.subscribe(value => {
+        this.showScanningSection = value;
+      });
+    }
+  private openLoginDialog(): void {
+    this.dialog.open(LoginComponent, {
       width: '400px',
     });
   }
+
+  
   fetchData() {
     // Replace this with your actual API call or data retrieval logic
     this.assetService.getLandRecordByDetails(this.district, this.taluk, this.surveyNumber).subscribe(
@@ -49,21 +58,15 @@ export class landRecordsComponent {
       }
     );
   }
-  
+ 
 
-
-  // toggleScanningSection() {
-  //   this.showScanningSection = !this.showScanningSection;
-  //   this.showForm = false; // Ensure form is hidden when scanning section is toggled
-  // }
 
   toggleScanningSection() {
     if (this.authService.isUserLoggedIn()) {
       this.showScanningSection = !this.showScanningSection;
       this.showForm = false;
     } else {
-      // Redirect to the login page if the user is not logged in
-      this.openWarningDialog();
+      this.openLoginDialog();
     }
   }
 
@@ -71,7 +74,6 @@ export class landRecordsComponent {
   }
 
   exploreNow() {
-    // Additional logic for when the Explore Now button is clicked
   }
 
   startScanningTab() {

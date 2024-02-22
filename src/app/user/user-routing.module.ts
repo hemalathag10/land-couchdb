@@ -11,12 +11,12 @@ import { PageComponent } from './land-records/page/page.component';
 
 const routes: Routes = [
   { path: 'nav-bar', component: NavbarComponent },
-  {path:'land-records', component:landRecordsComponent, canActivate: [AuthGuard] },
+  {path:'land-records', component:landRecordsComponent },
   {path:'registration', component:RegistrationComponent},
   {path:'login',component:LoginComponent},
   {path:'about',component:aboutComponent},
   {path:'contact',component:contactComponent},
-  {path:'page',component:PageComponent},
+  { path: 'page', component: PageComponent, canActivate: [AuthGuard] },
 
 
 

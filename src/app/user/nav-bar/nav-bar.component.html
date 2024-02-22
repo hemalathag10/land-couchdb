@@ -4,11 +4,14 @@
     <li><a routerLink="/about">About Us</a></li>
     <li><a routerLink="/contact">Contact</a></li>
     <li> <a  routerLink="/land-records">Land Records</a></li>
-    <li><a class="signup"(click)="openLoginDialog()">Sign In/Sign up</a></li>
+     <!-- Show login link only if not authenticated -->
+     <li *ngIf="!authService.isUserLoggedIn()">
+      <a class="signup" (click)="openLoginDialog()">Log in</a>
+    </li>
 
-    <!-- <a *ngIf="authService.isAuthenticated()" routerLink="/signin">Sign In/Sign Up</a> -->
-   <li> <a class="signup" (click)="logout()">Logout</a></li>
-    <!-- <li><a class="signup"(click)="openRegistrationDialog()">Sign Up</a></li> -->
-    <!-- <li><a class="signup"(click)="openLoginDialog()">Sign In/Sign up</a></li> -->
+    <!-- Show logout link only if authenticated -->
+    <li *ngIf="authService.isUserLoggedIn()">
+      <a class="signup" (click)="logout()">Logout</a>
+    </li>
   </ul>
 </nav>
