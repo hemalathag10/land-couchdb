@@ -8,7 +8,7 @@ import { landRecordsComponent } from './land-records/land-records.component';
 import { AuthGuard } from '../services/auth.guard';
 import { contactComponent } from './contact/contact.component';
 import { PageComponent } from './land-records/page/page.component';
-
+import { homeComponent } from './home/home.component';
 const routes: Routes = [
   { path: 'nav-bar', component: NavbarComponent },
   {path:'land-records', component:landRecordsComponent },
@@ -17,6 +17,7 @@ const routes: Routes = [
   {path:'about',component:aboutComponent},
   {path:'contact',component:contactComponent},
   { path: 'page', component: PageComponent, canActivate: [AuthGuard] },
+  {path:'home',component:homeComponent},
 
 
 
