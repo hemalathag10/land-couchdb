@@ -19,7 +19,6 @@
 // }
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AssetService } from 'src/app/services/asset.service';
-import { SentimentAnalysisService } from 'src/app/services/sentimentAnalysis.service';
 import { ChartComponent} from './chart.component';
 @Component({
   selector: 'app-feedback',
@@ -32,7 +31,7 @@ export class FeedbackComponent implements OnInit, AfterViewInit {
 
   @ViewChild(ChartComponent) speedometerChart!: ChartComponent;
 
-  constructor(private assetService: AssetService, private sentimentService: SentimentAnalysisService) {}
+  constructor(private assetService: AssetService,) {}
 
   ngOnInit(): void {
     this.assetService.getFeedback().subscribe((data) => {
@@ -40,9 +39,9 @@ export class FeedbackComponent implements OnInit, AfterViewInit {
 
       // Perform sentiment analysis on feedback
       this.feedbackData.forEach(feedback => {
-        this.sentimentService.analyzeSentiment(feedback.feedback).subscribe(score => {
-          this.sentimentScores.push(score);
-        });
+        // this.sentimentService.analyzeSentiment(feedback.feedback).subscribe(score => {
+        //   this.sentimentScores.push(score);
+        // });
       });
     });
   }

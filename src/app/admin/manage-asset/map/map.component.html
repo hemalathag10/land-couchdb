@@ -1,0 +1,7 @@
+<button (click)="openMap()" >Plot Map</button>
+
+<p>UPLOAD</p>
+<input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadPdf()">Upload PDF</button>
+    <div *ngIf="successMessage">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>

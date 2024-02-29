@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { WarningDialogComponent } from './warning-dialog.component';
 import { homeComponent } from './home/home.component';
+import { MapDisplayComponent } from './land-records/map-display/map-display.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ aboutComponent,
 contactComponent,
 PageComponent,
 WarningDialogComponent,
-homeComponent
+homeComponent,
+MapDisplayComponent
 
 
   ],

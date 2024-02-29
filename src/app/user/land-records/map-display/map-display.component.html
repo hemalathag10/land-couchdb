@@ -1,0 +1,12 @@
+<!-- map-display.component.html -->
+<div>
+    <h2>Map Display</h2>
+    <!-- You can display the PDF or handle errors as needed -->
+    <div *ngIf="pdfData; else noPdfError">
+      <iframe [src]="pdfData" width="100%" height="600px"></iframe>
+    </div>
+    <ng-template #noPdfError>
+      <p>{{ errorMessage }}</p>
+    </ng-template>
+  </div>
+  

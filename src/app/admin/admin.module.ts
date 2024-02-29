@@ -23,7 +23,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AuthService } from '../services/auth.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FeedbackComponent } from './feedback/feedback.component';
-import { SentimentAnalysisService } from '../services/sentimentAnalysis.service';
 import { ChartComponent } from './feedback/chart.component';
 
 
@@ -54,7 +53,7 @@ import { ChartComponent } from './feedback/chart.component';
 
 
   ],
-  providers: [AssetService, AuthService,SentimentAnalysisService],
+  providers: [AssetService, AuthService],
   bootstrap: []
 })
 export class AdminModule { }

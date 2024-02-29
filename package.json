@@ -29,6 +29,7 @@
     "crypto-js": "^4.2.0",
     "html5-qrcode": "^2.3.8",
     "natural": "^6.10.4",
+    "pouchdb": "^8.0.1",
     "rxjs": "~7.8.0",
     "sentiment": "^5.0.2",
     "slickgrid": "^5.8.0",

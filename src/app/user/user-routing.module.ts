@@ -9,6 +9,7 @@ import { AuthGuard } from '../services/auth.guard';
 import { contactComponent } from './contact/contact.component';
 import { PageComponent } from './land-records/page/page.component';
 import { homeComponent } from './home/home.component';
+import { MapDisplayComponent } from './land-records/map-display/map-display.component';
 const routes: Routes = [
   { path: 'nav-bar', component: NavbarComponent },
   {path:'land-records', component:landRecordsComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'contact',component:contactComponent},
   { path: 'page', component: PageComponent, canActivate: [AuthGuard] },
   {path:'home',component:homeComponent},
+  {path:'map-display',component:MapDisplayComponent},
 
 
 

@@ -69,6 +69,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { ManageAssetFormDialogComponent } from './manage-asset-form-dialog.component';
 import { AssetService } from 'src/app/services/asset.service';
 import { OwnersDetailsDialogComponent } from './owners-details-dialog/owners-details-dialog.component';
+import { MapComponent } from './map/map.component';
 
 @Component({
   selector: 'app-manage-asset',
@@ -172,6 +173,20 @@ export class ManageAssetComponent implements OnInit {
     });
   }
   
-
+  showMapDialog(assetArray: any[]) {
+    // Open the dialog with the assetArray data
+    const dialogRef = this.dialog.open(MapComponent, {
+      width: '400px',
+      height:'400px',
+     
+      data: assetArray[0],
+      
+    });
+  
+    // You can handle the dialog result if needed
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('dialog closed:', result);
+    });
+  }
 
 }

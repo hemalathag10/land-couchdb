@@ -15,13 +15,14 @@ const routes: Routes = [
       path: '',
       component: AdminComponent,
       children: [
+        { path: '', redirectTo: '/stats', pathMatch: 'full' },
+
         { path: 'manage-asset', component: ManageAssetComponent },
         { path: 'stats', component: StatsComponent },
         { path: 'reports-analytics', component: ReportsAnalyticsComponent },
         { path: 'manage-user', component: ManageUserComponent },
         { path: 'feedback', component: FeedbackComponent },
 
-        { path: '', redirectTo: 'stats', pathMatch: 'full' },
       ]
     }
   ];
