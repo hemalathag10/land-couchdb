@@ -1,8 +1,52 @@
-/* page.component.css */
+/* styles.css (or your preferred stylesheet) *//* styles.css (or your preferred stylesheet) */
+
+.page-container {
+  display: flex;
+}
+
+.left-sidebar {
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 200px;
+}
+
+.left-sidebar h3 {
+  margin-bottom: 15px;
+}
+
+.map-section {
+  margin-top: 20px;
+}
+
+.map-section h4 {
+  margin-bottom: 10px;
+}
+
+.map-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.map-button:hover {
+  background-color: #45a049;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 table {
-  width: 80%; /* Adjust the width as per your preference */
-  margin: 20px auto; /* Center the table by setting auto margins */
+  width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
 th, td {
@@ -12,10 +56,6 @@ th, td {
 }
 
 th {
-  background-color: #f2f2f2;
-}
-
-h2 {
-  margin-top: 20px;
-  text-align: center;
+  background-color: #4CAF50;
+  color: white;
 }

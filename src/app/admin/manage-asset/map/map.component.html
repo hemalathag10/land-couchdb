@@ -1,7 +1,16 @@
-<button (click)="openMap()" >Plot Map</button>
+<!-- page.component.html -->
 
-<p>UPLOAD</p>
-<input type="file" (change)="onFileSelected($event)" />
-    <button (click)="uploadPdf()">Upload PDF</button>
-    <div *ngIf="successMessage">{{ successMessage }}</div>
-    <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+<div class="map-section box">
+    <h4>Mark Land Area on Map</h4>
+    <p>Use the button below to mark a specific area on the map:</p>
+    <button (click)="openMap()">Plot Land Area</button>
+</div>
+
+<div class="upload-section box">
+    <h4>Upload Land Map Document</h4>
+    <p>Upload a document (PDF) containing the marked land area on the map:</p>
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadPdf()">Upload Land Map</button>
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

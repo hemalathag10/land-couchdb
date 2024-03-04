@@ -1,7 +1,8 @@
 // map-display.component.ts
-import { Component, Inject, InjectionToken, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-export const FETCHED_DATA_TOKEN = new InjectionToken<any>('FETCHED_DATA');
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-map-display',
@@ -9,14 +10,15 @@ export const FETCHED_DATA_TOKEN = new InjectionToken<any>('FETCHED_DATA');
   styleUrls: ['./map-display.component.css']
 })
 export class MapDisplayComponent implements OnInit {
-  pdfData: string = '';
+  pdfData: SafeResourceUrl = '';
   errorMessage: string = '';
   fetchedData: any;
 
-  constructor(private http: HttpClient, @Inject(FETCHED_DATA_TOKEN) private injectedData: any) { }
+  constructor(private http: HttpClient, private sharedservice: SharedService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.fetchedData = this.injectedData;
+    this.fetchedData = this.sharedservice.fetchedData;
+    console.log("amp", this.fetchedData);
     this.retrievePdf();
   }
 
@@ -29,11 +31,12 @@ export class MapDisplayComponent implements OnInit {
     this.http.get('http://localhost:5984/project/pdf', { headers })
       .subscribe(
         (existingFormData: any) => {
-            console.log("barcode",this.fetchedData.barcode)
-          const pdfAttachment = existingFormData.attachment?.user1;
+          const barcode = this.fetchedData[0].barcode;
+          const pdfAttachment = existingFormData.attachment[barcode];
 
           if (pdfAttachment && pdfAttachment.data) {
-            this.pdfData = 'data:application/pdf;base64,' + pdfAttachment.data;
+            // Use DomSanitizer to mark the data URL as safe
+            this.pdfData = this.sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + pdfAttachment.data);
           } else {
             this.errorMessage = 'No PDF data found in the document.';
           }

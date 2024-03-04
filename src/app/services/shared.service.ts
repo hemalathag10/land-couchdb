@@ -6,6 +6,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
+  public _fetchedData: any; // Change 'any' to the actual type of your data
+
+  get fetchedData(): any {
+    return this._fetchedData;
+  }
+
+  setFetchedData(data: any): void {
+    this._fetchedData = data;
+  }
   private showScanningSectionSubject = new BehaviorSubject<boolean>(false);
   showScanningSection$ = this.showScanningSectionSubject.asObservable();
   private userLoggedInSubject = new BehaviorSubject<boolean>(false);

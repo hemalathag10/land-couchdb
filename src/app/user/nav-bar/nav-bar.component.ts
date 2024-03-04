@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { landRecordsComponent } from '../land-records/land-records.component';
 import { SharedService } from 'src/app/services/shared.service';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,19 +18,12 @@ export class NavbarComponent {
     private unsubscriber: Subject<void> = new Subject<void>();
 
     constructor(private location: Location, public authService: AuthService,
-      private dialogService: DialogService,private sharedService: SharedService) {}
+      private dialogService: DialogService,private sharedService: SharedService,
+      private router:Router) {}
   
 
     ngOnInit(): void {
-      history.scrollRestoration = 'manual'; 
-      history.pushState(null, '');
-  
-      fromEvent(window, 'popstate').pipe(
-        takeUntil(this.unsubscriber)
-      ).subscribe((_) => {
-        history.pushState(null, ''); // Reset the browser history
-        this.showErrorModal(`You can't make changes or go back at this time.`);
-      });
+      
     }
   
     ngOnDestroy(): void {
@@ -38,6 +32,15 @@ export class NavbarComponent {
     }
   
     logout(): void {
+      history.scrollRestoration = 'manual'; 
+      history.pushState(null, '');
+  
+      fromEvent(window, 'popstate').pipe(
+        takeUntil(this.unsubscriber)
+      ).subscribe((_) => {
+        history.pushState(null, ''); 
+        this.showErrorModal(`You can't make changes or go back at this time.`);
+      });
       this.authService.logout();
       this.location.replaceState('/'); // Reset the browser history
     }
@@ -56,4 +59,11 @@ export class NavbarComponent {
       // Handle the result if needed
     });
   }
+  showLandRecordsDropdown: boolean = false;
+
+
+  toggleLandRecordsDropdown() {
+    this.showLandRecordsDropdown = !this.showLandRecordsDropdown;
+  }
+ 
 }

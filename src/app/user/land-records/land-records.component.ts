@@ -85,4 +85,6 @@ export class landRecordsComponent {
     this.showForm = false; // Ensure form is hidden when scanning section is toggled
 
   }
+ 
+
 }

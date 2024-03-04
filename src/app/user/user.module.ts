@@ -23,6 +23,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { WarningDialogComponent } from './warning-dialog.component';
 import { homeComponent } from './home/home.component';
 import { MapDisplayComponent } from './land-records/map-display/map-display.component';
+import { SharedService } from '../services/shared.service';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ MapDisplayComponent
 
 
   ],
-  providers: [AssetService,DataService],
+  providers: [AssetService,DataService,SharedService],
   bootstrap: []
 })
 export class UserModule { }
