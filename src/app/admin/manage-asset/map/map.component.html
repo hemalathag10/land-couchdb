@@ -1,5 +1,5 @@
 <!-- page.component.html -->
-
+<div class="conatiner">
 <div class="map-section box">
     <h4>Mark Land Area on Map</h4>
     <p>Use the button below to mark a specific area on the map:</p>
@@ -13,4 +13,8 @@
     <button (click)="uploadPdf()">Upload Land Map</button>
     <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+</div>
+<button (click)="closeDialog()">Close</button>
+
 </div>

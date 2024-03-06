@@ -1,13 +1,19 @@
 // shared.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject,  Subject  } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
   public _fetchedData: any; // Change 'any' to the actual type of your data
+  private decodedTextSubject = new Subject<string>();
+  decodedText$ = this.decodedTextSubject.asObservable();
 
+  sendDecodedText(decodedText: string) {
+    this.decodedTextSubject.next(decodedText);
+  }
   get fetchedData(): any {
     return this._fetchedData;
   }

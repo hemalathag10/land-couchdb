@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WarningDialogComponent } from '../warning-dialog.component';
 import { LoginComponent } from '../login/login.component';
 import { SharedService } from 'src/app/services/shared.service';
+import { QrCodeScannerComponent } from 'src/app/user/land-records/qr-code-scanner.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class landRecordsComponent {
   district: string = ''; 
   taluk: string = ''; 
   surveyNumber: string = ''; 
-
+  barcode:any;
   // Inject AssetService in the constructor
   constructor(private assetService: AssetService, private dataService:DataService,  
     private router: Router, private dialog: MatDialog, private authService:AuthService,private sharedService: SharedService) {}
@@ -70,14 +71,29 @@ export class landRecordsComponent {
     }
   }
 
-  startScanning() {
+  startScanning():void {
+   
   }
 
   exploreNow() {
   }
 
-  startScanningTab() {
-    // Additional logic for when the Start Scanning button in the tab is clicked
+  startScanningTab():void {
+    const dialogRef = this.dialog.open(QrCodeScannerComponent, {
+      width: '400px',
+    });
+
+    // Subscribe to the dialog's afterClosed event
+    dialogRef.afterClosed().subscribe((decodedText: string) => {
+      if (decodedText) {
+        // Set the decoded text to the barcode field
+        this.barcode = decodedText;
+        console.log('Barcode value in landRecordsComponent:', this.barcode);
+      }
+  
+      // Optionally, you can perform additional actions after the dialog is closed
+      console.log('QrCodeScannerComponent dialog closed.');
+    });
   }
 
   submitForm() {

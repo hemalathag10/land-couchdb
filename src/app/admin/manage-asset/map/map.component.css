@@ -1,4 +1,3 @@
-/* styles.css (or your preferred stylesheet) */
 
 .box {
     border: 1px solid #ccc; /* Border color and thickness */
@@ -41,3 +40,28 @@
 .error-message {
     color: red;
 }
+
+.container{
+    background-color: black;
+}
+
+/* map.component.css */
+button {
+    background-color: #292c2a; /* Set your desired background color */
+    color: #ffffff; /* Set the text color */
+    padding: 10px 15px; /* Set padding for the button */
+    border: none;
+    border-radius: 5px; /* Add rounded corners if desired */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+  
+    /* Add more styles as needed */
+  }
+  
+  button:hover {
+    background-color: #5e5f61; /* Change background color on hover */
+  }
+  
+  /* Adjust the styles based on your design preferences */
+  

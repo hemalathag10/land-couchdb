@@ -19,7 +19,6 @@ export class MapComponent  {
         private dialogRef: MatDialogRef<MapComponent>
       ) { }
     openMap(): void {
-        // Replace the latitude and longitude with your desired location
         const latitude = 37.7749;
         const longitude = -122.4194;
         const zoomLevel = 14;
@@ -136,5 +135,9 @@ export class MapComponent  {
               console.error('Error fetching existing data:', error);
             }
           );
+      }
+
+      closeDialog(): void {
+        this.dialogRef.close();
       }
 }

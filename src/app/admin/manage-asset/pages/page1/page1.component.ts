@@ -1,7 +1,8 @@
 // page1.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
+import { QrCodeScannerComponent } from 'src/app/admin/manage-asset/qr-code-scanner/qr-code-scanner.component';
 @Component({
   selector: 'app-page1',
   templateUrl: './page1.component.html',
@@ -9,6 +10,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 })
 export class Page1Component implements OnInit {
   @Input() form!: FormGroup;
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {}
+
 
   states: string[] = ['Andhra Pradesh', 'Karnataka', 'Kerala', 'Maharashtra', 'TamilNadu', 'Telangana'];
 
@@ -20,7 +23,6 @@ export class Page1Component implements OnInit {
     // Add other districts with taluks
   };
 
-  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     if (!this.form) {
@@ -59,5 +61,20 @@ export class Page1Component implements OnInit {
   positiveNumberValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
     return isNaN(value) || value <= 0 ? { positiveNumber: false } : null;
+  }
+
+  openQrCodeScanner(): void {
+    const dialogRef = this.dialog.open(QrCodeScannerComponent, {
+      width: '400px',
+      data: { barcodeControl: this.form.get('barcode') } // Pass the barcode form control
+    });
+
+    // Subscribe to the dialog's afterClosed event
+    dialogRef.afterClosed().subscribe(() => {
+      // Optionally, you can perform additional actions after the dialog is closed
+      console.log('QrCodeScannerComponent dialog closed.');
+      console.log('Barcode value in Page1Component:', this.form.get('barcode')?.value);
+
+    });
   }
 }
