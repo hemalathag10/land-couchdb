@@ -1,88 +1,100 @@
+/* Add this to your component's CSS file or global styles */
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+.box{
+  background-image: url('https://www.lincad.co.uk/wp-content/uploads/2022/08/contact-us-scaled-1.jpg');
+  background-size: cover; /* Adjust the background size as needed */
+  background-position: center;
+}
 .center-container {
-    margin-left: 150px;
-    width:80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  margin-left: 150px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+ /* Adjust the background position as needed */
+}
 
-  .contact-container {
-    display: flex;
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 60%; /* Adjust the width as needed */
-  }
+.contact-container {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.2); /* Set a transparent white background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1); /* Apply a subtle box shadow */
+  backdrop-filter: blur(10px); /* Apply a background blur effect */
+  width: 60%; /* Adjust the width as needed */
+}
 
-  .contact-info, .feedback-form {
-    flex: 1;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    margin-right: 20px;
-  }
+.contact-info, .feedback-form {
+  flex: 1;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.4); /* Set a semi-transparent white background */
+  margin-right: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Apply a subtle box shadow */
+}
 
-  .contact-info {
-    border-right: 2px solid #ccc;
-  }
+.contact-info {
+  border-right: 2px solid #ccc;
+}
 
-  h2 {
-    color: #333;
-  }
+h2 {
+  color: #333;
+}
 
-  p {
-    color: #555;
-  }
+p {
+  color: #555;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  label {
-    color: #333;
-  }
+label {
+  color: #333;
+}
 
-  input, textarea {
-    padding: 8px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+input, textarea {
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
-  button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-  button:hover {
-    background-color: #45a049;
-  }
+button:hover {
+  background-color: #45a049;
+}
 
-  /* Add this to your component's CSS file or global styles */
+/* Add this to your component's CSS file or global styles */
 
 .disabled-button {
-    background-color: grey;
-    color: #999; /* You can adjust the color as needed */
-    cursor: not-allowed;
-  }
-  
-  .error-message {
-    color: red;
-  }
+  background-color: grey;
+  color: #999; /* You can adjust the color as needed */
+  cursor: not-allowed;
+}
 
-  /* Add this to your component's CSS file or global styles */
+.error-message {
+  color: red;
+}
+
+/* Add this to your component's CSS file or global styles */
 
 .success-message {
-    color: green; /* You can adjust the color as needed */
-    margin-top: 10px; /* Adjust the margin as needed */
-  }
-  
-  
+  color: green; /* You can adjust the color as needed */
+  margin-top: 10px; /* Adjust the margin as needed */
+}

@@ -48,7 +48,8 @@
     width: 100%;
     height: 500px;
     position: relative;
-    background: url('https://media.istockphoto.com/id/1437629749/photo/land-plot-in-aerial-view-in-chiang-mai-of-thailand.webp?b=1&s=170667a&w=0&k=20&c=Xsz0O363gGwnvhI3L2d29D_Dr4qBcrGVdUmvvTXoMUo=') no-repeat center center/cover;
+    background: url('https://images.unsplash.com/photo-1593341061446-5bcea81db2c5?q=80&w=1768&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+      background-size: cover;
   }
   
   .showcase::after {
@@ -59,7 +60,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: rgba(0, 0, 0, 0.6);
+    /* background: rgba(0, 0, 0, 0.6); */
     /* box-shadow: inset 120px 100px 250px #000000, inset -120px -100px 250px #000000; */
   }
   
@@ -158,43 +159,78 @@
   }
   
   /* Card Styles */
-  .card {
-    flex: 1; /* Each card takes an equal width */
-    max-width: 300px; /* Set a maximum width for each card */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  #card{
-    max-height: 500px;
-  }
-  .card h2 {
-    color: #333;
-  }
+  /* Card Styles */
+.card {
+  flex: 1;
+  max-width: 300px;
+  height:300px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.5rem; /* Adjust font size */
+}
+
+.card p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Glassmorphism Styles for Card Link */
+.card a {
+  display: inline-block;
+  padding: 10px 15px; /* Decrease the width by adjusting padding */
+  background-color: rgba(242, 245, 247, 0.5); /* Use an rgba color with reduced opacity for the glassmorphism effect */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
+  transition: background-color 0.3s ease;
+}
+
+.card a:hover {
+  background-color: hsl(204, 76%, 82%);
+}
+
+
+/* Max height for #card */
+#card {
+  max-height: 900px;
+}
+
+
+#login{
+  position: relative;
+  background: url('https://img.freepik.com/premium-vector/creative-green-yellow-login-form-template_1017-9502.jpg') no-repeat center center/cover;
+    background-size: cover;
+}
   
-  .card p {
-    color: #666;
-    margin-bottom: 15px;
-  }
-  
-  .card a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .card a:hover {
-    background-color: #2980b9;
-  }
-  
-  
+
+#scan{
+  position: relative;
+  background: url('https://img.freepik.com/free-photo/person-scanning-qr-code_23-2149321695.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1708473600&semt=ais') no-repeat center center/cover;
+    background-size: cover;
+}
+
+
+#explore{
+  position: relative;
+  background: url('https://www.cyberswift.com/blog/wp-content/uploads/2022/09/land-records-management-system-using-gis-technology.jpg') no-repeat center center/cover;
+    background-size: cover;
+}
   .footer {
     max-width: 70%;
     margin: 1rem auto;
@@ -289,17 +325,37 @@
   
   .btn-xl {
     font-size: 2rem;
-    border-radius: 15px;
+    border-radius: 150px;
     padding: 1.5rem 2.1rem;
     text-transform: uppercase;
-    background-color: rgb(49, 48, 47);
-  }
+    background-color: rgba(255, 255, 255, 0.2); /* Use an rgba color with reduced opacity for the frosted glass effect */
+    backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a border with reduced opacity for better visibility */
+    color: white; /* Set text color to white for better contrast */
+    transition: background-color 0.3s ease; /* Optional: Add a smooth transition effect */
+}
+
+.btn-xl:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Adjust the opacity on hover if needed */
+}
+
   
-  .btn-lg {
-    font-size: 1.2rem;
-    padding: 0.8rem 1.3rem;
-    text-transform: uppercase;
-  }
+  /* Glassmorphism Styles */
+.btn-lg {
+  font-size: 1.2rem;
+  padding: 0.8rem 1.3rem;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, 0.2); /* Translucent background color for glassmorphism effect */
+  backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a border with reduced opacity for better visibility */
+  color: rgba(232, 34, 34, 0.212); /* Set text color to white for better contrast */
+  transition: background-color 0.3s ease; /* Optional: Add a smooth transition effect */
+}
+
+.btn-lg:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* Adjust the opacity on hover if needed */
+}
+
   
   .btn-icon {
     margin-left: 1rem;

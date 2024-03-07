@@ -42,24 +42,32 @@ export class landRecordsComponent {
 
   
   fetchData() {
-    // Replace this with your actual API call or data retrieval logic
-    this.assetService.getLandRecordByDetails(this.district, this.taluk, this.surveyNumber).subscribe(
-      (data: any) => {
-        // Handle the fetched data, e.g., display it or navigate to another component
-        this.dataService.setData(data);
-
-        console.log('Fetched Data:', data);
-        this.router.navigate(['/page']);
-
-        // TODO: Display the data or navigate to another component with the data
-      },
-      (error: any) => {
-        console.error('Error fetching data:', error);
-        // TODO: Handle the error, e.g., display a message like "Not Found"
-      }
-    );
+    if (this.barcode) {
+      // Fetch data by barcode
+      this.assetService.getLandRecordByBarcode(this.barcode).subscribe(
+        (data: any) => {
+          this.dataService.setData(data);
+          console.log('Fetched Data by Barcode:', data);
+          this.router.navigate(['/page']);
+        },
+        (error: any) => {
+          console.error('Error fetching data by Barcode:', error);
+        }
+      );
+    } else {
+      // Fetch data by taluk, district, and survey number
+      this.assetService.getLandRecordByDetails(this.district, this.taluk, this.surveyNumber).subscribe(
+        (data: any) => {
+          this.dataService.setData(data);
+          console.log('Fetched Data by Details:', data);
+          this.router.navigate(['/page']);
+        },
+        (error: any) => {
+          console.error('Error fetching data by Details:', error);
+        }
+      );
+    }
   }
- 
 
 
   toggleScanningSection() {
@@ -81,18 +89,15 @@ export class landRecordsComponent {
   startScanningTab():void {
     const dialogRef = this.dialog.open(QrCodeScannerComponent, {
       width: '400px',
+      data: { barcodeControl: this.barcode } // Pass the barcode form control
     });
 
     // Subscribe to the dialog's afterClosed event
-    dialogRef.afterClosed().subscribe((decodedText: string) => {
-      if (decodedText) {
-        // Set the decoded text to the barcode field
-        this.barcode = decodedText;
-        console.log('Barcode value in landRecordsComponent:', this.barcode);
-      }
-  
+    dialogRef.afterClosed().subscribe(() => {
       // Optionally, you can perform additional actions after the dialog is closed
       console.log('QrCodeScannerComponent dialog closed.');
+      console.log('Barcode value in Page1Component:', this.barcode);
+
     });
   }
 

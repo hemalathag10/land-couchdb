@@ -1,14 +1,26 @@
 /* app.component.css */
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.fullContainer{
+  position: relative;
+  background: url('https://www.colorwallpapers.com/uploads/wallpaper/white-aesthetic-wallpapers/width-853/tftLZ0I77pqV-white-aesthetic-clouds-pc-wallpapers.jpg') no-repeat center center/cover;
+  background-size: cover;
+  height:100%
+}
+.app-nav-bar {
+  margin-bottom: 0; /* Remove the margin at the bottom of the navigation bar */
+}
+
 .about-us-container {
   display: flex;
+  height:100%;
   justify-content: space-around;
   align-items: center;
-  padding: 40px;
-  background: linear-gradient(135deg, #f8faf8, #f7f9f7);
-  border-radius: 20px;
+  padding: 0px;
   margin: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Set the width to 100% to extend fully */
+  box-sizing: border-box; /* Include padding and border in the total width */
 }
+
 
 .image-section {
   flex: 1;
