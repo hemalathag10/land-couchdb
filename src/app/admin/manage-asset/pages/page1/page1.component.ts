@@ -2,7 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { QrCodeScannerComponent } from 'src/app/admin/manage-asset/qr-code-scanner/qr-code-scanner.component';
+import { QrCodeScannerComponent } from 'src/app/user/land-records/qr-code-scanner.component';
 @Component({
   selector: 'app-page1',
   templateUrl: './page1.component.html',
@@ -66,15 +66,23 @@ export class Page1Component implements OnInit {
   openQrCodeScanner(): void {
     const dialogRef = this.dialog.open(QrCodeScannerComponent, {
       width: '400px',
-      data: { barcodeControl: this.form.get('barcode') } // Pass the barcode form control
-    });
+      data: { onScanSuccess: this.onScanSuccess.bind(this) }     });
 
     // Subscribe to the dialog's afterClosed event
     dialogRef.afterClosed().subscribe(() => {
       // Optionally, you can perform additional actions after the dialog is closed
       console.log('QrCodeScannerComponent dialog closed.');
-      console.log('Barcode value in Page1Component:', this.form.get('barcode')?.value);
 
     });
   }
+  onScanSuccess(decodedText: string): void {
+    // Assuming 'barcode' is the name of the form control in your form
+    this.form.get('barcode')?.setValue(decodedText);
+  
+    // Alternatively, if 'barcode' is a direct property of your form, use:
+    // this.form.controls['barcode'].setValue(decodedText);
+  
+    console.log('Barcode value in Page1Component:', this.form.get('barcode')?.value);
+  }
+  
 }

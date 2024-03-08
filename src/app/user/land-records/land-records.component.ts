@@ -89,8 +89,7 @@ export class landRecordsComponent {
   startScanningTab():void {
     const dialogRef = this.dialog.open(QrCodeScannerComponent, {
       width: '400px',
-      data: { barcodeControl: this.barcode } // Pass the barcode form control
-    });
+      data: { onScanSuccess: this.onScanSuccess.bind(this) }     });
 
     // Subscribe to the dialog's afterClosed event
     dialogRef.afterClosed().subscribe(() => {
@@ -100,6 +99,12 @@ export class landRecordsComponent {
 
     });
   }
+  onScanSuccess(decodedText: string): void {
+    this.barcode = decodedText;
+    console.log('Barcode value in landRecordsComponent:', this.barcode);
+    this.fetchData()
+  }
+  
 
   submitForm() {
     // Additional logic for when the Submit button in the form is clicked

@@ -21,7 +21,7 @@ export class QrCodeScannerComponent implements OnInit {
     const onScanSuccess = (decodeText: string, decodeResult: any): void => {
       console.log(decodeText)
       console.log("data",this.data.barcodeControl)
-      this.data.barcodeControl.setValue(decodeText);
+      this.data.onScanSuccess(decodeText); // Use the callback function to pass the value
 
     };
 

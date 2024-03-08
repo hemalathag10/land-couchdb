@@ -26,9 +26,10 @@ export class QrCodeScannerComponent implements OnInit {
   private initQrCodeScanner(): void {
     const onScanSuccess = (decodeText: string, decodeResult: any): void => {
       // Check if the scanned QR code is not empty and not processed yet
+      alert(decodeText)
       if (decodeText && !this.isCodeProcessed) {
         // Set the scanned QR code to the form control
-        this.data.barcodeControl.setValue(decodeText);
+        this.data.onScanSuccess(decodeText); // Use the callback function to pass the value
 
         // Display a confirmation message with the scanned QR code
         console.log('Your QR Code is: ' + decodeText);
@@ -50,3 +51,5 @@ export class QrCodeScannerComponent implements OnInit {
     this.htmlScanner.render(onScanSuccess);
   }
 }
+
+
