@@ -10,13 +10,14 @@ import { ReportsAnalyticsComponent } from './reports-analytics/reports-analytics
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { AssetService } from '../services/asset.service';
 import { FeedbackComponent} from './feedback/feedback.component';
+import { AdminLoginComponent } from '../admin-login/admin-login.component';
 const routes: Routes = [
     {
       path: '',
       component: AdminComponent,
       children: [
         { path: '', redirectTo: '/stats', pathMatch: 'full' },
-
+        { path: 'admin-login', component: AdminLoginComponent },
         { path: 'manage-asset', component: ManageAssetComponent },
         { path: 'stats', component: StatsComponent },
         { path: 'reports-analytics', component: ReportsAnalyticsComponent },

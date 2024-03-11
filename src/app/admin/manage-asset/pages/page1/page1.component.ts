@@ -10,6 +10,8 @@ import { QrCodeScannerComponent } from 'src/app/user/land-records/qr-code-scanne
 })
 export class Page1Component implements OnInit {
   @Input() form!: FormGroup;
+  qrCodeScanned: boolean = false;
+
   constructor(private fb: FormBuilder, private dialog: MatDialog) {}
 
 
@@ -30,7 +32,6 @@ export class Page1Component implements OnInit {
     }
 
     // Add controls dynamically to the existing form
-    this.form.addControl('landId', this.fb.control('', [Validators.required, this.positiveNumberValidator]));
     this.form.addControl('barcode', this.fb.control('', Validators.required));
     this.form.addControl('landArea', this.fb.control('', [Validators.required, this.positiveNumberValidator]));
     this.form.addControl('ward', this.fb.control('', [Validators.required, this.positiveNumberValidator]));
@@ -76,13 +77,18 @@ export class Page1Component implements OnInit {
     });
   }
   onScanSuccess(decodedText: string): void {
-    // Assuming 'barcode' is the name of the form control in your form
-    this.form.get('barcode')?.setValue(decodedText);
-  
-    // Alternatively, if 'barcode' is a direct property of your form, use:
-    // this.form.controls['barcode'].setValue(decodedText);
-  
-    console.log('Barcode value in Page1Component:', this.form.get('barcode')?.value);
+    if (decodedText) {
+      this.form.get('barcode')?.setValue(decodedText);
+      // Show success message
+      alert("successfully scanned! You can stop scanning")
+      this.qrCodeScanned = true;
+      
+      console.log('Barcode value in Page1Component:', this.form.get('barcode')?.value);
+    } else {
+      // Show not scanned message
+      this.qrCodeScanned = false;
+    }
   }
+  
   
 }

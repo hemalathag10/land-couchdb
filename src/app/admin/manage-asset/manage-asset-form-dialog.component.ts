@@ -51,7 +51,6 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
   ) {
     // Initialize your form controls for each page
     this.page1Form = this.fb.group({
-      landId: ['', Validators.required],
       barcode: ['', Validators.required],
       landArea: ['', Validators.required],
       selectedDistrict: ['', Validators.required],
@@ -122,9 +121,6 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
   isPageValid(components: QueryList<any>): boolean {
     return components && components.length > 0 && components.toArray().every(component => component.isValid());
   }
-
-  // Function to handle form submission
- // Function to handle form submission
  
 
  // Inside onSubmit method in ManageAssetFormDialogComponent

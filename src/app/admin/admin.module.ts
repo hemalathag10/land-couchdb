@@ -24,6 +24,9 @@ import { AuthService } from '../services/auth.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ChartComponent } from './feedback/chart.component';
+import { MatFormFieldModule } from '@angular/material/form-field'; // Make sure to add this line
+import { MatInputModule } from '@angular/material/input'; // Add if you are using input fields
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -38,7 +41,8 @@ import { ChartComponent } from './feedback/chart.component';
     ReportsAnalyticsComponent,
     ManageUserComponent,
     FeedbackComponent,
-    ChartComponent
+    ChartComponent,
+    ProfileComponent
 
   ],
   imports: [
@@ -49,7 +53,10 @@ import { ChartComponent } from './feedback/chart.component';
     FormsModule,
     AdminRoutingModule,
     HttpClientModule,
-    NgSelectModule
+    NgSelectModule,
+    MatDialogModule,
+    MatFormFieldModule, // Add this line
+    MatInputModule,
 
 
   ],

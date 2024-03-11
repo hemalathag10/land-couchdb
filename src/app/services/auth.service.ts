@@ -106,6 +106,8 @@ export class AuthService {
     );
   }
 
+  
+
   logout():boolean {
     // You can perform any additional cleanup or server-side logout logic here
     // For simplicity, we'll just update the authentication state to false
@@ -135,4 +137,22 @@ export class AuthService {
       })
     );
   }
+
+  profile(): Observable<any> {
+    const url = `${this.apiUrl}/admin`;
+
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((response: any) => {
+        console.log("profile",response)
+        return {
+          response
+        };
+      }),
+      catchError((error: any) => {
+        console.error('Error fetching data:', error);
+        throw error;
+      })
+    );
+  }
+
 }

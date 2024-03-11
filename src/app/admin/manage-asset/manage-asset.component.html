@@ -19,7 +19,6 @@
       <thead>
         <tr>
           <th>S.No</th>
-          <th>Land Id</th>
           <th>Land Area</th>
           <th>State</th>
 
@@ -40,10 +39,8 @@
           <!-- Display properties from the first JSON object in each inner array -->
           <tr *ngIf="assetArray.length > 0">
             <td>{{ i + 1 }}</td>
-            <td>{{assetArray[0]?.landId}}</td>
             <td>{{ assetArray[0]?.landArea }}</td>
             <td>{{ assetArray[0]?.state }}</td>
-
             <td>{{ assetArray[0]?.selectedDistrict }}</td>
             <td>{{ assetArray[0]?.selectedTaluk }}</td>
             <td>{{ assetArray[0]?.ward }}</td>

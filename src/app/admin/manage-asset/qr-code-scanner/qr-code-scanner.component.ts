@@ -50,6 +50,10 @@ export class QrCodeScannerComponent implements OnInit {
     this.htmlScanner = new Html5QrcodeScanner('my-qr-reader', { fps: 10, qrbos: 250 });
     this.htmlScanner.render(onScanSuccess);
   }
+
+  closeScanner(): void {
+    this.dialogRef.close();
+  }
 }
 
 
