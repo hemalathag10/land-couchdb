@@ -7,24 +7,37 @@
         <div class="bg-light border-right" id="sidebar">
           <div class="sidebar-heading text-primary">Admin Dashboard</div>
           <div class="list-group list-group-flush">
-            <a routerLink="/stats" class="list-group-item">Dashboard</a>
-            <a routerLink="/manage-asset" class="list-group-item">Manage Asset</a>
-            <a routerLink="/manage-user" class="list-group-item">Manage User</a>
-            <a routerLink="/reports-analytics" class="list-group-item">Reports & Analytics</a>
-            <a routerLink="/feedback" class="list-group-item">Feedback</a>
-          </div>
+            <a routerLink="/stats" class="list-group-item">
+                <i class="fas fa-chart-bar mr-2"></i> Dashboard
+            </a>
+            <a routerLink="/manage-asset" class="list-group-item">
+                <i class="fas fa-cogs mr-2"></i> Manage Asset
+            </a>
+            <a routerLink="/manage-user" class="list-group-item">
+                <i class="fas fa-users mr-2"></i> Manage User
+            </a>
+            <a routerLink="/reports-analytics" class="list-group-item">
+                <i class="fas fa-chart-line mr-2"></i> Reports & Analytics
+            </a>
+            <a routerLink="/feedback" class="list-group-item">
+                <i class="fas fa-comments mr-2"></i> Feedback
+            </a>
+        </div>
+        
         </div>
       </div>
   
       <div class="col-md-9">
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a class="navbar-brand" href="#"></a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+          <a class="navbar-brand" href="#">
+            <i class="fas fa-globe mr-2"></i> Land Records Hub
+          </a>          
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
                 <a class="nav-link" (click)="openProfileDialog()">
@@ -42,7 +55,7 @@
         </nav>
   
         <!-- Router Outlet for displaying components -->
-        <div class="main-content">
+        <div class="main-content mt-4">
           <router-outlet></router-outlet>
 
         </div>

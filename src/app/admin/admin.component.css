@@ -2,43 +2,47 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #a5a2a2;  /* Set background color to white */
+    background-color: #cac6c6;  /* Set background color to white */
     margin: 0;
     padding: 0;
   }
   
   .container-fluid {
     margin-top: 20px;
+    background: linear-gradient(to right, #f6f4f4, #f9f8f8); /* Silver */
   }
   
+  .list-group-item i {
+    margin-right: 15px; /* Adjust the value based on your preference */
+  }
   #sidebar {
     height: 100vh;
-    background-color: #000;  /* Set sidebar background color to black */
+    background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
     color: #fff;
   }
   
   .sidebar-heading {
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 15px 0;
-    color :rgb(7, 7, 7)!important;
+    padding: 15px 10px;
+    color :rgb(246, 243, 243)!important;
     margin-left:40px;
   }
   
   .list-group-item {
     padding: 15px;
     cursor: pointer;
-    background-color: #000;  /* Set list item background color to black */
+    background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
     border: none;
     color: #fff;
   }
   
   .list-group-item:hover {
-    background-color: #333;  /* Darken the background color on hover */
+    background: linear-gradient(to right, #e4e3e9, #b4b3b6, #a9a8ad)!important;
   }
   
   .navbar {
-    background-color: #000 !important;  /* Set navbar background color to black */
+    background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
     color: #fff;
     padding: 10px 20px;
   }
@@ -60,11 +64,11 @@ body {
   
   .main-content {
     padding: 20px;
-    background-color: #fff;  /* Set main content background color to white */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to right, #070127, #1a0066, #08002f)!important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   }
   
 #log{
   float: right !important;
 }  
+

@@ -18,15 +18,30 @@
 
  
   
-  .top-box {
-    background-color: #3498db;
-    color: #fff;
-  }
-  
-  .bottom-box {
-    background-color: #2ecc71;
-    color: #fff;
-  }
+  .box-1 {
+  background: linear-gradient(to right, #8B4513, #D2B48C); /* Brown */
+  color: #fff;
+}
+
+.box-2 {
+  background: linear-gradient(to right, #C0C0C0, #808080); /* Silver */
+  color: #fff;
+}
+
+.box-3 {
+  background: linear-gradient(to right, #007a80, #00c8ff); /* Green */
+  color: #fff;
+}
+
+.box-4 {
+  background: linear-gradient(to right, #FFA500, #FFD700); /* Orange */
+  color: #fff;
+}
+
+.box-5 {
+  background: linear-gradient(to right, #800080, #9370DB); /* Purple */
+  color: #fff;
+}
   
   .stat-icon {
     font-size: 24px;
