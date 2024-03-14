@@ -15,8 +15,13 @@
     border-radius: 8px;
     margin-bottom: 20px;
   }
-
+h2{
+  color: white !important;
+}
  
+tbody  {
+  background-color: #f9f9f9!important;
+}
   
   .box-1 {
   background: linear-gradient(to right, #8B4513, #D2B48C); /* Brown */

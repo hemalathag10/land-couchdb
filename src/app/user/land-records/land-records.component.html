@@ -20,11 +20,10 @@
         <div class="left-section">
           <h2>Scanning Instructions</h2>
     <p>Follow these steps to start scanning:</p>
-    <ol>
-      <li>Prepare the document you want to scan.</li>
-      <li>Place the document on the scanner bed.</li>
-      <li>Click the "Start Scanning" button .</li>
-    </ol>
+    <ul>
+      <li>Click start scanning button.</li>
+      <li>Place the document on the scanner.</li>
+    </ul>
     <br>
           <button class="btn btn-lg" (click)="startScanningTab()">Start Scanning</button>
         </div>
@@ -35,18 +34,25 @@
         <!-- Right side: Form Structure -->
         <div class="card">
           <div class="right-section">
-            <form id="landForm" >
+            <form [formGroup]="form">
               <label for="district">District:</label>
-              <input type="text" id="district" name="district" [(ngModel)]="district">
-          
+              <!-- Use select dropdown instead of input -->
+              <select id="district" formControlName="district" [(ngModel)]="district">
+                <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+              </select>
+    
               <label for="taluk">Taluk:</label>
-              <input type="text" id="taluk" name="taluk" [(ngModel)]="taluk">
-          
-
+              <!-- Use select dropdown instead of input -->
+              <select id="taluk" formControlName="taluk" [(ngModel)]="taluk">
+                <!-- Initialize with empty option -->
+                <option value="">Select Taluk</option>
+                <option *ngFor="let taluk of taluks[district]" [value]="taluk">{{ taluk }}</option>
+              </select>
+    
               <label for="surveyNumber">Survey Number:</label>
-              <input type="text" id="surveyNumber" name="surveyNumber" [(ngModel)]="surveyNumber">
-          
-              <button type="button" class="btn btn-lg" (click)="fetchData()">Submit</button>
+              <input type="text" id="surveyNumber" formControlName="surveyNumber" [(ngModel)]="surveyNumber">
+              <br>
+              <button type="button" class="btn btn-sm" (click)="fetchData()">Submit</button>
             </form>
           </div>
       </div>

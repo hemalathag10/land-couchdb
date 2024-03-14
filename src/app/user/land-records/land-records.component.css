@@ -345,10 +345,10 @@
   font-size: 1.2rem;
   padding: 0.8rem 1.3rem;
   text-transform: uppercase;
-  background-color: rgba(255, 255, 255, 0.2); /* Translucent background color for glassmorphism effect */
+  background-color: black!important; /* Translucent background color for glassmorphism effect */
   backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a border with reduced opacity for better visibility */
-  color: rgba(232, 34, 34, 0.212); /* Set text color to white for better contrast */
+  color: white!important; /* Set text color to white for better contrast */
   transition: background-color 0.3s ease; /* Optional: Add a smooth transition effect */
 }
 
@@ -356,7 +356,12 @@
   background-color: rgba(255, 255, 255, 0.3); /* Adjust the opacity on hover if needed */
 }
 
-  
+.btn-sm{
+  background-color: black!important; /* Translucent background color for glassmorphism effect */
+  backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a border with reduced opacity for better visibility */
+  color: white!important; /* Set text color to white for better contrast */
+  }
   .btn-icon {
     margin-left: 1rem;
   }

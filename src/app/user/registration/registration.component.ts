@@ -68,7 +68,7 @@ export class RegistrationComponent {
         .subscribe(
           (existingFormData: any) => {
             const usersArray: User[] = existingFormData.user || [];
-  
+              console.log(formData)
             // Check if the email already exists
             const emailExists = usersArray.some((user: User) => user.emailId === formData.emailId);
   

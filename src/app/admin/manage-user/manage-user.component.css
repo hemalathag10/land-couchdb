@@ -10,6 +10,9 @@ div {
     border-collapse: collapse;
     margin-top: 20px;
   }
+  h2{
+    color:white
+  }
   
   th, td {
     border: 1px solid #ddd;
@@ -17,6 +20,9 @@ div {
     text-align: left;
   }
   
+tbody  {
+  background-color: #f9f9f9!important;
+}
   th {
     background-color: #f2f2f2;
   }
