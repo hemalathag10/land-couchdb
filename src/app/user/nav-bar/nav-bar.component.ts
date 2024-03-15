@@ -46,7 +46,6 @@ export class NavbarComponent {
     }
   
     private showErrorModal(message: string): void {
-      // Implement your logic to show an error modal here
       console.error(message);
     }
   openRegistrationDialog() {
@@ -56,7 +55,6 @@ export class NavbarComponent {
 
   openLoginDialog() {
     this.dialogService.openLoginDialog().subscribe(result => {
-      // Handle the result if needed
     });
   }
   showLandRecordsDropdown: boolean = false;
