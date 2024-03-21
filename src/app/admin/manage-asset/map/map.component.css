@@ -44,7 +44,9 @@
 .container{
     background-color: black;
 }
-
+h4,p{
+    color:white;
+}
 /* map.component.css */
 button {
     background-color: #292c2a; /* Set your desired background color */

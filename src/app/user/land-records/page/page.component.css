@@ -1,4 +1,3 @@
-/* styles.css (or your preferred stylesheet) *//* styles.css (or your preferred stylesheet) */
 
 .page-container {
   display: flex;
@@ -23,7 +22,7 @@
 }
 
 .map-button {
-  background-color: #4CAF50;
+  background-color: #08002f;
   color: white;
   padding: 10px;
   border: none;
@@ -31,7 +30,7 @@
 }
 
 .map-button:hover {
-  background-color: #45a049;
+  background-color: #190e4d;
 }
 
 .main-content {
@@ -53,9 +52,14 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  width: 500px;
 }
 
 th {
-  background-color: #4CAF50;
+  background-color: #08002f;
   color: white;
+}
+
+tr{
+  width:100%;
 }

@@ -129,11 +129,12 @@ export class landRecordsComponent {
   }
   onScanSuccess(decodedText: string): void {
     this.barcode = decodedText;
+    alert("successfully scanned! You can stop scanning")
+
     console.log('Barcode value in landRecordsComponent:', this.barcode);
     this.fetchData()
   }
   
-
   submitForm() {
     // Additional logic for when the Submit button in the form is clicked
     this.showForm = false; // Ensure form is hidden when scanning section is toggled

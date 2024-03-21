@@ -1,8 +1,8 @@
 /* styles.css */
 
 nav {
-    background-color: black;
-height:45px;
+  background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
+  height:45px;
   }
 
   ul {

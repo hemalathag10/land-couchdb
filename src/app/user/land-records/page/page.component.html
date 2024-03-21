@@ -57,13 +57,14 @@
       <tbody>
         <ng-container *ngFor="let asset of fetchedData">
           <ng-container *ngFor="let owner of asset.owners">
-            <ng-container *ngFor="let individualOwner of owner.owners">
               <tr>
                 <td>
                   <p>Ownership Duration From: {{ owner.ownershipDurationFrom }}</p>
                   <p>Ownership Duration To: {{ owner.ownershipDurationTo }}</p>
                   <p>Number of Owners: {{ owner.numOwners }}</p>
                 </td>
+                <ng-container *ngFor="let individualOwner of owner.owners">
+                <tr>
                 <td>
                   <p>Owner Name: {{ individualOwner.ownername }}</p>
                   <p>Contact Information: {{ individualOwner.contactInformation }}</p>
@@ -74,8 +75,10 @@
                   <p>Land Usage History: {{ individualOwner.landUsageHistory }}</p>
                   <p>Buyer Seller Details: {{ individualOwner.buyerSellerDetails }}</p>
                 </td>
-              </tr>
-            </ng-container>
+              </ng-container>
+            </tr>
+              
+          
           </ng-container>
         </ng-container>
       </tbody>

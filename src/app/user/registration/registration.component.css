@@ -2,10 +2,10 @@
 form {
     max-width: 300px;
     margin: auto;
-    height:200px;
+    height:20px!important;
   }
   h4{
-    margin-left: 85px;
+    margin-left: 115px;
   }
   
   /* Style labels for better readability */

@@ -14,7 +14,7 @@ export class DialogService {
   openRegistrationDialog(): Observable<any> {
     const dialogRef = this.dialog.open(RegistrationComponent, {
       width: '400px',
-      height:'400px'
+      height:'300px'
       // You can customize dialog options here
     });
 

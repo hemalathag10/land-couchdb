@@ -30,7 +30,7 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
 
   // Array to hold form groups for each page
   pageForms: FormGroup[] = [];
-
+  success:string='';
   // Use 'any' type for dynamic page components
   pageComponents: { [key: string]: QueryList<any> } = {};
   currentPage: number = 1;
@@ -169,10 +169,10 @@ onSubmitting() {
 console.log("exist")
  
   // Use the updateAsset method instead of createAsset
-  this.assetService.updateAsset(this.data.landId, page2Data).subscribe(
+  this.assetService.updateAsset(this.data.barcode, page2Data).subscribe(
     (response: any) => {
       console.log('Data updated in the database successfully:', response);
-      
+
       // Optionally, you can navigate to another page or perform other actions after a successful update
       this.dialogRef.close();
     },
@@ -197,7 +197,8 @@ console.log("exist")
 this.assetService.createAsset([page1], 'doc_asset').subscribe(
     (response: any) => {
    console.log('Data stored in the database successfully:', response);
-  //         // Optionally, you can navigate to another page or perform other actions after successful storage
+   this.success="Data stored successfully"
+   this.dialogRef.close()
   },
       (error) => {
       console.error('Error storing data in the database:', error);

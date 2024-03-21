@@ -33,13 +33,14 @@
 
 <!-- Recent Registrations Table -->
 <div class="recent-registrations-container">
-  <h2>Recent Registrations</h2>
+  <div class="heading">
+  <h2>Registrations</h2>
+  </div>
   <table>
     <thead>
       <tr>
         <th>S.No</th>
-         <th>Land Id</th>
-         <th>Land Area</th>
+         <th>Land Area(in Sq.feet)</th>
           <th>District</th>
           <th>Taluk</th>
           <th>Ward</th>
@@ -54,7 +55,6 @@
     <tbody>
       <tr *ngFor="let registration of recentRegistrationsData let i=index">
         <td>{{ i + 1 }}</td>
-        <td>{{ registration.landId }}</td>
         <td>{{ registration.landArea }}</td>
         <td>{{ registration.selectedDistrict}}</td>
         <td>{{ registration.selectedTaluk}}</td>

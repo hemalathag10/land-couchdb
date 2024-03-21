@@ -6,18 +6,19 @@
   
   <br>
 
-  <button type="button" (click)="openQrCodeScanner()">Scan QR Code</button>
+  <button type="button" (click)="openQrCodeScanner()">Scan Bar Code</button>
   <div *ngIf="qrCodeScanned" class="success-message">
-    QR Code successfully scanned!
+    Bar Code successfully scanned!
   </div>
   <div *ngIf="!qrCodeScanned" class="error-message">
-    QR Code not scanned.
+    Bar Code not scanned.
   </div>
   <br>
 
   
   <label for="landArea">Land Area: (in sq.feet)</label>
-  <input type="number" id="landArea" formControlName="landArea" min="0"/>
+  <input type="number" id="landArea" formControlName="landArea" min="320"/>
+  <small *ngIf="(form.get('landArea')?.errors?.['required'] || form.get('landArea')?.errors?.['min']) && form.get('landArea')?.touched" class="error-message">Minimum land area must be 320 sq.feet.</small>
   <br>
 
   <label for="ward">Ward Number:</label>

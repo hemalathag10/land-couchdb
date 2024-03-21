@@ -15,7 +15,7 @@ export class Page1Component implements OnInit {
   constructor(private fb: FormBuilder, private dialog: MatDialog) {}
 
 
-  states: string[] = ['Andhra Pradesh', 'Karnataka', 'Kerala', 'Maharashtra', 'TamilNadu', 'Telangana'];
+  states: string[] = ['TamilNadu', ];
 
   districts: string[] = ['Ariyalur', 'Chennai', 'Madurai'];
   taluks: { [key: string]: string[] } = {
@@ -35,7 +35,7 @@ export class Page1Component implements OnInit {
     this.form.addControl('barcode', this.fb.control('', Validators.required));
     this.form.addControl('landArea', this.fb.control('', [Validators.required, this.positiveNumberValidator]));
     this.form.addControl('ward', this.fb.control('', [Validators.required, this.positiveNumberValidator]));
-    this.form.addControl('state', this.fb.control('', Validators.required));
+    this.form.addControl('state', this.fb.control('TamilNadu', Validators.required));
     this.form.addControl('surveyNumber', this.fb.control('', Validators.required));
     this.form.addControl('subdivisionNumber', this.fb.control('', Validators.required));
     this.form.addControl('ownership', this.fb.control('', Validators.required));

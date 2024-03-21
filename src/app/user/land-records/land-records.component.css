@@ -21,7 +21,7 @@
   }
   
   ul {
-    list-style: none;
+    
   }
   
   h1,
@@ -345,11 +345,12 @@
   font-size: 1.2rem;
   padding: 0.8rem 1.3rem;
   text-transform: uppercase;
-  background-color: black!important; /* Translucent background color for glassmorphism effect */
+  background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
   backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a border with reduced opacity for better visibility */
   color: white!important; /* Set text color to white for better contrast */
   transition: background-color 0.3s ease; /* Optional: Add a smooth transition effect */
+  border-radius: 15px;
 }
 
 .btn-lg:hover {
@@ -357,10 +358,12 @@
 }
 
 .btn-sm{
-  background-color: black!important; /* Translucent background color for glassmorphism effect */
+  background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
   backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a border with reduced opacity for better visibility */
   color: white!important; /* Set text color to white for better contrast */
+  margin-top:20px;
+  border-radius:15px
   }
   .btn-icon {
     margin-left: 1rem;
@@ -479,20 +482,53 @@
   }
   
   /* Additional styles for the form */
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  /* Style for form container */
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Style for each form group */
+.form-group {
+  margin-right: 20px; /* Adjust margin as needed */
+  margin-bottom: 10px; /* Adjust margin as needed */
+  display: flex;
+  align-items: center;
+}
+
+/* Style for labels */
+.form-group label {
+  min-width: 120px; /* Adjust width as needed */
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+
+form {
+  max-width: 400px; /* Adjust as needed */
+  margin: 0 auto;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Select dropdowns */
+select, input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-top: 5px;
+}
+ 
   
-  form label {
-    margin-top: 10px;
-  }
-  
-  form input {
-    padding: 5px;
-    margin-bottom: 15px;
-  }
-  li{
-    text-align:left
-  }

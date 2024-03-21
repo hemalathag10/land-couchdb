@@ -199,21 +199,21 @@ private drawLineChart() {
                 if (!isNaN(year) && !isNaN(purchasePrice)) {
                  if (!landValueRange.hasOwnProperty(year)) {
                   // If the year doesn't exist, create a new array with the purchase price
-                  landValueRange[year] = [Math.floor(purchasePrice / landArea)];
+                  landValueRange[year] = [(purchasePrice / landArea)];
+                  console.log("p",purchasePrice,landArea,Math.floor(purchasePrice / landArea))
                 } else {
                   // If the year already exists, add the purchase price to the existing array
                   landValueRange[year].push(Math.floor(purchasePrice/landArea));
                 }
                 }
               }
+
             });
           }
         });
       });
     }
   
-    console.log(landValueRange);
-    console.log(this.assetData);
   
     return landValueRange;
   }
@@ -223,7 +223,7 @@ private drawLineChart() {
   
     if (nestedOwners && nestedOwners.length > 0) {
       const purchasePrice = nestedOwners[0].purchasePrice;
-  
+  console.log("price",purchasePrice)
       if (typeof purchasePrice === 'number') {
         return purchasePrice;
       } else if (typeof purchasePrice === 'string') {

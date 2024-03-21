@@ -8,33 +8,40 @@ body {
   }
   
   .container-fluid {
-    margin-top: 20px;
+    margin-top: 0px;
     background: linear-gradient(to right, #f6f4f4, #f9f8f8); /* Silver */
   }
   
   .list-group-item i {
     margin-right: 15px; /* Adjust the value based on your preference */
   }
-  #sidebar {
+  /* #sidebar {
     height: 100vh;
     background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
     color: #fff;
+  } */
+  #sidebar{
+    background: rgb(74, 74, 168)!important;
+
   }
   
   .sidebar-heading {
-    font-size: 1.5rem;
+    font-size: 18px;
     font-weight: bold;
     padding: 15px 10px;
     color :rgb(246, 243, 243)!important;
-    margin-left:40px;
+    margin-left:25px;
+    margin-top: 10px;
   }
   
   .list-group-item {
     padding: 15px;
     cursor: pointer;
-    background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
+    background: rgb(74, 74, 168)!important;
     border: none;
     color: #fff;
+    font-size: 16px;
+
   }
   
   .list-group-item:hover {
@@ -42,18 +49,20 @@ body {
   }
   
   .navbar {
-    background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
-    color: #fff;
-    padding: 10px 20px;
+    background: rgb(251, 251, 251)!important;
+    color: #090909!important;
+    padding: 0px;
+    height:55px;
+    border-radius:20px
   }
   
   .navbar-brand {
-    color: #fff;
+    color: #090909;
     font-weight: bold;
   }
   
   .navbar-nav .nav-link {
-    color: #fff;
+    color: #0a0808;
     margin-right: 15px;
     font-weight: bold;
   }
@@ -63,12 +72,34 @@ body {
   }
   
   .main-content {
+    margin:50px 10px;
     padding: 20px;
-    background: linear-gradient(to right, #070127, #1a0066, #08002f)!important;
+    background: rgb(222, 222, 225)!important;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width:1200px
   }
   
 #log{
   float: right !important;
 }  
 
+.col-md-3{
+  background: rgb(74, 74, 168)!important;
+  width: 240px;
+  height: 820px;
+  margin: 11px;
+  padding: 12px;
+  border-radius: 41px;
+
+}
+.list-group list-group-flush{
+  background: rgb(74, 74, 168)!important;
+
+}
+.col-md-9 right{
+  height:10px
+}
+.sidebar-heading text-primary{
+  margin-right:20px!important;
+}

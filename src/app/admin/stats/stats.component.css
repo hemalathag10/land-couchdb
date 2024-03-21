@@ -15,21 +15,30 @@
     border-radius: 8px;
     margin-bottom: 20px;
   }
-h2{
-  color: white !important;
-}
+  h2 {
+    margin-bottom: 5px;
+  }
+  .heading{
+    width: 150px;
+      padding: 5px;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background-color: white; /* Silver */
+      color:rgb(12, 11, 11);
+  }
  
 tbody  {
   background-color: #f9f9f9!important;
 }
   
   .box-1 {
-  background: linear-gradient(to right, #8B4513, #D2B48C); /* Brown */
+  background: linear-gradient(to right, #138b25, #8cd2af); /* Brown */
   color: #fff;
 }
 
 .box-2 {
-  background: linear-gradient(to right, #C0C0C0, #808080); /* Silver */
+  background: linear-gradient(to right, #f1b16b, #f49163); /* Silver */
   color: #fff;
 }
 
@@ -39,7 +48,7 @@ tbody  {
 }
 
 .box-4 {
-  background: linear-gradient(to right, #FFA500, #FFD700); /* Orange */
+  background: linear-gradient(to right, #f283dc, #ee9be0); /* Orange */
   color: #fff;
 }
 

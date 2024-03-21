@@ -59,7 +59,7 @@ export class AssetService {
     switchMap((existingData: any) => {
       // Find the correct landId within both outer and inner arrays
      const indexToUpdate = existingData.asset
-  .findIndex((outerArray: any[]) => outerArray.some((obj: any) => obj.landId === Id));
+  .findIndex((outerArray: any[]) => outerArray.some((obj: any) => obj.barcode === Id));
 
 console.log('formData:', formData.ownershipDurationFrom);
 console.log('existingData.asset:', existingData.asset);
@@ -108,11 +108,6 @@ if (indexToUpdate !== -1) {
 }
 
   
-  
-  
-  
-  
-
   
 
   private getHeaders(): HttpHeaders {

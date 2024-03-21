@@ -21,7 +21,7 @@
           <h2>Scanning Instructions</h2>
     <p>Follow these steps to start scanning:</p>
     <ul>
-      <li>Click start scanning button.</li>
+      <li>Click the start scanning button.</li>
       <li>Place the document on the scanner.</li>
     </ul>
     <br>
@@ -40,7 +40,7 @@
               <select id="district" formControlName="district" [(ngModel)]="district">
                 <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
               </select>
-    
+              <br>
               <label for="taluk">Taluk:</label>
               <!-- Use select dropdown instead of input -->
               <select id="taluk" formControlName="taluk" [(ngModel)]="taluk">
@@ -48,7 +48,7 @@
                 <option value="">Select Taluk</option>
                 <option *ngFor="let taluk of taluks[district]" [value]="taluk">{{ taluk }}</option>
               </select>
-    
+              <br>
               <label for="surveyNumber">Survey Number:</label>
               <input type="text" id="surveyNumber" formControlName="surveyNumber" [(ngModel)]="surveyNumber">
               <br>

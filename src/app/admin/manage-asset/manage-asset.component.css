@@ -13,11 +13,11 @@ h2 {
     text-align: center;
     border-radius: 8px;
     margin-bottom: 10px;
-    background: linear-gradient(to right, #ef8484, #ebc0c0); /* Silver */
-    color:white;
+    background-color: white; /* Silver */
+    color:rgb(12, 11, 11);
 }
-#butt{
-  background: linear-gradient(to right, #2ff602, #91ef9f,rgb(25, 245, 5))!important; /* Silver */
+button{
+  background: rgb(74, 74, 168)!important;
 
 }
 table {
@@ -49,15 +49,15 @@ button {
 
 }
 #update{
-  background: linear-gradient(to right, #f8cb03, #f8b659, #f3e789)!important; 
+  background: rgb(74, 74, 168)!important;
 
 }
 #view{
-  background: linear-gradient(to right, #34bbf0, #90e4f7, #1ad3fd)!important;
+  background: rgb(74, 74, 168)!important;
 
 }
 #add{
-  background: linear-gradient(to right, #f034bb, #f790e1, #fd1adb)!important; 
+  background: rgb(74, 74, 168)!important;
 
 }
 
