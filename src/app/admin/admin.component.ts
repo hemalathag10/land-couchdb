@@ -18,5 +18,7 @@ export class AdminComponent {
       width: '400px',
     });
   }
+
+
 }
 

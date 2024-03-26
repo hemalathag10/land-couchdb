@@ -91,3 +91,21 @@ tbody  {
   .recent-registrations-container tr:hover {
     background-color: #f5f5f5;
   }
+
+
+#grid1{
+  width:25px!important;
+  background-color: #ee9be0;
+}
+  .slick-headerrow ui-state-default{
+    width: 30px !important;
+  }
+:root {
+  --cell-odd-background-color: rgb(234, 234, 35);
+  --row-mouse-hover-color: lightgreen;
+}
+#grid11 , .gridpane, slickgrid-container slickgrid_644992 ui-widget {
+  width:945px;
+}
+
+@import url('@slickgrid-universal/common/dist/styles/css/slickgrid-theme-bootstrap.css');

@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Page1Component } from './manage-asset/pages/page1/page1.component';
 import { Page2Component } from './manage-asset/pages/page2/page2.component';
+import { AngularSlickgridModule } from 'angular-slickgrid';
 
 import { AssetService } from 'src/app/services/asset.service'; 
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'; // Make sure 
 import { MatInputModule } from '@angular/material/input'; // Add if you are using input fields
 import { ProfileComponent } from './profile/profile.component';
 
-
+import { CustomInputFilter } from './stats/custom-inputFilter';
 @NgModule({
   declarations: [
     ManageAssetComponent,
@@ -42,7 +43,7 @@ import { ProfileComponent } from './profile/profile.component';
     ManageUserComponent,
     FeedbackComponent,
     ChartComponent,
-    ProfileComponent
+    ProfileComponent,
 
   ],
   imports: [
@@ -57,10 +58,10 @@ import { ProfileComponent } from './profile/profile.component';
     MatDialogModule,
     MatFormFieldModule, // Add this line
     MatInputModule,
-
+    AngularSlickgridModule.forRoot()
 
   ],
-  providers: [AssetService, AuthService],
+  providers: [AssetService, AuthService, CustomInputFilter,],
   bootstrap: []
 })
 export class AdminModule { }

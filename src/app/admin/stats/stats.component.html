@@ -36,43 +36,17 @@
   <div class="heading">
   <h2>Registrations</h2>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th>S.No</th>
-         <th>Land Area(in Sq.feet)</th>
-          <th>District</th>
-          <th>Taluk</th>
-          <th>Ward</th>
-          <th>State</th>
-          <th>Survey Number</th>
-          <th>Subdivision Number</th>
-          <th>Type of Ownership</th>
-          <th>Land Use Type</th>
-        <!-- Add more columns as needed -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let registration of recentRegistrationsData let i=index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ registration.landArea }}</td>
-        <td>{{ registration.selectedDistrict}}</td>
-        <td>{{ registration.selectedTaluk}}</td>
-        <td>{{ registration.ward}}</td>
-        <td>{{ registration.state}}</td>
-        <td>{{ registration.surveyNumber}}</td>
-        <td>{{ registration.subdivisionNumber}}</td>
-        <td>{{ registration.ownership}}</td>
-        <td>{{ registration.landUseType}}</td>
 
 
-
-
-
-
-
-        <!-- Add more cells for additional columns -->
-      </tr>
-    </tbody>
-  </table>
+  <div id="demo" *ngIf="recentRegistrationsData.length > 0"> <!-- Check if recentRegistrationsData has data -->
+    <angular-slickgrid  gridId="grid11" [columnDefinitions]="columnDefinitions" 
+      [gridOptions]="gridOptions" [dataset]="dataset"  
+      (onAngularGridCreated)="angularGridReady($event)"
+      ></angular-slickgrid>
+  </div>
+  
+  <div *ngIf="recentRegistrationsData.length === 0"> <!-- Show a message when there's no data -->
+    No data available.
+  </div>
+  
 </div>
