@@ -8,6 +8,11 @@
       <h4>Map Actions</h4>
       <p>Explore the land details on the map:</p>
       <button class="map-button" (click)="goToMap()">View Map</button>
+      <br>
+      <hr>
+      <h4>Predict Future Price</h4>
+      <!-- <p>Explore the land details on the map:</p> -->
+      <button class="map-button" (click)="showLineChart()">Click here</button>
     </div>
   </div>
 
@@ -84,5 +89,11 @@
       </tbody>
     </table>
     <br>
+    <div class="chart-section-line" *ngIf="showChart" id="lineChartSection">
+ 
+       <div>
+         <canvas id="lineChart" width="400" height="400"></canvas>
+       </div>      
+   </div>
   </div>
 </div>

@@ -1,75 +1,27 @@
-// // // manage-asset.component.ts
 
-// import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup } from '@angular/forms';
-// import { MatDialog } from '@angular/material/dialog';
-// import { ManageAssetFormDialogComponent } from './manage-asset-form-dialog.component';
-// import { AssetService } from 'src/app/services/asset.service';
-// import { Page1Component } from './pages/page1/page1.component';
-// import { Page2Component } from './pages/page2/page2.component';
-
-// @Component({
-//   selector: 'app-manage-asset',
-//   templateUrl: './manage-asset.component.html',
-//   styleUrls: ['./manage-asset.component.css']
-// })
-// export class ManageAssetComponent implements OnInit {
-//    assetForm!: FormGroup;
-//    page1Data: any[] = [];
-
-//   constructor(private dialog: MatDialog, private fb: FormBuilder,private assetService: AssetService) {
-//     this.assetForm = this.fb.group({
-//       // ... your form controls ...
-//     });
-//   }
-
-//   ngOnInit(): void {
-//     // Initialize your component, if needed
-//     this.fetchAssets();
-
-//   }
-
-//   showAddNewForm() {
-//     // Open the dialog
-//     const dialogRef = this.dialog.open(ManageAssetFormDialogComponent, {
-//       width: '400px', // Adjust the width as needed
-//       data: { form: this.assetForm.value } // Pass form data if needed
-      
-//     });
-
-//     // Handle the dialog result
-//     dialogRef.afterClosed().subscribe(result => {
-//       if (result) {
-//         // Form submitted, handle the data if needed
-//         console.log(result);
-//       }
-//     });
-//   }
-
- 
-//   fetchAssets() {
-//     console.log('Fetching Assets...');
-//     this.assetService.getAllAssets().subscribe(
-//       (response: any) => {
-//         // Assuming 'assets' is an array inside the response
-//         this.page1Data = response.asset || [];
-//       },
-//       (error) => {
-//         console.error('Error fetching assets:', error);
-//       }
-//     );
-//   }
-// }
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { ManageAssetFormDialogComponent } from './manage-asset-form-dialog.component';
 import { AssetService } from 'src/app/services/asset.service';
 import { OwnersDetailsDialogComponent } from './owners-details-dialog/owners-details-dialog.component';
 import { MapComponent } from './map/map.component';
+import {
+  AngularGridInstance,
+ 
+  Formatter,
+ 
+} from 'node_modules/angular-slickgrid';
+
+const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+  if (dataContext.id ==3) { // option 3 is High
+    console.log("grid")
+
+    return `<div class="cell-menu-dropdown-outline">Action<i class="fa fa-caret-down"></i></div>`;
+  }
+  return `<div class="disabled">Action <i class="fa fa-caret-down"></i></div>`;
+};
 
 @Component({
   selector: 'app-manage-asset',
@@ -80,8 +32,12 @@ export class ManageAssetComponent implements OnInit {
   assetForm!: FormGroup;
   page1Data: any[] = [];
   page2Form!: FormGroup; 
+  columnDefinitions: any[] = [];
+  gridOptions: any = {};
+  dataset: any[] = [];
+  angularGrid!: AngularGridInstance;
 
-  
+
   constructor(private dialog: MatDialog, private fb: FormBuilder, private assetService: AssetService) {
     this.assetForm = this.fb.group({
       landArea: [''],
@@ -92,33 +48,91 @@ export class ManageAssetComponent implements OnInit {
   ngOnInit(): void {
    
     this.fetchAssets();
-  }
+
+    }
+    
 
   showAddNewForm(existingData?: any) {
     const dialogRef = this.dialog.open(ManageAssetFormDialogComponent, {
       width: '400px',
-      data: existingData // Pass the existing data directly
+      data: existingData 
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log(result);
-        // Update the data in the table or database if needed
         
-        this.fetchAssets(); // Refresh data after update
+        this.fetchAssets(); 
       }
     });
   }
   
   
   
-
+  
 
   fetchAssets() {
     console.log('Fetching Assets...');
     this.assetService.getAllAssets().subscribe(
       (response: any) => {
         this.page1Data = response.asset || [];
+        console.log("page",this.page1Data)
+        this.columnDefinitions = [
+          { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 50 },
+    
+          { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
+          { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
+          { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true,},
+          { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 210 },
+          { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 100},
+          { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 130 },
+          { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150},
+          { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150},
+          {
+            id: 'action', name: 'Update', field: 'action', sortable: false, maxWidth: 150,
+            formatter: actionFormatter
+          }
+          
+          
+        ];
+        
+   
+    
+this.dataset = this.page1Data.map((registrationArray, index) => {
+  const registration = registrationArray[0];
+  return {
+    id: index + 1,
+    landArea: registration ? registration.landArea : "", 
+    State: registration ? registration.state : "",
+    District: registration ? registration.selectedDistrict : "",
+    Taluk: registration ? registration.selectedTaluk : "",
+    Ward: registration ? registration.ward : "",
+    SurveyNumber: registration ? registration.surveyNumber : "",
+    ownership: registration ? registration.ownership : "",
+    LandUseType: registration ? registration.landUseType : "",
+  };
+});
+
+       
+        this.gridOptions = {
+          enableAutoResize: true,
+          enableCellNavigation: true,
+          enableSorting: true,
+          autoHeight: true,
+          explicitInitialization: true, 
+          showHeaderRow: true,
+          headerRowHeight: 10, 
+          rowHeight: 40, 
+          enableAsyncPostRender: true,
+          enableVirtualRendering: true ,
+          autoResize: {
+            maxWidth: 850,
+            maxHeight:500
+          },
+        
+      } 
+
+
       },
       (error) => {
         console.error('Error fetching assets:', error);
@@ -128,25 +142,18 @@ export class ManageAssetComponent implements OnInit {
 
 
   update_Asset(landId: number) {
-    // Find the corresponding asset based on the landId
     const clickedAsset = this.page1Data.find(asset => asset.some((a: any) => a.landId === landId));
   
     if (clickedAsset) {
-      // Get the index of the asset array where the landId is located
       const assetIndex = clickedAsset.findIndex((a: any) => a.landId === landId);
   
-      // Assuming you have the page2 data stored in page2Form.value
       const page2Data = this.assetForm.value;
   
-      // Extract only the page2 data from the form value
       const ownersData = page2Data.owners;
   
-      // Check if 'owners' array is present in the clickedAsset at the correct index
       if (clickedAsset[assetIndex].owners) {
-        // Append new owners to the existing array
         clickedAsset[assetIndex].owners.push(...ownersData);
       } else {
-        // Create 'owners' array if it doesn't exist
         clickedAsset[assetIndex].owners = [...ownersData];
       }
   
@@ -158,7 +165,6 @@ export class ManageAssetComponent implements OnInit {
   }
   
   showOwnersDetailsDialog(assetArray: any[]) {
-    // Open the dialog with the assetArray data
     const dialogRef = this.dialog.open(OwnersDetailsDialogComponent, {
       width: '600px',
       height:'400px',
@@ -167,14 +173,12 @@ export class ManageAssetComponent implements OnInit {
       
     });
   
-    // You can handle the dialog result if needed
     dialogRef.afterClosed().subscribe(result => {
       console.log('Owners View dialog closed:', result);
     });
   }
   
   showMapDialog(assetArray: any[]) {
-    // Open the dialog with the assetArray data
     const dialogRef = this.dialog.open(MapComponent, {
       width: '400px',
       height:'400px',
@@ -183,7 +187,6 @@ export class ManageAssetComponent implements OnInit {
       
     });
   
-    // You can handle the dialog result if needed
     dialogRef.afterClosed().subscribe(result => {
       console.log('dialog closed:', result);
     });

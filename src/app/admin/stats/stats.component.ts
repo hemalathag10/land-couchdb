@@ -2,21 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AssetService } from 'src/app/services/asset.service';
 import {
   AngularGridInstance,
-  AutocompleteOption,
-  Column,
-  Editors,
-  EditorArguments,
-  EditorValidator,
-  FieldType,
-  Filters,
-  FlatpickrOption,
-  Formatter,
-  Formatters,
-  GridOption,
-  LongTextEditorOption,
-  OnEventArgs,
-  OperatorType,
-  SortComparers,
+ 
 } from 'node_modules/angular-slickgrid';
 import { CustomInputFilter } from './custom-inputFilter';
 
@@ -75,19 +61,7 @@ export class StatsComponent implements OnInit {
       // Populate column definitions dynamically
       this.columnDefinitions = [
         { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 50 },
-        {
-          id: 'description',
-          name: 'Description',
-          field: 'description',
-          filterable: true,
-          sortable: true,
-          minWidth: 80,
-          type: FieldType.string,
-          filter: {
-            model: CustomInputFilter, // Here is where you assign the custom filter
-            enableTrimWhiteSpace: true
-          }
-        },
+ 
         { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
         { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
         { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true,},
@@ -102,7 +76,7 @@ export class StatsComponent implements OnInit {
       // Populate dataset dynamically
       this.dataset = this.recentRegistrationsData.map((registration, index) => ({
         id: index + 1,
-        description: registration.landArea,
+        landArea: registration.landArea,
         State: registration.state,
         District:registration.selectedDistrict,
         Taluk:registration.selectedTaluk,

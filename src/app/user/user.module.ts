@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import { WarningDialogComponent } from './warning-dialog.component';
 import { homeComponent } from './home/home.component';
 import { MapDisplayComponent } from './land-records/map-display/map-display.component';
 import { SharedService } from '../services/shared.service';
+import { LandPriceComponent } from './land-records/land-price/land-price.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ contactComponent,
 PageComponent,
 WarningDialogComponent,
 homeComponent,
-MapDisplayComponent
+MapDisplayComponent,
+LandPriceComponent
 
 
   ],

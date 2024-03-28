@@ -3,6 +3,7 @@
 nav {
   background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
   height:45px;
+  border-radius: 10px;
   }
 
   ul {

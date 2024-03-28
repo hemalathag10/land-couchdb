@@ -15,11 +15,7 @@ body {
   .list-group-item i {
     margin-right: 15px; /* Adjust the value based on your preference */
   }
-  /* #sidebar {
-    height: 100vh;
-    background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
-    color: #fff;
-  } */
+
   #sidebar{
     background: rgb(74, 74, 168)!important;
 
@@ -49,11 +45,13 @@ body {
   }
   
   .navbar {
-    background: rgb(251, 251, 251)!important;
+    background: rgb(222, 222, 225)!important;
     color: #090909!important;
     padding: 0px;
     height:55px;
-    border-radius:20px
+    border-radius:20px;
+    margin:25px;
+    width:1180px
   }
   
   .navbar-brand {
@@ -72,7 +70,7 @@ body {
   }
   
   .main-content {
-    margin:50px 10px;
+    margin:0px 10px;
     padding: 20px;
     background: rgb(222, 222, 225)!important;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -102,4 +100,19 @@ body {
 }
 .sidebar-heading text-primary{
   margin-right:20px!important;
+}
+
+/* Media query for small devices (tablets and up) */
+@media (min-width: 768px) {
+  .col-sm-12 {
+    flex: 0 0 100%; /* Force full width on small devices */
+    max-width: 100%;
+  }
+}
+
+/* Media query for medium and larger devices */
+@media (min-width: 992px) {
+  .col-md-3, .col-md-9 {
+    flex-basis: auto; /* Reset flex-basis */
+  }
 }

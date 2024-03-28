@@ -1,28 +1,19 @@
-<table>
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Feedback</th>
-        <!-- Add other table headers as needed -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let feedback of feedbackData">
-        <td>{{ feedback.email }}</td>
-        <td>{{ feedback.feedback }}</td>
-        <!-- Add other table cells as needed -->
-      </tr>
-    </tbody>
-  </table>
+<div>
+  <div class="heading">
+    <h2>All Feedback</h2>
+    </div>
+<div id="demo" *ngIf="feedbackData.length > 0"> <!-- Check if recentRegistrationsData has data -->
+  <angular-slickgrid  gridId="grid11" [columnDefinitions]="columnDefinitions" 
+    [gridOptions]="gridOptions" [dataset]="dataset"  
+    ></angular-slickgrid>
+</div>
+
+<div *ngIf="feedbackData.length === 0"> <!-- Show a message when there's no data -->
+  No data available.
+</div>
   <div>
-    
+ </div>   
   
-    <!-- <div *ngIf="sentimentScores.length > 0">
-      <h2>Sentiment Analysis</h2>
-      <div style="text-align: center;">
-        <! Use the correct property name: [sentimentScores] -->
-        <!-- <app-chart [feedbackData]="feedbackData" [sentimentScores]="sentimentScores"></app-chart> -->
-      <!-- </div> -->
-    <!-- </div> --> 
+ 
   </div>
   

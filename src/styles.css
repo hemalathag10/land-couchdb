@@ -11,3 +11,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: none !important;
 }
 
+/* Default styles for all screen sizes */
+.container {
+  width: 100%; /* Take full width */
+}
+
+/* Media query for tablets and larger devices */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px; /* Limit width for tablets */
+    margin: 0 auto; /* Center the container */
+  }
+}
+
+/* Media query for laptops/desktops */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px; /* Limit width for laptops/desktops */
+    margin: 0 auto; /* Center the container */
+  }
+}
+

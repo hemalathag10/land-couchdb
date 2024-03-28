@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
   }
-  
+ 
   body {
     font-family: 'Arial', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -20,11 +20,9 @@
     color: #999;
   }
   
-  ul {
-    
-  }
+
   
-  h1,
+  
   h2,
   h3,
   h4 {
@@ -38,6 +36,17 @@
   
   p {
     margin: 0.5rem 0;
+    color:  #08002f!important;
+    font-weight:5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+
+  }
+  h1{
+    color: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+
   }
   
   img {
@@ -60,8 +69,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    /* background: rgba(0, 0, 0, 0.6); */
-    /* box-shadow: inset 120px 100px 250px #000000, inset -120px -100px 250px #000000; */
+  
   }
   
   .showcase-top {
@@ -96,7 +104,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 34px;
   }
   
   .showcase-content h1 {
@@ -324,19 +332,22 @@
   }
   
   .btn-xl {
-    font-size: 2rem;
+    display: inline-block;
+    font-size: 1rem;
     border-radius: 150px;
     padding: 1.5rem 2.1rem;
     text-transform: uppercase;
     background-color: rgba(255, 255, 255, 0.2); /* Use an rgba color with reduced opacity for the frosted glass effect */
-    backdrop-filter: blur(10px); /* Apply a blur effect to simulate frosted glass */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a border with reduced opacity for better visibility */
-    color: white; /* Set text color to white for better contrast */
+    color: rgb(6, 6, 6); /* Set text color to white for better contrast */
+    text-decoration: none;
     transition: background-color 0.3s ease; /* Optional: Add a smooth transition effect */
+    margin-top:41px
+  
 }
 
 .btn-xl:hover {
-    background-color: rgba(255, 255, 255, 0.3); /* Adjust the opacity on hover if needed */
+  background-color: rgba(255, 255, 255, 0.3); /* Adjust the hover color with a slightly increased alpha value */
 }
 
   

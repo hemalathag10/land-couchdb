@@ -76,7 +76,7 @@ private drawLineChart() {
 
   // Create a single dataset with points sorted by x-axis (year)
   const dataset: { x: number; y: number }[] = [];
-
+console.log("purchases",purchasePricesArray)
   purchasePricesArray.forEach((prices, index) => {
     // Add each point to the dataset
     prices.forEach((price: number) => {

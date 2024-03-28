@@ -1,0 +1,12 @@
+mat-dialog-content{
+    width:200px
+}
+h2{
+    margin:0px 108px;
+}
+#lineChart{
+width:488px;
+height:340px;
+display:block;
+box-sizing: border-box;
+}

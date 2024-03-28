@@ -4,9 +4,11 @@
 }
 
 .left-sidebar {
-  background-color: #f2f2f2;
+  background: rgb(222, 222, 225)!important;
   padding: 20px;
   width: 200px;
+  margin:7px 7px;
+  border-radius:10px;
 }
 
 .left-sidebar h3 {
