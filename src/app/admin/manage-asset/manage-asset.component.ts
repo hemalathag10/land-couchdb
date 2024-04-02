@@ -10,7 +10,7 @@ import { MapComponent } from './map/map.component';
 
 import {
   AngularGridInstance,
-  Formatter,
+  Formatter,Filters
 } from 'node_modules/angular-slickgrid';
 
 const updateFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
@@ -123,16 +123,16 @@ export class ManageAssetComponent implements OnInit {
 
   dataTable(){
     this.columnDefinitions = [
-      { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 60, },
-
-      { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
-      { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
-      { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 110},
-      { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 150 },
-      { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 60},
-      { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 90 },
-      { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150},
-      { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150},
+      { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 90,  filterable: true, filter: { model: Filters.compoundInputNumber }},
+      { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90, filterable: true, filter: { model: Filters.compoundInputNumber } },
+      { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110, filterable: true, filter: { model: Filters.compoundInputText } },
+      { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 110,  filterable: true, filter: { model: Filters.compoundInputText }},
+      { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 150  ,filterable: true, filter: { model: Filters.compoundInputText }},
+      { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 90,  filterable: true, filter: { model: Filters.compoundInputNumber }},
+      { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 90 ,  filterable: true, filter: { model: Filters.compoundInputNumber }},
+      { id: 'SubdivisionNumber', name: 'Subdivision Number', field: 'SubdivisionNumber', sortable: true, maxWidth: 90 ,  filterable: true, filter: { model: Filters.compoundInputNumber }},
+      { id: 'typeOfOwnership', name: 'Type of Ownership', field: 'typeOfOwnership', sortable: true, maxWidth: 150,  filterable: true, filter: { model: Filters.compoundInputText }  },
+      { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150, filterable: true, filter: { model: Filters.compoundInputText }},
       {
         id: 'action', name: 'Actions', field: 'action', sortable: false, maxWidth: 110,
         formatter: updateFormatter, onCellClick: (event:any,row:any) => {
@@ -178,7 +178,8 @@ District: registration ? registration.selectedDistrict : "",
 Taluk: registration ? registration.selectedTaluk : "",
 Ward: registration ? registration.ward : "",
 SurveyNumber: registration ? registration.surveyNumber : "",
-ownership: registration ? registration.ownership : "",
+SubdivisionNumber: registration ? registration.subdivisionNumber : "",
+typeOfOwnership: registration ? registration.ownership : "",
 LandUseType: registration ? registration.landUseType : "",
 
 };
@@ -188,16 +189,17 @@ LandUseType: registration ? registration.landUseType : "",
     this.gridOptions = {
       enableAutoResize: true,
       enableCellNavigation: true,
-      enableSorting: true,
+      enableSorting: true,     
+      enableFiltering: true,
       autoHeight: true,
       explicitInitialization: true, 
       showHeaderRow: true,
-      headerRowHeight: 10, 
+      headerRowHeight: 40, 
       rowHeight: 40, 
       enableAsyncPostRender: true,
       enableVirtualRendering: true ,
       autoResize: {
-        maxWidth: 1320,
+        maxWidth: 1420,
         maxHeight:500
       },
     

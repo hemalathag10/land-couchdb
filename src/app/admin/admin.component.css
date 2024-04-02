@@ -109,7 +109,7 @@ body {
   color: rgb(74, 74, 168)!important
 }
 li{
-  margin:10px 10px;
+  margin:10px 0px;
 }
 
 @media (min-width: 768px) {

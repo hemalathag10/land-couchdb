@@ -27,7 +27,7 @@ export class PageComponent implements OnInit, AfterViewInit {
         this.sharedservice._fetchedData = data;
         console.log("data", this.fetchedData[0].owners);
 
-        if (this.fetchedData[0] && this.fetchedData[0].owners) {
+        if (this.fetchedData[0] ?.owners) {
           this.extractAllYearPrices();
           console.log(this.allYearPrices)
         }
@@ -41,12 +41,11 @@ export class PageComponent implements OnInit, AfterViewInit {
   extractAllYearPrices() {
     const pricesByYear: { [key: number]: number } = {};
   
-    // Extract historical prices
     this.fetchedData[0].owners.forEach((owner: any) => { 
-      if (owner && owner.owners) {
+      if (owner ?.owners) {
         let year = new Date(owner.ownershipDurationFrom).getFullYear();
         owner.owners.forEach((ownerDetail: any) => { 
-          if (ownerDetail && ownerDetail.purchasePrice) {
+          if (ownerDetail ?.purchasePrice) {
             const purchasePrice = parseFloat(ownerDetail.purchasePrice);
             if (!isNaN(purchasePrice)) {
               pricesByYear[year] = purchasePrice;
@@ -56,13 +55,12 @@ export class PageComponent implements OnInit, AfterViewInit {
       }
     });
   
-    // Predict and add future prices
     const pricesCount = Object.keys(pricesByYear).length;
     if (pricesCount >= 2) {
       const priceYears = Object.keys(pricesByYear).map(Number);
       const priceChangeRate = (pricesByYear[priceYears[pricesCount - 1]] - pricesByYear[priceYears[0]]) / (pricesCount - 1);
   
-      const numYearsToPredict = 3; // Predict prices for the next 3 years
+      const numYearsToPredict = 3; 
       const currentYear = new Date().getFullYear();
 
       for (let i = 0; i <= numYearsToPredict; i++) {
@@ -91,31 +89,26 @@ export class PageComponent implements OnInit, AfterViewInit {
     const purchasePricesArray = this.allYearPrices;
     const dataset: { x: number; y: number }[] = [];
   
-    // Iterate over purchasePricesArray to populate the dataset
     purchasePricesArray.forEach((pricesObj: any) => {
       const year = pricesObj.year;
       const price = pricesObj.price;
   
-      // Ensure year and price are valid
       if (!isNaN(year) && !isNaN(price)) {
         dataset.push({ x: year, y: price });
       }
     });
   
-    // Sort the dataset by year (x-axis)
     dataset.sort((a, b) => a.x - b.x);
   
-    // Extract years for x-axis labels
     const years = dataset.map(data => data.x);
   
-    // Create the chart
     new Chart(document.getElementById("lineChart") as HTMLCanvasElement, {
       type: 'line',
       data: {
-        labels: years.map(year => year.toString()), // Use years as x-axis labels
+        labels: years.map(year => year.toString()), 
         datasets: [{
           label: 'Land Value Range (Rs)',
-          data: dataset, // Use the sorted dataset
+          data: dataset, 
           borderColor: 'rgb(255, 99, 132)',
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderWidth: 2,

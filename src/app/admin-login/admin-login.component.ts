@@ -35,16 +35,14 @@ export class AdminLoginComponent {
             this.successMessage='Login Success';
             this.router.navigate(['./admin']);
 
-            // Redirect or display a success message
           } else {
             this.errorMessage='Invalid email or password'
             console.error('Invalid email or password');
-            // Display an error message to the user
+            alert("invalid user or password")
           }
         },
         (error) => {
           console.error('Login failed:', error);
-          // Display an error message to the user
         }
       );
     }

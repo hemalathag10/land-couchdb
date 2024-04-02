@@ -21,19 +21,15 @@ import {
     callback!: FilterCallback;
     operator: OperatorType | OperatorString = OperatorType.equal;
   
-    /** Getter for the Column Filter */
     get columnFilter(): ColumnFilter {
       return this.columnDef?.filter ?? {};
     }
   
-    /** Getter for the Grid Options pulled through the Grid Object */
     get gridOptions(): GridOption {
       return (this.grid?.getOptions() ?? {}) as GridOption;
     }
   
-    /**
-     * Initialize the Filter
-     */
+    
     init(args: FilterArguments) {
       this.grid = args.grid as SlickGrid;
       this.callback = args.callback;

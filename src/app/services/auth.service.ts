@@ -96,6 +96,8 @@ export class AuthService {
             })
           );
         } else {
+          alert("invalid user or password")
+
           return throwError('Invalid credentials');
         }
       }),

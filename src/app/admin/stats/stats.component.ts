@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AssetService } from 'src/app/services/asset.service';
 import {
   AngularGridInstance,
- 
+  FieldType,
+  Filters,FlatpickrOption
 } from 'node_modules/angular-slickgrid';
 
 
@@ -83,31 +84,37 @@ export class StatsComponent implements OnInit {
 
   dataTable(){
     this.columnDefinitions = [
-      { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 50 },
+      { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 90 ,  filterable: true, filter: { model: Filters.compoundInputNumber }},
+      { id: 'Date', name: 'Date', field: 'Date', sortable: true, maxWidth: 120, type: FieldType.dateUsShort, exportWithFormatter: true, filterable: true, filter: { model: Filters.compoundDate }
+    },
 
-      { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
-      { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
-      { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true,},
-      { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 250 },
-      { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 100},
-      { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 130 },
-      { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150},
-      { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150},
+      { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90, filterable: true, filter: { model: Filters.compoundInputNumber} },
+      { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110, filterable: true, filter: { model: Filters.compoundInputText } },
+      { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true, filter: { model: Filters.compoundInputText } },
+      { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 310 , type: FieldType.string, filterable: true, filter: { model: Filters.compoundInputText }},
+      { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 100, filterable: true,filter: { model: Filters.compoundInputNumber}},
+      { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 130,filterable: true, filter: { model: Filters.compoundInputNumber} },
+      { id: 'SubdivisionNumber', name: 'Subdivision Number', field: 'SubdivisionNumber', sortable: true, maxWidth: 130,filterable: true, filter: { model: Filters.compoundInputNumber} },
+      { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150, filterable: true,filter: { model: Filters.compoundInputText}},
+      { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150, filterable: true,filter: { model: Filters.compoundInputNumber}},
     ];
-    
 
-    // Populate dataset dynamically
-    this.dataset = this.recentRegistrationsData.map((registration, index) => ({
+
+      this.dataset = this.recentRegistrationsData.map((registration, index) => ({
       id: index + 1,
+      Date: registration.owners[registration.owners.length - 1].ownershipDurationFrom,
       landArea: registration.landArea,
       State: registration.state,
       District:registration.selectedDistrict,
       Taluk:registration.selectedTaluk,
       Ward:registration.ward,
       SurveyNumber:registration.surveyNumber,
+      SubdivisionNumber:registration.subdivisionNumber,
       ownership:registration.ownership,
-      LandUseType:registration.landUseType
+      LandUseType:registration.landUseType,
+
     }));
+
     
    
     // Set grid options
@@ -115,15 +122,16 @@ export class StatsComponent implements OnInit {
       enableAutoResize: true,
       enableCellNavigation: true,
       enableSorting: true,
+      enableFiltering: true,
       autoHeight: true, // Disable autoHeight to enable vertical scrolling
       explicitInitialization: true, // Explicit initialization is needed when using autoHeight or virtual scrolling
       showHeaderRow: true, // Show header row if needed
-      headerRowHeight: 10, // Adjust header row height as needed
+      headerRowHeight: 50, // Adjust header row height as needed
       rowHeight: 40, // Adjust row height as needed
       enableAsyncPostRender: true, // Enable async post render if needed
       enableVirtualRendering: true ,
       autoResize: {
-        maxWidth: 1080,
+        maxWidth: 1200,
         maxHeight:500
       },
     

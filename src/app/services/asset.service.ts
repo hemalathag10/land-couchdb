@@ -10,8 +10,8 @@ import { catchError, switchMap, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AssetService {
-  private baseUrl = 'http://localhost:5984/project'; // Update with your CouchDB base URL
-  private credentials = 'admin:admin'; // Update with your CouchDB credentials
+  private baseUrl = 'http://localhost:5984/project'; 
+  private credentials = 'admin:admin'; 
 
   constructor(private http: HttpClient) {}
 
@@ -56,7 +56,6 @@ export class AssetService {
 
   return this.http.get(url, { headers: this.getHeaders() }).pipe(
     switchMap((existingData: any) => {
-      // Find the correct landId within both outer and inner arrays
      const indexToUpdate = existingData.asset
   .findIndex((outerArray: any[]) => outerArray.some((obj: any) => obj.barcode === Id));
 
@@ -65,27 +64,19 @@ console.log('existingData.asset:', existingData.asset);
 console.log('indexToUpdate:', indexToUpdate);
 
 if (indexToUpdate !== -1) {
-  // Navigate to the outermost owners array of the clicked asset
   const ownersArray = existingData.asset[indexToUpdate][0]?.owners;
-
   console.log('ownersArray:', ownersArray);
-
   if (ownersArray) {
-    // Append formData to the existing data inside the outermost owners array
     let previousOwners=ownersArray[ownersArray.length-1]
     console.log("pre",previousOwners)
     if (previousOwners.ownershipDurationTo==="present")
     {
       const ownershipFromDate = new Date(formData.ownershipDurationFrom);
-      
-      // Subtract one day from ownershipFromDate
       ownershipFromDate.setDate(ownershipFromDate.getDate() - 1);
-
       previousOwners.ownershipDurationTo = ownershipFromDate.toISOString().split('T')[0];
 
     }
     console.log("after",previousOwners)
-
     ownersArray.push(formData);
     console.log('Updated ownersArray:', ownersArray);
   } else {
@@ -95,8 +86,6 @@ if (indexToUpdate !== -1) {
   console.error('Index not found for landId:', Id);
 }
 
-
-      // Update the existing document
       return this.http.put(url, existingData, { headers: this.getHeaders() });
     }),
     catchError((error: any) => {
@@ -107,9 +96,7 @@ if (indexToUpdate !== -1) {
 }
 
   
-  
-
-  private getHeaders(): HttpHeaders {
+private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Basic ' + btoa(this.credentials)
@@ -125,7 +112,6 @@ if (indexToUpdate !== -1) {
 
     return this.http.get<any>(`${this.baseUrl}/${documentId}`, { headers }).pipe(
       map((response: any) => {
-        // Ensure that the response structure matches your expectations
         return {
           page1: response.page1 || [],
           page2: response.page2 || [],
@@ -166,14 +152,11 @@ console.log("user",headers)
   }
 
   getLandRecordByDetails(district: string, taluk: string, surveyNumber: string): Observable<any> {
-    // Replace this with your actual API call or data retrieval logic
     const url = `${this.baseUrl}/doc_asset`;
-    // Include headers in the request
     const headers = this.getHeaders();
 
     return this.http.get(url, { headers }).pipe(
       map((response: any) => {
-        // Search for the specific index in the 'asset' array
         const index = response.asset.findIndex((outerArray: any[]) =>
           outerArray.some((obj: any) =>
             obj.selectedDistrict == district &&
@@ -182,10 +165,8 @@ console.log("user",headers)
           )
         );
         if (index !== -1) {
-          // If the index is found, return the data at that index
           return response.asset[index];
         } else {
-          // If not found, return an appropriate message or handle accordingly
           return { error: 'Data not found for the specified details.' };
         }
       }),
@@ -198,14 +179,10 @@ console.log("user",headers)
 
 
 getLandRecordByBarcode(barcode:any): Observable<any> {
-  // Replace this with your actual API call or data retrieval logic
   const url = `${this.baseUrl}/doc_asset`;
-  // Include headers in the request
   const headers = this.getHeaders();
-
   return this.http.get(url, { headers }).pipe(
     map((response: any) => {
-      // Search for the specific index in the 'asset' array
       const index = response.asset.findIndex((outerArray: any[]) =>
         outerArray.some((obj: any) =>
           obj.barcode == barcode
@@ -213,10 +190,8 @@ getLandRecordByBarcode(barcode:any): Observable<any> {
         )
       );
       if (index !== -1) {
-        // If the index is found, return the data at that index
         return response.asset[index];
       } else {
-        // If not found, return an appropriate message or handle accordingly
         return { error: 'Data not found for the specified details.' };
       }
     }),
