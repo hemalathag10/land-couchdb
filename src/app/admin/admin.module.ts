@@ -20,7 +20,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AuthService } from '../services/auth.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FeedbackComponent } from './feedback/feedback.component';
-import { ChartComponent } from './feedback/chart.component';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input'; 
 import { ProfileComponent } from './profile/profile.component';
@@ -38,7 +37,6 @@ import { CustomInputFilter } from './stats/custom-inputFilter';
     ReportsAnalyticsComponent,
     ManageUserComponent,
     FeedbackComponent,
-    ChartComponent,
     ProfileComponent,
 
   ],

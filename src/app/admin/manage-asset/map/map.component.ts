@@ -1,11 +1,6 @@
 
 import { Component, Inject, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-
-import { AssetService } from 'src/app/services/asset.service';
-import { ChangeDetectorRef } from '@angular/core';
-
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({

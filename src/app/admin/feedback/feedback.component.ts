@@ -1,19 +1,17 @@
 
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AssetService } from 'src/app/services/asset.service';
-import { ChartComponent} from './chart.component';
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css']
 })
-export class FeedbackComponent implements OnInit, AfterViewInit {
+export class FeedbackComponent implements OnInit {
   feedbackData: any[] = [];
   sentimentScores: number[] = [];
   columnDefinitions: any[] = [];
   gridOptions: any = {};
   dataset: any[] = [];
-  @ViewChild(ChartComponent) speedometerChart!: ChartComponent;
 
   constructor(private assetService: AssetService,) {}
 
@@ -60,10 +58,5 @@ export class FeedbackComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    // After view initialization, update the speedometer chart with sentiment data
-    if (this.speedometerChart) {
-      this.speedometerChart.updateChart();
-    }
-  }
+  
 }
