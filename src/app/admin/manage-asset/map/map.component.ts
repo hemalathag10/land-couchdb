@@ -95,6 +95,7 @@ export class MapComponent  {
                       (response: any) => {
                         this.successMessage = 'Successfully registered';
                         console.log('Data stored successfully:', response);
+                        alert("Plot Map Stored Successfully")
                       },
                       (error: HttpErrorResponse) => {
                         this.errorMessage = 'Error storing data.';

@@ -136,8 +136,7 @@ export class landRecordsComponent {
   }
   
   submitForm() {
-    // Additional logic for when the Submit button in the form is clicked
-    this.showForm = false; // Ensure form is hidden when scanning section is toggled
+    this.showForm = false; 
 
   }
  

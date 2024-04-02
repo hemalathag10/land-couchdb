@@ -47,7 +47,7 @@ div {
     border: none;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 30px;
     margin-left:10px;
   }
   .right{
@@ -66,5 +66,9 @@ div {
   input:disabled,
   select:disabled {
     background-color: #444; /* Darker gray background for disabled elements */
+  }
+  .close {
+    display: inline-block; /* Ensures the button behaves like inline element */
+    margin-right: 10px; /* Adjust the margin between the button and the heading */
   }
   

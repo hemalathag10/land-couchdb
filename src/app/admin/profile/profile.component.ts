@@ -11,6 +11,7 @@ export class ProfileComponent {
   email:string=""
   name:string=""
   role:string=""
+  empId:string=""
   ngOnInit() {
     // Subscribe to changes in the shared service
     this.authService.profile().subscribe(
@@ -18,6 +19,7 @@ export class ProfileComponent {
         this.email=data.response.user[0].emailId
         this.name=data.response.user[0].name
         this.role=data.response.user[0].role
+        this.empId=data.response.user[0].empId
         console.log("data",data.response.user[0].emailId)
       }
     );

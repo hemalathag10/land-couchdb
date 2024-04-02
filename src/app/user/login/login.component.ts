@@ -44,18 +44,15 @@ export class LoginComponent {
             console.log('Login successful');
             this.dialogRef.close();
             this.router.navigate(['./land-records'])
-            // Redirect or display a success message
           } else {
             this.errorMessage='Invalid email or password'
             console.error('Invalid email or password');
-            // Display an error message to the user
           }
         },
         (error) => {
           this.errorMessage='Invalid email or password'
 
           console.error('Login failed:', error);
-          // Display an error message to the user
         }
       );
     }

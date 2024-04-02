@@ -4,10 +4,11 @@
 }
 
 .left-sidebar {
-  background: rgb(222, 222, 225)!important;
-  padding: 20px;
+  background: rgb(252, 252, 253)!important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);  
+  padding: 24px;
   width: 200px;
-  margin:7px 7px;
+  margin:19px 7px;
   border-radius:10px;
 }
 
@@ -16,7 +17,8 @@
 }
 
 .map-section {
-  margin-top: 20px;
+  margin: 67px 8px;
+  width:141px
 }
 
 .map-section h4 {
@@ -37,15 +39,21 @@
 
 .main-content {
   flex: 1;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin:21px 19px;
+  padding: 25px;
+  background: rgb(252, 252, 253)!important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  width:1336px
 }
 
+
 table {
-  width: 100%;
+  width: 1248px;
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -54,7 +62,7 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  width: 500px;
+  width: 621px;
 }
 
 th {

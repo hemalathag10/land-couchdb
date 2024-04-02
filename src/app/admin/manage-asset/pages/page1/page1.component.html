@@ -6,7 +6,7 @@
   
   <br>
 
-  <button type="button" (click)="openQrCodeScanner()">Scan Bar Code</button>
+  <button class="scanner" type="button" (click)="openQrCodeScanner()">Scan Bar Code</button>
   <div *ngIf="qrCodeScanned" class="success-message">
     Bar Code successfully scanned!
   </div>
@@ -22,7 +22,7 @@
   <br>
 
   <label for="ward">Ward Number:</label>
-  <input type="number" id="ward" formControlName="ward" min="0"/>
+  <input type="text" id="ward" formControlName="ward" min="0"/>
   <br>
 
   <label for="selectedDistrict">District:</label>
@@ -44,7 +44,7 @@
   <br>
 
   <label for="surveyNumber">Survey Number:</label>
-  <input type="number" id="surveyNumber" formControlName="surveyNumber" min="0"/>
+  <input type="text" id="surveyNumber" formControlName="surveyNumber" min="0"/>
   <br>
 
   <label for="subdivisionNumber">Subdivision Number:</label>

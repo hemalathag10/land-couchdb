@@ -1,12 +1,17 @@
 <app-nav-bar></app-nav-bar>
 
+
 <!-- land-record.component.html -->
 <header class="showcase">
   <div class="showcase-top">
+    
   </div>
   <div class="showcase-content">
-    <h1>Explore Land Records</h1>
-    <p>Access land information anytime. Secure and Convenient.</p>
+    <div class="typewriter">
+      <h1>Explore Land Records.</h1>
+    </div>
+    <br>
+    <p>Unearth the secrets of your land with our convenient online access to land records.</p>
     <button class="btn btn-xl" (click)="toggleScanningSection()">Click Here</button>
   </div>
 </header>
@@ -61,25 +66,23 @@
     <br>
 <section class="tab-content">
   <div class="container">
-    <!-- Tab Content 1 -->
     <div id="tab-1-content" class="tab-content-item show">
       <div class="tab-1-content-inner">
-        <!-- Card 1: Login -->
         <div class="card" id="login">
        
-          <a href="" >Log In Now</a>
+          <a>Log In Now</a>
         </div>
 
         <!-- Card 2: Scan -->
         <div class="card" id="scan" *ngIf="showScanCard">
         
-          <a href=""  (click)="startScanning()">Start Scanning</a>
+          <a  (click)="startScanning()">Start Scanning</a>
         </div>
 
         <!-- Card 3: Explore -->
         <div class="card" id="explore">
          
-          <a href=""  (click)="exploreNow()">Explore Now</a>
+          <a (click)="exploreNow()">Explore Now</a>
         </div>
       </div>
     </div>
@@ -87,14 +90,11 @@
 
     
 
-    <!-- Tab Content 3 -->
     <div id="tab-3-content" class="tab-content-item">
-      <!-- ... (content for Tab 3) ... -->
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <p>Questions? Call 1-800-123-4567</p>
-  <!-- ... (footer content for the land record website) ... -->
 </footer>

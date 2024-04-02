@@ -111,3 +111,35 @@ tbody  {
 
 @import url('@slickgrid-universal/common/dist/styles/css/slickgrid-theme-bootstrap.css');
 
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container input[type="text"],
+.search-container select {
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-container button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #45a049;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #050404;
+  font-size:16px;
+}

@@ -1,21 +1,19 @@
-/* map-display.component.css */
 .map-container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .sidebar {
-    width: 25%;
-    padding: 20px;
-    background-color: #f0f0f0;
-  }
-  
-  .pdf-container {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  iframe {
-    border: 1px solid #ccc;
-  }
-  
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 206px;
+  padding: 69px 46px;
+  background-color: #f0f0f0;
+}
+
+.pdf-container {
+  flex: 1;
+  padding: 20px;
+}
+
+iframe {
+  border: 1px solid #ccc;
+}

@@ -31,7 +31,6 @@ export class Page1Component implements OnInit {
       throw new Error('Form is required for Page1Component');
     }
 
-    // Add controls dynamically to the existing form
     this.form.addControl('barcode', this.fb.control('', Validators.required));
     this.form.addControl('landArea', this.fb.control('', [Validators.required, this.positiveNumberValidator]));
     this.form.addControl('ward', this.fb.control('', [Validators.required, this.positiveNumberValidator]));

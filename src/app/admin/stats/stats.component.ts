@@ -4,7 +4,6 @@ import {
   AngularGridInstance,
  
 } from 'node_modules/angular-slickgrid';
-import { CustomInputFilter } from './custom-inputFilter';
 
 
 @Component({
@@ -13,10 +12,6 @@ import { CustomInputFilter } from './custom-inputFilter';
   styleUrls: ['./stats.component.css']
 })
 export class StatsComponent implements OnInit {
-
-  
-
-
   totalAssets: number = 0;
   totalUsers: number = 0;
   recentRegistrations: number = 0;
@@ -27,17 +22,26 @@ export class StatsComponent implements OnInit {
   gridOptions: any = {};
   dataset: any[] = [];
   angularGrid!: AngularGridInstance;
+  districts: string[] = ['Ariyalur', 'Chennai', 'Madurai'];
+
+  
+  searchQuery: any ;
+  searchQueryLower:any;
+  selectedFilterType: string = 'District';
+  filteredDataset: any[] = [];
+  fieldValueString:any;
 
   constructor(private assetService: AssetService) {}
   
   ngOnInit() {
-    // Assuming you have a method in your AssetService to fetch all assets
+    
+    this.processData()
+  }
+  processData(){
     this.assetService.getAllAssets().subscribe((response: any) => {
       const assetsArrays: any[][] = response.asset || [];
-
       console.log("response", response);
       this.totalAssets = assetsArrays.length;
-
       const today = new Date().toISOString().split('T')[0];
       this.newAssetsToday = assetsArrays.filter(assetArray =>
         assetArray.some(asset =>
@@ -45,7 +49,6 @@ export class StatsComponent implements OnInit {
         )
       ).length;
 
-      // Calculate recent registrations (within last 7 days)
       const last7Days = new Date();
       last7Days.setDate(last7Days.getDate() - 7);
 
@@ -57,54 +60,9 @@ export class StatsComponent implements OnInit {
       console.log('Recent Registrations Data:', this.recentRegistrationsData);
 
       this.recentRegistrations = this.recentRegistrationsData.length;
-
-      // Populate column definitions dynamically
-      this.columnDefinitions = [
-        { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 50 },
- 
-        { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
-        { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
-        { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true,},
-        { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 210 },
-        { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 100},
-        { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 130 },
-        { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150},
-        { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150},
-      ];
-      
-
-      // Populate dataset dynamically
-      this.dataset = this.recentRegistrationsData.map((registration, index) => ({
-        id: index + 1,
-        landArea: registration.landArea,
-        State: registration.state,
-        District:registration.selectedDistrict,
-        Taluk:registration.selectedTaluk,
-        Ward:registration.ward,
-        SurveyNumber:registration.surveyNumber,
-        ownership:registration.ownership,
-        LandUseType:registration.landUseType
-      }));
+      this.dataTable()
       
      
-      // Set grid options
-      this.gridOptions = {
-        enableAutoResize: true,
-        enableCellNavigation: true,
-        enableSorting: true,
-        autoHeight: true, // Disable autoHeight to enable vertical scrolling
-        explicitInitialization: true, // Explicit initialization is needed when using autoHeight or virtual scrolling
-        showHeaderRow: true, // Show header row if needed
-        headerRowHeight: 10, // Adjust header row height as needed
-        rowHeight: 40, // Adjust row height as needed
-        enableAsyncPostRender: true, // Enable async post render if needed
-        enableVirtualRendering: true ,
-        autoResize: {
-          maxWidth: 1050,
-          maxHeight:500
-        },
-      
-      };
     });
 
     this.assetService.getAllUsers().subscribe((response: any) => {
@@ -120,7 +78,86 @@ export class StatsComponent implements OnInit {
 
       console.log(this.newUsersToday);
     });
+
   }
+
+  dataTable(){
+    this.columnDefinitions = [
+      { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 50 },
+
+      { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
+      { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
+      { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true,},
+      { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 250 },
+      { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 100},
+      { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 130 },
+      { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150},
+      { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150},
+    ];
+    
+
+    // Populate dataset dynamically
+    this.dataset = this.recentRegistrationsData.map((registration, index) => ({
+      id: index + 1,
+      landArea: registration.landArea,
+      State: registration.state,
+      District:registration.selectedDistrict,
+      Taluk:registration.selectedTaluk,
+      Ward:registration.ward,
+      SurveyNumber:registration.surveyNumber,
+      ownership:registration.ownership,
+      LandUseType:registration.landUseType
+    }));
+    
+   
+    // Set grid options
+    this.gridOptions = {
+      enableAutoResize: true,
+      enableCellNavigation: true,
+      enableSorting: true,
+      autoHeight: true, // Disable autoHeight to enable vertical scrolling
+      explicitInitialization: true, // Explicit initialization is needed when using autoHeight or virtual scrolling
+      showHeaderRow: true, // Show header row if needed
+      headerRowHeight: 10, // Adjust header row height as needed
+      rowHeight: 40, // Adjust row height as needed
+      enableAsyncPostRender: true, // Enable async post render if needed
+      enableVirtualRendering: true ,
+      autoResize: {
+        maxWidth: 1080,
+        maxHeight:500
+      },
+    
+    };
+  }
+  applyFilter() {
+    if (this.selectedFilterType && this.searchQuery) {
+      this.filteredDataset = this.recentRegistrationsData.filter(data => {
+        const fieldValue = data[this.selectedFilterType];
+       
+        
+        console.log("jjj",data[this.selectedFilterType],data, typeof(this.searchQuery))
+      
+          // Check if the field value is defined before converting to lowercase
+          console.log("value",data[this.selectedFilterType])
+
+        
+            this.fieldValueString = data[this.selectedFilterType].toString().toLowerCase();
+
+            this.searchQueryLower = this.searchQuery.toLowerCase();
+
+                console.log("fff",this.fieldValueString)
+          return this.fieldValueString==this.searchQueryLower;
+        
+        return false; // Exclude data if the selected field is not defined
+      });
+    } 
+    // Update the dataset used by SlickGrid to the filtered dataset
+    this.recentRegistrationsData=this.filteredDataset
+    this.dataTable()
+    console.log("aa",this.filteredDataset)
+  }
+  
+  
   angularGridReady(event: any) {
     this.angularGrid = event.grid;
   }

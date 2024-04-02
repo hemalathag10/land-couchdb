@@ -12,7 +12,8 @@ import * as CryptoJS from 'crypto-js';
 export class AuthService {
  
   private isLoggedIn: boolean = false;
- 
+  private isAdminLoggedIn: boolean = false;
+
 
   private apiUrl = 'http://localhost:5984/project'; 
   private baseUrl = 'http://localhost:5984/project/form'; 
@@ -21,14 +22,12 @@ export class AuthService {
   private headers = new HttpHeaders({
     'Authorization': 'Basic ' + btoa('admin:admin'),
     'Content-Type': 'application/json',
-    // Add any other headers you need for authentication
   });
 
   constructor(private http: HttpClient) {
    
   }
 
-  // Update the authentication state
 
   login(emailId: string, password: string): Observable<any> {
     const url = `${this.apiUrl}/form`;
@@ -50,7 +49,7 @@ export class AuthService {
           const decryptedPassword = CryptoJS.AES.decrypt(user.password, 'secret key').toString(CryptoJS.enc.Utf8);
   
           console.log('Decrypted password:', decryptedPassword);
-  
+
           if (decryptedPassword === password) {
             user.lastLogin = new Date().toISOString();
             this.isLoggedIn = true;
@@ -89,6 +88,7 @@ export class AuthService {
 
         if (adminUser) {
           adminUser.lastLogin = new Date().toISOString();
+          this.isAdminLoggedIn = true;
 
           return this.http.put(url, userData, { headers: this.headers }).pipe(
             switchMap(() => {
@@ -109,20 +109,23 @@ export class AuthService {
   
 
   logout():boolean {
-    // You can perform any additional cleanup or server-side logout logic here
-    // For simplicity, we'll just update the authentication state to false
 
     this.isLoggedIn = false;
     return this.isLoggedIn
   }
 
+  adminLogout():boolean {
+
+    this.isAdminLoggedIn = false;
+    return this.isAdminLoggedIn
+  }
+
   submitFeedback(feedbackData: any): Observable<any> {
-    const url = `${this.apiUrl}/feedback`; // Adjust the URL based on your CouchDB setup
+    const url = `${this.apiUrl}/feedback`; 
     console.log("feed",feedbackData)
 
     return this.http.get(url, { headers: this.headers }).pipe(
       switchMap((feedbackDoc: any) => {
-        // Assuming 'messages' is the array inside the 'feedback' document
         feedbackDoc.messages.push(feedbackData);
 
         return this.http.put(url, feedbackDoc, { headers: this.headers }).pipe(

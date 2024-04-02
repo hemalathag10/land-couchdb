@@ -13,8 +13,11 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isUserLoggedIn()) {
       return true;
     } else {
-      this.router.navigate(['/']); // Redirect to home if not logged in
+      this.router.navigate(['/land-records']); 
       return false;
     }
   }
+
+  
+ 
 }

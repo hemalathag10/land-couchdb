@@ -1,34 +1,71 @@
-/* styles.css */
-
 nav {
-  background: linear-gradient(to right, #08002f, #1a0066, #08002f)!important;
-  height:45px;
-  border-radius: 10px;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.brand {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.icon {
+  display: none;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  ul {
+    display: none;
+    position: absolute;
+    top: 50px; /* Adjust as needed */
+    left: 0;
+    width: 100%;
+    background-color: #333;
   }
 
-  ul {
-    list-style-type: none;
-    float:right;
-    padding: 0;
-    overflow: hidden;
-    margin-top: 15px;
+  ul.responsive {
+    display: block;
   }
-  
+
   li {
-    display: inline;
-    margin-right: 20px;
+    display: block;
+    margin: 10px 0;
   }
-  
-  a {
+
+  .icon {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     color: white;
-    text-decoration: none;
   }
-  
-  a:hover {
-    color: gray;
-  }
-  .signup{
-    color:white;
-  }
-  
-  
+}
+i{
+  margin:0px 10px;
+}

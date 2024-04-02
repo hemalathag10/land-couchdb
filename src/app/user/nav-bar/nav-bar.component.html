@@ -1,16 +1,17 @@
 <nav>
-  <ul>
-    <!-- <li><a routerLink="/nav-bar">Home</a></li> -->
-    <li><a routerLink="/home">Home</a></li>
+  <a class="brand" routerLink="/home"><i class="fas fa-map-marked-alt">&nbsp;</i>Land Ledger</a>
 
-    <li><a routerLink="/about">About Us</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-    <li> <a  routerLink="/land-records">Land Records</a></li>
-  
+  <ul [ngClass]="{ 'responsive': showResponsiveNav }">
+    <li><a routerLink="/home"><i class="fas fa-home"></i>Home</a></li>
+    <li><a routerLink="/about"><i class="fas fa-info-circle"></i>About Us</a></li>
+    <li><a routerLink="/contact"><i class="fas fa-envelope"></i>Contact</a></li>
+    <li><a routerLink="/land-records"><i class="fas fa-landmark"></i>Land Records</a></li>
+    
+
     
      <!-- Show login link only if not authenticated -->
      <li *ngIf="!authService.isUserLoggedIn()">
-      <a class="signup" (click)="openLoginDialog()">Log in</a>
+      <a class="signup" (click)="openLoginDialog()"><i class="fas fa-sign-in-alt"></i>Log in</a>
     </li>
 
     <!-- Show logout link only if authenticated -->
@@ -18,4 +19,8 @@
       <a class="signup" (click)="logout()">Logout</a>
     </li>
   </ul>
+  <a class="icon" href="javascript:void(0);" (click)="toggleResponsiveNav()">
+    <i class="fa fa-bars"></i>
+  </a>
 </nav>
+

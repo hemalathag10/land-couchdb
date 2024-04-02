@@ -31,14 +31,29 @@
 </div>
 
 
-<!-- Recent Registrations Table -->
 <div class="recent-registrations-container">
+  
   <div class="heading">
   <h2>Registrations</h2>
   </div>
 
+  <div class="search-container">
+    <label>select Filter :</label>
+    <select [(ngModel)]="selectedFilterType">
+      <option value="selectedDistrict">District</option>
+      <option value="Taluk">Taluk</option>
+      <option value="ward">Ward</option>
+      <option value="surveyNumber">Survey Number</option>
+      <option value="ownership">Ownership Type</option>
+      <option value="LandUseType">Land Use Type</option>
+    </select>
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search...">
 
-  <div id="demo" *ngIf="recentRegistrationsData.length > 0"> <!-- Check if recentRegistrationsData has data -->
+    <button (click)="applyFilter()">Search</button>
+  </div>
+<br>
+
+  <div id="demo" *ngIf="recentRegistrationsData.length > 0">
     <angular-slickgrid  gridId="grid11" [columnDefinitions]="columnDefinitions" 
       [gridOptions]="gridOptions" [dataset]="dataset"  
       (onAngularGridCreated)="angularGridReady($event)"

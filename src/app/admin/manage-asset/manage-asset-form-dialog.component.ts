@@ -1,11 +1,10 @@
 // manage-asset-form-dialog.component.ts
-import { Component, Inject, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, Inject, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Page1Component } from './pages/page1/page1.component';
 import { Page2Component } from './pages/page2/page2.component';
 import { AssetService } from 'src/app/services/asset.service';
-import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
@@ -71,7 +70,6 @@ export class ManageAssetFormDialogComponent implements AfterViewInit {
     this.page1Form.patchValue(data);
     this.page2Form.patchValue(data);
 
-    // this.patchPage2Form(this.data);
 
     
     // Push the form groups into the array
@@ -149,13 +147,9 @@ onSubmit() {
 
 // Function to handle form submission
 onSubmitting() {
-  // Combine form data from all pages
-  const formData = this.pageForms.map(form => form.value);
-
-  // Get the existing data from the dialog component
+  
   const existingData = this.data;
 
-  // Extract Page 2 data specifically
   const page2Data = this.page2Form.value;
   console.log("page2",page2Data)
  
@@ -164,36 +158,28 @@ onSubmitting() {
   }
 
 
-  // If the existing data has an 'owners' field, append the new owners as an array
   if(existingData){
 console.log("exist")
  
-  // Use the updateAsset method instead of createAsset
   this.assetService.updateAsset(this.data.barcode, page2Data).subscribe(
     (response: any) => {
       console.log('Data updated in the database successfully:', response);
-
-      // Optionally, you can navigate to another page or perform other actions after a successful update
       this.dialogRef.close();
     },
     (error) => {
       console.error('Error updating data in the database:', error);
-      // Handle error (show error message, log, etc.)
     }
   );
   }
   else{
 
     const page1=this.page1Form.value;
-    // const formData = this.pageForms.map(form => form.value);
     page1.owners=[page2Data]
     page1.created_at = new Date();
 
   
-  //     // Log combined form data to the console
  console.log('All page data:', [page1]);
     
-  //     // Assuming you want to store the data in your database using the AssetService
 this.assetService.createAsset([page1], 'doc_asset').subscribe(
     (response: any) => {
    console.log('Data stored in the database successfully:', response);
@@ -202,16 +188,11 @@ this.assetService.createAsset([page1], 'doc_asset').subscribe(
   },
       (error) => {
       console.error('Error storing data in the database:', error);
-  //         // Handle error (show error message, log, etc.     });
   
-  //     // Close the dialog
   this.dialogRef.close();
   });
 
   }
 }
-
-
-
 
 }

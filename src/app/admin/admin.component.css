@@ -9,7 +9,6 @@ body {
   
   .container-fluid {
     margin-top: 0px;
-    background: linear-gradient(to right, #f6f4f4, #f9f8f8); /* Silver */
   }
   
   .list-group-item i {
@@ -49,9 +48,10 @@ body {
     color: #090909!important;
     padding: 0px;
     height:55px;
-    border-radius:20px;
-    margin:25px;
-    width:1180px
+    border-radius:15px;
+    margin:5px;
+    width:1660px;
+    display:flex
   }
   
   .navbar-brand {
@@ -70,12 +70,12 @@ body {
   }
   
   .main-content {
-    margin:0px 10px;
+    margin:-8px -4px;
     padding: 20px;
-    background: rgb(222, 222, 225)!important;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background: rgb(222, 222, 223) !important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);    
     border-radius: 20px;
-    width:1200px
+    width:1420px;
   }
   
 #log{
@@ -85,24 +85,33 @@ body {
 .col-md-3{
   background: rgb(74, 74, 168)!important;
   width: 240px;
-  height: 820px;
-  margin: 11px;
+  height: 1020px;
   padding: 12px;
-  border-radius: 41px;
+  border-radius: 30px;
+  margin:-10px 2px
+
 
 }
 .list-group list-group-flush{
   background: rgb(74, 74, 168)!important;
 
 }
-.col-md-9 right{
-  height:10px
-}
+
 .sidebar-heading text-primary{
-  margin-right:20px!important;
+  margin-right:-10px!important;
+  float: left!important;
+}
+.brand{
+  margin-right:1300px!important;
+  float: left!important;
+  font-size: 20px;
+  font-weight:bold!important;
+  color: rgb(74, 74, 168)!important
+}
+li{
+  margin:10px 10px;
 }
 
-/* Media query for small devices (tablets and up) */
 @media (min-width: 768px) {
   .col-sm-12 {
     flex: 0 0 100%; /* Force full width on small devices */

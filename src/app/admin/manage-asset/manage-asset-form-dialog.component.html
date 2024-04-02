@@ -2,7 +2,7 @@
 <div>
   <h2>Manage Asset Form</h2>
   <form [formGroup]="currentPage === 1 ? page1Form : page2Form" (ngSubmit)="onSubmitting()">
-    <button type="button" (click)="dialogRef.close()">Close</button>
+    <button type="button" class="close" (click)="dialogRef.close()">Close</button>
 
 
     <!-- Include the pages in your template -->

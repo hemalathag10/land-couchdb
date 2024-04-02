@@ -1,10 +1,6 @@
-// navbar.component.ts
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';import { DialogService } from 'src/app/services/dialog.service';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { landRecordsComponent } from '../land-records/land-records.component';
-import { SharedService } from 'src/app/services/shared.service';
+import { DialogService } from 'src/app/services/dialog.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -14,54 +10,48 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavbarComponent {
-  
-    private unsubscriber: Subject<void> = new Subject<void>();
+  showResponsiveNav: boolean = false;
 
-    constructor(private location: Location, public authService: AuthService,
-      private dialogService: DialogService,private sharedService: SharedService,
-      private router:Router) {}
-  
+  navItems = [
+    { label: 'Home', link: '/home' },
+    { label: 'About Us', link: '/about' },
+    { label: 'Contact', link: '/contact' },
+    { label: 'Land Records', link: '/land-records' },
+    // Add more menu items as needed
+  ];
 
-    ngOnInit(): void {
-      
-    }
-  
-    ngOnDestroy(): void {
-      this.unsubscriber.next();
-      this.unsubscriber.complete();
-    }
-  
-    logout(): void {
-      history.scrollRestoration = 'manual'; 
-      history.pushState(null, '');
-  
-      fromEvent(window, 'popstate').pipe(
-        takeUntil(this.unsubscriber)
-      ).subscribe((_) => {
-        history.pushState(null, ''); 
-        this.showErrorModal(`You can't make changes or go back at this time.`);
-      });
-      this.authService.logout();
-      this.location.replaceState('/'); // Reset the browser history
-    }
-  
-    private showErrorModal(message: string): void {
-      console.error(message);
-    }
+  constructor(private location: Location, public authService: AuthService,
+              private dialogService: DialogService, private router: Router) {}
+
+  logout(): void {
+    history.scrollRestoration = 'manual'; 
+    history.pushState(null, '');
+
+    window.onpopstate = () => {
+      history.pushState(null, ''); 
+      this.showErrorModal(`You can't make changes or go back at this time.`);
+    };
+
+    this.authService.logout();
+    this.location.replaceState('/'); // Reset the browser history
+  }
+
   openRegistrationDialog() {
-    this.dialogService.openRegistrationDialog().subscribe(result => {
-    });
+    this.dialogService.openRegistrationDialog().subscribe(result => {});
   }
 
   openLoginDialog() {
-    this.dialogService.openLoginDialog().subscribe(result => {
-    });
+    this.dialogService.openLoginDialog().subscribe(result => {});
   }
-  showLandRecordsDropdown: boolean = false;
+
+  showErrorModal(message: string): void {
+    console.error(message);
+  }
 
 
-  toggleLandRecordsDropdown() {
-    this.showLandRecordsDropdown = !this.showLandRecordsDropdown;
+  toggleResponsiveNav() {
+    this.showResponsiveNav = !this.showResponsiveNav;
+    console.log('Responsive Nav Toggled:', this.showResponsiveNav);
   }
- 
+  
 }

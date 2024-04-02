@@ -28,10 +28,6 @@ export class RegistrationComponent {
   errorMessage: string = '';
   errorPasswordMessage: string = '';
 
-
-    
-
-
   constructor(private fb: FormBuilder, private http: HttpClient,private dialogService: DialogService, public dialogRef: MatDialogRef<RegistrationComponent> ) {
     this.myForm = this.fb.group({
       emailId: ['', [Validators.required, Validators.email]],
@@ -42,7 +38,6 @@ export class RegistrationComponent {
 
   openRegistrationDialog() {
     this.dialogService.openRegistrationDialog().subscribe(result => {
-      // Handle the result if needed
     });
   }
   onSubmit() {
@@ -54,7 +49,6 @@ export class RegistrationComponent {
   
       const encryptedPassword = CryptoJS.AES.encrypt(formData.password, 'secret key').toString();
   
-      // Replace the plain text password with the encrypted password
       formData.password = encryptedPassword;
     
       formData.createdAt = new Date();
@@ -69,7 +63,6 @@ export class RegistrationComponent {
           (existingFormData: any) => {
             const usersArray: User[] = existingFormData.user || [];
               console.log(formData)
-            // Check if the email already exists
             const emailExists = usersArray.some((user: User) => user.emailId === formData.emailId);
   
             if (emailExists) {
@@ -103,7 +96,7 @@ export class RegistrationComponent {
   checkEmailExists() {
     const emailInput = this.myForm.get('emailId');
 
-    if (emailInput && emailInput.valid) { // Check if emailInput is not null
+    if (emailInput && emailInput.valid) { 
       const formData = { emailId: emailInput.value } as User;
 
       const headers = new HttpHeaders({

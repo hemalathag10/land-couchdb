@@ -1,10 +1,9 @@
 // asset.service.ts
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
-import { map, } from 'rxjs/operators';
+import { catchError, switchMap, map } from 'rxjs/operators';
 
 
 @Injectable({

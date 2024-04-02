@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-admin',
   templateUrl:'./admin.component.html',
-  styleUrls: ['./admin.component.css']  // Ensure this line includes the correct path to your CSS file
+  styleUrls: ['./admin.component.css']  
 
 })
 export class AdminComponent {

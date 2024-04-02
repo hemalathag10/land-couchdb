@@ -72,10 +72,8 @@ export class PageComponent implements OnInit, AfterViewInit {
       }
     }
   
-    // Convert pricesByYear object to array format
     this.allYearPrices = Object.entries(pricesByYear).map(([year, price]) => ({ year: parseInt(year), price }));
   
-    // Sort the allYearPrices array by year
     this.allYearPrices.sort((a, b) => a.year - b.year);
   }
   
@@ -122,7 +120,7 @@ export class PageComponent implements OnInit, AfterViewInit {
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderWidth: 2,
           pointBackgroundColor: 'rgb(255, 99, 132)',
-          fill: false // Set fill to false for line chart
+          fill: false 
         }]
       },
       options: {

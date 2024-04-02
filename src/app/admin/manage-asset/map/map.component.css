@@ -9,7 +9,7 @@
 
 .map-section button,
 .upload-section button {
-    background-color: #4CAF50;
+    background-color:  rgb(74, 74, 168)!important;
     color: white;
     padding: 10px;
     border: none;
@@ -19,7 +19,7 @@
 
 .map-section button:hover,
 .upload-section button:hover {
-    background-color: #45a049;
+    background-color: rgb(74, 74, 168)!important;
 }
 
 .upload-section p,

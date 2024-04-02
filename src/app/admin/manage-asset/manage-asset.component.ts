@@ -1,5 +1,5 @@
 
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -7,21 +7,27 @@ import { ManageAssetFormDialogComponent } from './manage-asset-form-dialog.compo
 import { AssetService } from 'src/app/services/asset.service';
 import { OwnersDetailsDialogComponent } from './owners-details-dialog/owners-details-dialog.component';
 import { MapComponent } from './map/map.component';
+
 import {
   AngularGridInstance,
- 
   Formatter,
- 
 } from 'node_modules/angular-slickgrid';
 
-const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
-  if (dataContext.id ==3) { // option 3 is High
-    console.log("grid")
-
-    return `<div class="cell-menu-dropdown-outline">Action<i class="fa fa-caret-down"></i></div>`;
-  }
-  return `<div class="disabled">Action <i class="fa fa-caret-down"></i></div>`;
+const updateFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+  
+  return `<button id="myButton"  style="background: rgb(74, 74, 168);color:white;border-radius:5px; height:31px; width:73px
+  " >Update</button>`;
 };
+const viewFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+  
+  return `<button id="myButton"  style="background: rgb(74, 74, 168);color:white;border-radius:5px; height:31px; width:73px
+  ">View</button>`;
+};
+const mapFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+  
+  return `<button id="myButton" style="background: rgb(74, 74, 168);color:white; border-radius:5px; height:31px; width:53px" >Add</button>`;
+};
+
 
 @Component({
   selector: 'app-manage-asset',
@@ -37,8 +43,13 @@ export class ManageAssetComponent implements OnInit {
   dataset: any[] = [];
   angularGrid!: AngularGridInstance;
 
+  searchQuery: any ;
+  searchQueryLower:any;
+  selectedFilterType: string = 'District';
+  filteredDataset: any[] = [];
+  fieldValueString:any;
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder, private assetService: AssetService) {
+  constructor(private dialog: MatDialog, private fb: FormBuilder, private assetService: AssetService,private elementRef: ElementRef) {
     this.assetForm = this.fb.group({
       landArea: [''],
       selectedDistrict: [''],
@@ -49,8 +60,7 @@ export class ManageAssetComponent implements OnInit {
    
     this.fetchAssets();
 
-    }
-    
+   }   
 
   showAddNewForm(existingData?: any) {
     const dialogRef = this.dialog.open(ManageAssetFormDialogComponent, {
@@ -67,7 +77,7 @@ export class ManageAssetComponent implements OnInit {
     });
   }
   
-  
+
   
   
 
@@ -77,60 +87,7 @@ export class ManageAssetComponent implements OnInit {
       (response: any) => {
         this.page1Data = response.asset || [];
         console.log("page",this.page1Data)
-        this.columnDefinitions = [
-          { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 50 },
-    
-          { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
-          { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
-          { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true,},
-          { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 210 },
-          { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 100},
-          { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 130 },
-          { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150},
-          { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150},
-          {
-            id: 'action', name: 'Update', field: 'action', sortable: false, maxWidth: 150,
-            formatter: actionFormatter
-          }
-          
-          
-        ];
-        
-   
-    
-this.dataset = this.page1Data.map((registrationArray, index) => {
-  const registration = registrationArray[0];
-  return {
-    id: index + 1,
-    landArea: registration ? registration.landArea : "", 
-    State: registration ? registration.state : "",
-    District: registration ? registration.selectedDistrict : "",
-    Taluk: registration ? registration.selectedTaluk : "",
-    Ward: registration ? registration.ward : "",
-    SurveyNumber: registration ? registration.surveyNumber : "",
-    ownership: registration ? registration.ownership : "",
-    LandUseType: registration ? registration.landUseType : "",
-  };
-});
-
-       
-        this.gridOptions = {
-          enableAutoResize: true,
-          enableCellNavigation: true,
-          enableSorting: true,
-          autoHeight: true,
-          explicitInitialization: true, 
-          showHeaderRow: true,
-          headerRowHeight: 10, 
-          rowHeight: 40, 
-          enableAsyncPostRender: true,
-          enableVirtualRendering: true ,
-          autoResize: {
-            maxWidth: 850,
-            maxHeight:500
-          },
-        
-      } 
+        this.dataTable()
 
 
       },
@@ -163,6 +120,115 @@ this.dataset = this.page1Data.map((registrationArray, index) => {
       console.error('Clicked asset not found. Cannot update.');
     }
   }
+
+  dataTable(){
+    this.columnDefinitions = [
+      { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 60, },
+
+      { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90 },
+      { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110 },
+      { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 110},
+      { id: 'Taluk', name: 'Taluk', field: 'Taluk', sortable: true, maxWidth: 150 },
+      { id: 'Ward', name: 'Ward', field: 'Ward', sortable: true, maxWidth: 60},
+      { id: 'SurveyNumber', name: 'Survey Number', field: 'SurveyNumber', sortable: true, maxWidth: 90 },
+      { id: 'ownership', name: 'Type of Ownership', field: 'ownership', sortable: true, maxWidth: 150},
+      { id: 'LandUseType', name: 'Land Use Type', field: 'LandUseType', sortable: true, maxWidth: 150},
+      {
+        id: 'action', name: 'Actions', field: 'action', sortable: false, maxWidth: 110,
+        formatter: updateFormatter, onCellClick: (event:any,row:any) => {
+          if (event) {
+            this.showAddNewForm(this.page1Data[row.row][0])
+          }
+        }
+        
+      },
+      {
+        id: 'ownership', name: 'Ownership', field: 'ownership', sortable: false, maxWidth: 110,
+        formatter: viewFormatter, onCellClick: (event:any,row:any) => {
+          if (event) {
+            
+            this.showOwnersDetailsDialog(this.page1Data[row.row])
+          }
+        }
+        
+      },
+      {
+        id: 'map', name: 'Map', field: 'map', sortable: false, maxWidth: 110,
+        formatter: mapFormatter, onCellClick: (event:any,row:any) => {
+          if (event) {
+            
+            this.showMapDialog(this.page1Data[row.row])
+          }
+        }
+        
+      }
+      
+      
+    ];
+    
+
+
+this.dataset = this.page1Data.map((registrationArray, index) => {
+const registration = registrationArray[0];
+return {
+id: index + 1,
+landArea: registration ? registration.landArea : "", 
+State: registration ? registration.state : "",
+District: registration ? registration.selectedDistrict : "",
+Taluk: registration ? registration.selectedTaluk : "",
+Ward: registration ? registration.ward : "",
+SurveyNumber: registration ? registration.surveyNumber : "",
+ownership: registration ? registration.ownership : "",
+LandUseType: registration ? registration.landUseType : "",
+
+};
+});
+
+   
+    this.gridOptions = {
+      enableAutoResize: true,
+      enableCellNavigation: true,
+      enableSorting: true,
+      autoHeight: true,
+      explicitInitialization: true, 
+      showHeaderRow: true,
+      headerRowHeight: 10, 
+      rowHeight: 40, 
+      enableAsyncPostRender: true,
+      enableVirtualRendering: true ,
+      autoResize: {
+        maxWidth: 1320,
+        maxHeight:500
+      },
+    
+  } 
+  }
+
+  applyFilter() {
+    if (this.selectedFilterType && this.searchQuery) {
+      this.filteredDataset = this.page1Data.filter(data => {
+        const fieldValue = data[0][this.selectedFilterType];
+       
+        
+      
+          console.log("value",data[0][this.selectedFilterType])
+
+        
+            this.fieldValueString = data[0][this.selectedFilterType].toString().toLowerCase();
+
+            this.searchQueryLower = this.searchQuery.toLowerCase();
+
+          return this.fieldValueString==this.searchQueryLower;
+        
+        return false; 
+      });
+    } 
+    this.page1Data=this.filteredDataset
+    this.dataTable()
+    console.log("aa",this.filteredDataset)
+  }
+  
+  
   
   showOwnersDetailsDialog(assetArray: any[]) {
     const dialogRef = this.dialog.open(OwnersDetailsDialogComponent, {

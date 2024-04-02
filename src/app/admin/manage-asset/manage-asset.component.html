@@ -5,68 +5,34 @@
       <div class="heading">
         <h2>ALL ASSETS</h2>
       </div>
+      <div class="search-container">
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Search...">
+        
+        <select [(ngModel)]="selectedFilterType">
+          
+          <option value="selectedDistrict">District</option>
+          <option value="Taluk">Taluk</option>
+          <option value="ward">Ward</option>
+          <option value="surveyNumber">Survey Number</option>
+          <option value="ownership">Ownership Type</option>
+          <option value="LandUseType">Land Use Type</option>
+        </select>
+        <button (click)="applyFilter()">Search</button>
+      </div>
     </div>
     <div class="col-md-3 text-right">
       <button class="btn btn-success"  id="butt" (click)="showAddNewForm();">Add New Asset</button>
     </div>
   </div>
 
-
-  <div class="table-container">
-    <table *ngIf="page1Data && page1Data.length > 0" class="table">
-      <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Land Area(in sq.feet)</th>
-          <th>State</th>
-
-          <th>District</th>
-          <th>Taluk</th>
-          <th>Ward</th>
-          <th>Survey Number</th>
-          <th>Subdivision Number</th>
-          <th>Type of Ownership</th>
-          <th>Land Use Type</th>
-          <th>Actions</th>
-          <th>Ownership</th>
-          <th>Map</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let assetArray of page1Data let i=index" >
-          <!-- Display properties from the first JSON object in each inner array -->
-          <tr *ngIf="assetArray.length > 0">
-            <td>{{ i + 1 }}</td>
-            <td>{{ assetArray[0]?.landArea }}</td>
-            <td>{{ assetArray[0]?.state }}</td>
-            <td>{{ assetArray[0]?.selectedDistrict }}</td>
-            <td>{{ assetArray[0]?.selectedTaluk }}</td>
-            <td>{{ assetArray[0]?.ward }}</td>
-            <td>{{ assetArray[0]?.surveyNumber }}</td>
-            <td>{{ assetArray[0]?.subdivisionNumber }}</td>
-            <td>{{ assetArray[0]?.ownership }}</td>
-            <td>{{ assetArray[0]?.landUseType }}</td>
-            <td class="action-buttons">
-              <button class="btn btn-primary btn-sm" id="update" (click)="showAddNewForm(assetArray[0]); ">Update</button>
-            </td>
-            <td>
-              <button class="btn btn-primary btn-sm" id="view" (click)="showOwnersDetailsDialog(assetArray);">View</button>
-            </td>
-            <td>
-              <button class="btn btn-primary btn-sm" id="add"(click)="showMapDialog(assetArray);">Add</button>
-            </td>          </tr>
-        </ng-container>
-      </tbody>
-    </table>
-    
-  </div>
-  <div id="demo" *ngIf="page1Data.length > 0"> <!-- Check if recentRegistrationsData has data -->
+<br>
+  <div id="demo" *ngIf="page1Data.length > 0"> 
     <angular-slickgrid  gridId="grid1" [columnDefinitions]="columnDefinitions" 
       [gridOptions]="gridOptions" [dataset]="dataset"  
       ></angular-slickgrid>
   </div>
   
-  <div *ngIf="page1Data.length === 0"> <!-- Show a message when there's no data -->
+  <div *ngIf="page1Data.length === 0"> 
     No data available.
   </div>
 </div>

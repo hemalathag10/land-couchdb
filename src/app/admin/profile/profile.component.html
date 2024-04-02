@@ -15,23 +15,23 @@
 
   <!-- Change password form -->
   <form>
+    <label>Employee Id: </label>
+    <span>{{this.empId}}</span>
+<br>
     <label>Email Id :</label>
     <span>{{this.email}}</span>
       <br>
 
-      <label>New Password :</label>
-      <span>
-      <input matInput type="password" placeholder="Enter new password"></span>
+      <label>Role: </label>
+      <span>{{this.role}}</span>
+
+     
       <br>
-      <label>Confirm Password :</label>
-      <span>
-      <input matInput type="password" placeholder="Confirm new password"></span>
-      
+
   </form>
 </div>
 <div mat-dialog-actions>
   <!-- Update and Close buttons -->
-  <button mat-button >Update</button>
   <button mat-button mat-dialog-close>Close</button>
 </div>
       </div>
