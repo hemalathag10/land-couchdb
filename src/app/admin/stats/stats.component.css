@@ -1,62 +1,10 @@
 /* stats.css */
 
-.stats-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .stat-box {
-    width: 200px;
-    padding: 10px;
-    text-align: center;
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-  h2 {
-    margin-bottom: 5px;
-  }
-  .heading{
-    width: 150px;
-      padding: 5px;
-      text-align: center;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      background-color: white; /* Silver */
-      color:rgb(12, 11, 11);
-  }
- 
-tbody  {
-  background-color: #f9f9f9!important;
-}
-  
-  .box-1 {
-  background: linear-gradient(to right, #7adf89, #8cd2af); /* Brown */
-  color: #fff;
-}
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
 
-.box-2 {
-  background: linear-gradient(to right, #f18093, #f2b79c); /* Silver */
-  color: #fff;
-  width:500x!important
-}
 
-.box-3 {
-  background: linear-gradient(to right, #1e3c3d, #9bd2e1); /* Green */
-  color: #fff;
-}
-
-.box-4 {
-  background: linear-gradient(to right, #a06904, #8e7004); /* Orange */
-  color: #fff;
-}
-
-.box-5 {
-  background: linear-gradient(to right, #800080, #b291f4); /* Purple */
-  color: #fff;
-}
   
   .stat-icon {
     font-size: 45px;
@@ -105,9 +53,7 @@ tbody  {
   --cell-odd-background-color: rgb(234, 234, 35);
   --row-mouse-hover-color: lightgreen;
 }
-#grid11 , .gridpane, slickgrid-container slickgrid_644992 ui-widget {
-  width:945px;
-}
+
 
 @import url('@slickgrid-universal/common/dist/styles/css/slickgrid-theme-bootstrap.css');
 

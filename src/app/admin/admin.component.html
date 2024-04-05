@@ -1,70 +1,113 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-            
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-    <div class="brand"><i class="fas fa-map-marked-alt"></i>
-      Land Ledger</div>
 
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" (click)="openProfileDialog()">
-          <i class="fa fa-user"></i> Profile
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin-login">
-          <i class="fa fa-sign-out"></i> Logout
-        </a>
-      </li>
-    
-    </ul>
-  </div>
-</nav>
-<div class="container-fluid">
- 
+<!-- Banner -->
+<a class="btn w-full btn-primary text-truncate rounded-0 py-2 border-0 " style="z-index: 1000;">
+  <strong>Land Ledger</strong> 
+</a>
 
-    <div class="row">
+<!-- Dashboard -->
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+  <!-- Vertical Navbar -->
+  <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+      <div class="container-fluid">
+          <!-- Toggler -->
+          <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- Brand -->
+          <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+              <h2>Dashboard</h2>
+            </a>
+            <hr>
+          <!-- User menu (mobile) -->
+          <div class="navbar-user d-lg-none">
+              <!-- Dropdown -->
+              <div class="dropdown">
+                  <!-- Toggle -->
+                  <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="avatar-parent-child">
+                          <span class="avatar-child avatar-badge bg-success"></span>
+                      </div>
+                  </a>
+                  <!-- Menu -->
+                 
+              </div>
+          </div>
+          <!-- Collapse -->
+          <div class="collapse navbar-collapse" id="sidebarCollapse">
+              <!-- Navigation -->
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="/stats">
+                          <i class="bi bi-house"></i> Overview
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="/manage-asset">
+                          <i class="bi bi-credit-card"></i> Manage Asset
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/manage-user">
+                        <i class="bi bi-people"></i> Manage User
+                    </a>
+                </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="/reports-analytics">
+                          <i class="bi bi-bar-chart"></i> Analytics
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="/feedback">
+                          <i class="bi bi-chat"></i> Feedback
+                      </a>
+                  </li>
+              </ul>
+              <!-- Divider -->
+              <hr class="navbar-divider my-5 opacity-20">
+              <!-- Navigation -->
       
-      <div class="col-md-3">
-        <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar">
-          <br>
-          <div class="list-group list-group-flush">
-            <a routerLink="/stats" class="list-group-item">
-                <i class="fas fa-chart-bar mr-2"></i> Dashboard
-            </a>
-            <a routerLink="/manage-asset" class="list-group-item">
-                <i class="fas fa-cogs mr-2"></i> Manage Asset
-            </a>
-            <a routerLink="/manage-user" class="list-group-item">
-                <i class="fas fa-users mr-2"></i> Manage User
-            </a>
-            <a routerLink="/reports-analytics" class="list-group-item">
-                <i class="fas fa-chart-line mr-2"></i> Reports & Analytics
-            </a>
-            <a routerLink="/feedback" class="list-group-item">
-                <i class="fas fa-comments mr-2"></i> Feedback
-            </a>
-        </div>
-        
-        </div>
+              <!-- Push content down -->
+              <div class="mt-auto"></div>
+              <!-- User (md) -->
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" (click)="openProfileDialog()">
+                          <i class="bi bi-person-square"></i> Profile
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" id="logoutBtn" (click)="confirmLogout()">
+                          <i class="bi bi-box-arrow-left"></i> Logout
+                      </a>
+                  </li>
+              </ul>
+          </div>
       </div>
-  
-      <div class="col-md-9">
-        <!-- Top Navbar -->
-       
-  
-        <!-- Router Outlet for displaying components -->
-        <div class="main-content ">
-          
-          <router-outlet></router-outlet>
+  </nav>
+  <!-- Main content -->
+  <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+      <!-- Header -->
+      <header class="bg-surface-primary border-bottom pt-6">
+          <div class="container-fluid">
+              <div class="mb-npx">
+                  <div class="row align-items-center">
+                      <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                          <!-- Title -->
+                          <h1 class="h2 mb-0 ls-tight"></h1>
+                      </div>
+                      <!-- Actions -->
+                     
+                  </div>
+                  <!-- Nav -->
+                 
+              </div>
+          </div>
+      </header>
+      <!-- Main -->
+      <main class="py-6 bg-surface-secondary">
+        <router-outlet></router-outlet>
 
-        </div>
-      </div>
-    </div>
+      </main>
   </div>
-  
+</div>
   

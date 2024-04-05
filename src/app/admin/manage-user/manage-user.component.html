@@ -1,16 +1,22 @@
-<div>
-  <div class="heading">
-    <h2>All Users</h2>
-    </div>
- 
-    <div id="demo" *ngIf="users.length > 0"> <!-- Check if recentRegistrationsData has data -->
-      <angular-slickgrid  gridId="grid11" [columnDefinitions]="columnDefinitions" 
-        [gridOptions]="gridOptions" [dataset]="dataset"  
-        ></angular-slickgrid>
+
+  
+
+  <div class="card shadow border-0 mb-7" style="margin-left: 14%;">
+    <div class="card-header">
+        <h2 class="mb-0">All Users</h2>
     </div>
     
-    <div *ngIf="users.length === 0"> <!-- Show a message when there's no data -->
-      No data available.
+    <div class="table-responsive">
+      
+      <div id="demo" *ngIf="users.length > 0"> <!-- Check if recentRegistrationsData has data -->
+        <angular-slickgrid  gridId="grid11" [columnDefinitions]="columnDefinitions" 
+          [gridOptions]="gridOptions" [dataset]="dataset"  
+          ></angular-slickgrid>
+      </div>
+      
+      <div *ngIf="users.length === 0"> <!-- Show a message when there's no data -->
+        No data available.
+      </div>
     </div>
-  </div>
   
+</div>

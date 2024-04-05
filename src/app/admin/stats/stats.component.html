@@ -1,58 +1,108 @@
-<!-- stats.component.html -->
-<div class="stats-container">
-  <div class="stat-box box-1">
-    <i class="stat-icon material-icons large-icon">dashboard</i>
-    <div class="stat-label">Total Assets</div>
-    <div class="stat-value">{{ totalAssets }}</div>
+
+
+<div class="row g-6 mb-6" style="margin-left:32px">
+  <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card shadow border-0">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col">
+                      <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Assets</span>
+                      <span class="h3 font-bold mb-0">{{ totalAssets }}</span>
+                  </div>
+                  <div class="col-auto">
+                      <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                          <i class="bi bi-credit-card"></i>
+                      </div>
+                  </div>
+              </div>
+           
+          </div>
+      </div>
+  </div>
+  <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card shadow border-0">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col">
+                      <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Users</span>
+                      <span class="h3 font-bold mb-0">{{ totalUsers }}</span>
+                  </div>
+                  <div class="col-auto">
+                      <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                          <i class="bi bi-people"></i>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
   </div>
 
-  <div class="stat-box box-2">
-    <i class="stat-icon material-icons">person</i>
-    <div class="stat-label">Total Users</div>
-    <div class="stat-value">{{ totalUsers }}</div>
+  <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card shadow border-0">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col">
+                      <span class="h6 font-semibold text-muted text-sm d-block mb-2">New Users Today</span>
+                      <span class="h3 font-bold mb-0">{{ newUsersToday }}</span>
+                  </div>
+                  <div class="col-auto">
+                      <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                          <i class="bi bi-person"></i>
+                      </div>
+                  </div>
+              </div>
+            
+          </div>
+      </div>
   </div>
-  <div class="stat-box box-3">
-    <i class="stat-icon material-icons">history</i>
-    <div class="stat-label">Recent Registrations</div>
-    <div class="stat-value">{{ recentRegistrations }}</div>
-  </div>
-
-  <div class="stat-box box-4">
-    <i class="stat-icon material-icons">insert_drive_file</i>
-    <div class="stat-label">New Assets Today</div>
-    <div class="stat-value">{{ newAssetsToday }}</div>
-  </div>
-
-  <div class="stat-box box-5">
-    <i class="stat-icon material-icons">person_add</i>
-    <div class="stat-label">New Users Today</div>
-    <div class="stat-value">{{ newUsersToday }}</div>
-  </div>
+  <div class="col-xl-3 col-sm-6 col-12">
+    <div class="card shadow border-0">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">New Assets Today</span>
+                    <span class="h3 font-bold mb-0">{{ newAssetsToday }}</span>
+                </div>
+                <div class="col-auto">
+                    <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                        <i class="bi bi-person"></i>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
 </div>
 
 
-<div class="recent-registrations-container">
+
+
+
+<div class="card shadow border-0 mb-7" style="margin-left: 39px;">
+    <div class="card-header">
+        <h2 class="mb-0">Registrations</h2>
+    </div>
+    <br>
+    <div class="search-container" style="margin-left:25px">
+      <label for="selectedfilter" >select Filter :</label>
+      <select [(ngModel)]="selectedFilterType">
+        <option value="selectedDistrict">District</option>
+        <option value="Taluk">Taluk</option>
+        <option value="ward">Ward</option>
+        <option value="surveyNumber">Survey Number</option>
+        <option value="subdivisionNumber">Subdivision Number</option>
+        <option value="ownership">Ownership Type</option>
+        <option value="LandUseType">Land Use Type</option>
+      </select>
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search...">
   
-  <div class="heading">
-  <h2>Registrations</h2>
-  </div>
-
-  <div class="search-container">
-    <label>select Filter :</label>
-    <select [(ngModel)]="selectedFilterType">
-      <option value="selectedDistrict">District</option>
-      <option value="Taluk">Taluk</option>
-      <option value="ward">Ward</option>
-      <option value="surveyNumber">Survey Number</option>
-      <option value="ownership">Ownership Type</option>
-      <option value="LandUseType">Land Use Type</option>
-    </select>
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search...">
-
-    <button (click)="applyFilter()">Search</button>
-  </div>
-<br>
-
+      <button (click)="applyFilter()">Search</button>
+    </div>
+  <br>
+    <div class="table-responsive">
+      
   <div id="demo" *ngIf="recentRegistrationsData.length > 0">
     <angular-slickgrid  gridId="grid11" [columnDefinitions]="columnDefinitions" 
       [gridOptions]="gridOptions" [dataset]="dataset"  
@@ -63,5 +113,9 @@
   <div *ngIf="recentRegistrationsData.length === 0"> <!-- Show a message when there's no data -->
     No data available.
   </div>
+    </div>
   
 </div>
+
+
+

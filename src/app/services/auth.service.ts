@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, of, throwError, } from 'rxjs';
 import { catchError, switchMap, map } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
 
@@ -35,13 +35,13 @@ export class AuthService {
     return this.http.get(url, { headers: this.headers }).pipe(
       switchMap((userData: any) => {
         if (!userData || !userData.user) {
-          return throwError('Invalid user data');
+          return throwError(()=>'Invalid user data');
         }
   
         const user = userData.user.find((u: any) => u.emailId === emailId);
   
         if (!user) {
-          return throwError('User not found');
+          return throwError(()=>'User not found');
         }
   
         try {
@@ -61,16 +61,16 @@ export class AuthService {
               })
             );
           } else {
-            return throwError('Password mismatch');
+            return throwError(()=>'Password mismatch');
           }
         } catch (error) {
           console.error('Error during password decryption:', error);
-          return throwError('Decryption error');
+          return throwError(()=>'Decryption error');
         }
       }),
       catchError((error: any) => {
         console.error('Error during login:', error);
-        return throwError('Login failed: ' + error.message);
+        return throwError(()=>'Login failed: ' + error.message);
       })
     );
   }
@@ -79,12 +79,12 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
-  adminLogin(emailId: string, password: string): Observable<any> {
+  adminLogin(userName: string, password: string): Observable<any> {
     const url = `${this.apiUrl}/admin`;
 
     return this.http.get(url, { headers: this.headers }).pipe(
       switchMap((userData: any) => {
-        const adminUser = userData.user.find((u: any) => u.emailId === emailId && u.password === password);
+        const adminUser = userData.user.find((u: any) => u.userName === userName && u.password === password);
 
         if (adminUser) {
           adminUser.lastLogin = new Date().toISOString();
@@ -96,9 +96,9 @@ export class AuthService {
             })
           );
         } else {
-          alert("invalid user or password")
+          alert("Invalid user or password")
 
-          return throwError('Invalid credentials');
+          return throwError(()=>'Invalid credentials');
         }
       }),
       catchError((error: any) => {

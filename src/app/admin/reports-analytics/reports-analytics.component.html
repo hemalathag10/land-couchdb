@@ -25,14 +25,50 @@
 
   <div class="select-container" style="display: flex; gap: 10px;">
     <div class="select-wrapper">
-      <label for="lineChartDistrict">Select District:</label>
-      <ng-select class="district" [(ngModel)]="selectedDistrict" [items]="districts" bindLabel="name"></ng-select>
     </div>
 
-    <div class="select-wrapper">
-      <label for="lineChartTaluk">Select Taluk:</label>
-      <ng-select class="taluk" [(ngModel)]="selectedTaluk" [items]="taluks[selectedDistrict]" bindLabel="name"></ng-select>
-    </div>
+    <form class="example-form">
+      <mat-form-field class="example-full" appearance="fill">
+        <mat-label>Select District</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Select District"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto"
+                [(ngModel)]="selectedDistrictOption"
+               >
+               <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Select Taluk</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Select Taluk"
+               matInput
+               [formControl]="Control"
+               [matAutocomplete]="secondAuto"
+               [(ngModel)]="selectedTalukOption"
+               >
+               <mat-autocomplete #secondAuto="matAutocomplete">
+                <mat-option *ngFor="let option of taluks[selectedDistrictOption]" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              
+      </mat-form-field>
+      
+      
+    </form>
+    
+    
+   
   </div>
 
   <button (click)="search()">Search</button>

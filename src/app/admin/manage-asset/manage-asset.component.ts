@@ -168,7 +168,7 @@ export class ManageAssetComponent implements OnInit {
     
 
 
-this.dataset = this.page1Data.map((registrationArray, index) => {
+this.dataset = this.page1Data.reverse().map((registrationArray, index) => {
 const registration = registrationArray[0];
 return {
 id: index + 1,
@@ -209,7 +209,6 @@ LandUseType: registration ? registration.landUseType : "",
   applyFilter() {
     if (this.selectedFilterType && this.searchQuery) {
       this.filteredDataset = this.page1Data.filter(data => {
-        const fieldValue = data[0][this.selectedFilterType];
        
         
       
@@ -222,7 +221,6 @@ LandUseType: registration ? registration.landUseType : "",
 
           return this.fieldValueString==this.searchQueryLower;
         
-        return false; 
       });
     } 
     this.page1Data=this.filteredDataset

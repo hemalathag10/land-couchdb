@@ -1,14 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AssetService } from 'src/app/services/asset.service';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router'; 
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { WarningDialogComponent } from '../warning-dialog.component';
 import { LoginComponent } from '../login/login.component';
 import { SharedService } from 'src/app/services/shared.service';
 import { QrCodeScannerComponent } from 'src/app/user/land-records/qr-code-scanner.component';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -25,6 +24,7 @@ export class landRecordsComponent {
   district: string = ''; 
   taluk: string = ''; 
   surveyNumber: string = ''; 
+  subdivisionNumber:string=''
   barcode:any;
   districts: string[] = ['Ariyalur', 'Chennai', 'Madurai'];
   taluks: { [key: string]: string[] } = {
@@ -45,6 +45,7 @@ export class landRecordsComponent {
         district: [''], // Add appropriate default values if needed
         taluk: [''],
         surveyNumber: [''],
+        subdivisionNumber:[''],
         selectedDistrict: [''], // Initialize selectedDistrict and selectedTaluk
         selectedTaluk: ['']
         // Add more form controls if needed
@@ -74,9 +75,14 @@ export class landRecordsComponent {
       // Fetch data by barcode
       this.assetService.getLandRecordByBarcode(this.barcode).subscribe(
         (data: any) => {
+          if (data){
           this.dataService.setData(data);
           console.log('Fetched Data by Barcode:', data);
           this.router.navigate(['/page']);
+          }
+          else{
+            alert("Data not found!!!")
+          }
         },
         (error: any) => {
           console.error('Error fetching data by Barcode:', error);
@@ -84,11 +90,17 @@ export class landRecordsComponent {
       );
     } else {
       // Fetch data by taluk, district, and survey number
-      this.assetService.getLandRecordByDetails(this.district, this.taluk, this.surveyNumber).subscribe(
+      console.log(this.subdivisionNumber)
+      this.assetService.getLandRecordByDetails(this.district, this.taluk, this.surveyNumber,this.subdivisionNumber).subscribe(
         (data: any) => {
+          console.log(data)
+          if(data){
           this.dataService.setData(data);
           console.log('Fetched Data by Details:', data);
-          this.router.navigate(['/page']);
+          this.router.navigate(['/page']);}
+          else{
+            alert("Data not found!!!")
+          }
         },
         (error: any) => {
           console.error('Error fetching data by Details:', error);
@@ -107,21 +119,14 @@ export class landRecordsComponent {
     }
   }
 
-  startScanning():void {
-   
-  }
-
-  exploreNow() {
-  }
+ 
 
   startScanningTab():void {
     const dialogRef = this.dialog.open(QrCodeScannerComponent, {
       width: '400px',
       data: { onScanSuccess: this.onScanSuccess.bind(this) }     });
 
-    // Subscribe to the dialog's afterClosed event
     dialogRef.afterClosed().subscribe(() => {
-      // Optionally, you can perform additional actions after the dialog is closed
       console.log('QrCodeScannerComponent dialog closed.');
       console.log('Barcode value in Page1Component:', this.barcode);
 
@@ -130,7 +135,6 @@ export class landRecordsComponent {
   onScanSuccess(decodedText: string): void {
     this.barcode = decodedText;
     alert("successfully scanned! You can stop scanning")
-
     console.log('Barcode value in landRecordsComponent:', this.barcode);
     this.fetchData()
   }

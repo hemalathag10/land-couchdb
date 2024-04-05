@@ -69,14 +69,14 @@
                 <ng-container *ngFor="let individualOwner of owner.owners">
                   <tr>
                     <td>
-                      <p>Owner Name: {{ individualOwner.ownername }}</p>
+                      <p>Owner Name: {{ individualOwner.name }}</p>
                       <p>Contact Information: {{ individualOwner.contactInformation }}</p>
                       <p>Address: {{ individualOwner.address }}</p>
                       <p>Purchase Price: {{ individualOwner.purchasePrice }}</p>
                       <p>Date of Transaction: {{ individualOwner.dateOfTransaction }}</p>
                       <p>Transaction Type: {{ individualOwner.transactionType }}</p>
                       <p>Land Usage History: {{ individualOwner.landUsageHistory }}</p>
-                      <p>Buyer Seller Details: {{ individualOwner.buyerSellerDetails }}</p>
+                      <p>Seller Details: {{ individualOwner.sellerDetails }}</p>
                     </td>
                   </tr>
                 </ng-container>

@@ -14,8 +14,11 @@
   body {
     font-family: 'Arial', sans-serif;
     -webkit-font-smoothing: antialiased;
-    background: #7d7a7a;
     color: #999;
+    background: #333;
+    padding-top: 5em;
+    display: flex;
+    justify-content: center;
   }
   
 
@@ -166,7 +169,7 @@
 .card {
   flex: 1;
   max-width: 300px;
-  height:300px;
+  height:397px;
   margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -561,13 +564,6 @@ select, input {
 
 
 
-/* GLOBAL STYLES */
-body {
-  background: #333;
-  padding-top: 5em;
-  display: flex;
-  justify-content: center;
-}
 
 /* DEMO-SPECIFIC STYLES */
 .typewriter h1 {

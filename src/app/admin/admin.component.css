@@ -1,127 +1,17 @@
-/* src/styles.css or your component-specific styles */
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #cac6c6;  /* Set background color to white */
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container-fluid {
-    margin-top: 0px;
-  }
-  
-  .list-group-item i {
-    margin-right: 15px; /* Adjust the value based on your preference */
-  }
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
 
-  #sidebar{
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+strong{
+    margin: 5px;
+    float: left;
+    font-size: 23px;
+}
+.navbar-vertical .navbar-nav .nav-link{
+    font-size:16px!important;
+}
+.btn-primary{
     background: rgb(74, 74, 168)!important;
 
-  }
-  
-  .sidebar-heading {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 15px 10px;
-    color :rgb(246, 243, 243)!important;
-    margin-left:25px;
-    margin-top: 10px;
-  }
-  
-  .list-group-item {
-    padding: 15px;
-    cursor: pointer;
-    background: rgb(74, 74, 168)!important;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-
-  }
-  
-  .list-group-item:hover {
-    background: linear-gradient(to right, #e4e3e9, #b4b3b6, #a9a8ad)!important;
-  }
-  
-  .navbar {
-    background: rgb(222, 222, 225)!important;
-    color: #090909!important;
-    padding: 0px;
-    height:55px;
-    border-radius:15px;
-    margin:5px;
-    width:1660px;
-    display:flex
-  }
-  
-  .navbar-brand {
-    color: #090909;
-    font-weight: bold;
-  }
-  
-  .navbar-nav .nav-link {
-    color: #0a0808;
-    margin-right: 15px;
-    font-weight: bold;
-  }
-  
-  .navbar-nav .nav-link:last-child {
-    margin-right: 0;
-  }
-  
-  .main-content {
-    margin:-8px -4px;
-    padding: 20px;
-    background: rgb(222, 222, 223) !important;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);    
-    border-radius: 20px;
-    width:1420px;
-  }
-  
-#log{
-  float: right !important;
-}  
-
-.col-md-3{
-  background: rgb(74, 74, 168)!important;
-  width: 240px;
-  height: 1020px;
-  padding: 12px;
-  border-radius: 30px;
-  margin:-10px 2px
-
-
-}
-.list-group list-group-flush{
-  background: rgb(74, 74, 168)!important;
-
-}
-
-.sidebar-heading text-primary{
-  margin-right:-10px!important;
-  float: left!important;
-}
-.brand{
-  margin-right:1300px!important;
-  float: left!important;
-  font-size: 20px;
-  font-weight:bold!important;
-  color: rgb(74, 74, 168)!important
-}
-li{
-  margin:10px 0px;
-}
-
-@media (min-width: 768px) {
-  .col-sm-12 {
-    flex: 0 0 100%; /* Force full width on small devices */
-    max-width: 100%;
-  }
-}
-
-/* Media query for medium and larger devices */
-@media (min-width: 992px) {
-  .col-md-3, .col-md-9 {
-    flex-basis: auto; /* Reset flex-basis */
-  }
 }

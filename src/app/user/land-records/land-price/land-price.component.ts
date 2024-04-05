@@ -19,10 +19,7 @@ import { Chart } from "chart.js";
     constructor(public dialogRef: MatDialogRef<LandPriceComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any) {}
   
-    // ngOnInit() {
-    //   // Retrieve data passed from the parent component
-    //   this.allYearPrices = this.data.allYearPrices;
-    // }
+  
   
     ngAfterViewInit() {
       // Draw the line chart
@@ -45,13 +42,10 @@ import { Chart } from "chart.js";
           }
         });
       
-        // Sort the dataset by year (x-axis)
         dataset.sort((a, b) => a.x - b.x);
       
-        // Extract years for x-axis labels
         const years = dataset.map(data => data.x);
       
-        // Create the chart
      new Chart(document.getElementById("lineChart") as HTMLCanvasElement, {
           type: 'line',
           data: {

@@ -34,8 +34,7 @@ export class MapDisplayComponent implements OnInit {
           const barcode = this.fetchedData[0].barcode;
           const pdfAttachment = existingFormData.attachment[barcode];
 
-          if (pdfAttachment && pdfAttachment.data) {
-            // Use DomSanitizer to mark the data URL as safe
+          if (pdfAttachment ?.data) {
             this.pdfData = this.sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + pdfAttachment.data);
           } else {
             this.errorMessage = 'No PDF data found in the document.';

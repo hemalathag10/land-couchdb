@@ -49,7 +49,7 @@ input {
 /* Style the submit button */
 button {
   background-color: #4caf50; /* Green background color */
-  color: white; /* White text color */
+  color: rgb(27, 6, 79); /* White text color */
   padding: 12px;
   border: none;
   border-radius: 5px;
@@ -61,5 +61,6 @@ button {
 button:disabled {
   background-color: #cccccc; /* Grey background color */
   cursor: not-allowed;
-  color: #999; /* Light gray text color */
+  color: #07042c; /* Light gray text color */
+  font-weight: bold;
 }

@@ -5,6 +5,7 @@
 <div class="map-container">
   <div class="sidebar">
     <h2>Location Details</h2>
+    <p>Subdivision Number: {{ fetchedData[0].subdivisionNumber }}</p>
     <p>State: {{ fetchedData[0].state }}</p>
     <p>District: {{ fetchedData[0].selectedDistrict }}</p>
     <p>Taluk: {{ fetchedData[0].selectedTaluk }}</p>
@@ -15,7 +16,7 @@
   <div class="pdf-container">
     <!-- You can display the PDF or handle errors as needed -->
     <div *ngIf="pdfData; else noPdfError">
-      <iframe [src]="pdfData" width="700px" height="600px"></iframe>
+      <iframe title="" [src]="pdfData" width="700px" height="600px"></iframe>
     </div>
     <ng-template #noPdfError>
       <p>{{ errorMessage }}</p>

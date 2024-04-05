@@ -37,8 +37,8 @@ export class ManageUserComponent implements OnInit {
         this.dataset = this.users.map((registration, index) => ({
           id: index + 1,
           email: registration.emailId,
-          createdAt: new Date(registration.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }),
-          lastLogin: new Date(registration.lastLogin).toLocaleString('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+          createdAt: this.formatDate(registration.createdAt, false),
+          lastLogin: this.formatDate(registration.lastLogin, true)
         }));
         
        
@@ -65,5 +65,30 @@ export class ManageUserComponent implements OnInit {
       }
     ); 
   
+}
+formatDate(dateString: string, includeTime: boolean): string {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'short' });
+  const year = date.getFullYear();
+  
+  if (includeTime) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    return `${day} ${month} ${year}, ${this.formatTime(hours, minutes, seconds)}`;
+  } else {
+    return `${day} ${month} ${year}`;
+  }
+}
+
+// Method to format time
+formatTime(hours: number, minutes: number, seconds: number): string {
+  return `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+}
+
+// Method to pad zero to single digit time values
+padZero(value: number): string {
+  return value < 10 ? `0${value}` : `${value}`;
 }
 }

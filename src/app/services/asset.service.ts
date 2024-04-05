@@ -151,7 +151,7 @@ console.log("user",headers)
     return this.http.get<any>(`${this.baseUrl}/form`, { headers });
   }
 
-  getLandRecordByDetails(district: string, taluk: string, surveyNumber: string): Observable<any> {
+  getLandRecordByDetails(district: string, taluk: string, surveyNumber: string, subdivisionNumber:string): Observable<any> {
     const url = `${this.baseUrl}/doc_asset`;
     const headers = this.getHeaders();
 
@@ -161,14 +161,13 @@ console.log("user",headers)
           outerArray.some((obj: any) =>
             obj.selectedDistrict == district &&
             obj.selectedTaluk == taluk &&
-            obj.surveyNumber == surveyNumber
+            obj.surveyNumber == surveyNumber &&
+            obj.subdivisionNumber == subdivisionNumber
           )
         );
         if (index !== -1) {
           return response.asset[index];
-        } else {
-          return { error: 'Data not found for the specified details.' };
-        }
+        } 
       }),
       catchError((error: any) => {
         console.error('Error fetching data:', error);
@@ -191,9 +190,7 @@ getLandRecordByBarcode(barcode:any): Observable<any> {
       );
       if (index !== -1) {
         return response.asset[index];
-      } else {
-        return { error: 'Data not found for the specified details.' };
-      }
+      } 
     }),
     catchError((error: any) => {
       console.error('Error fetching data:', error);

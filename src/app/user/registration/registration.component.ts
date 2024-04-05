@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders ,HttpErrorResponse} from '@angular/common/http';
 import { DialogService } from 'src/app/services/dialog.service';
-import { Inject } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 
-import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef} from '@angular/material/dialog';
 
 
 
@@ -66,6 +65,7 @@ export class RegistrationComponent {
             const emailExists = usersArray.some((user: User) => user.emailId === formData.emailId);
   
             if (emailExists) {
+              console.log(emailExists)
             } else {
               usersArray.push(formData);
   
@@ -133,7 +133,7 @@ export class RegistrationComponent {
   checkPasswordValidity() {
     const passwordInput = this.myForm.get('password');
   
-    if (passwordInput && passwordInput.value) {
+    if (passwordInput ?.value) {
       const password = passwordInput.value;
       const hasNumber = /\d/.test(password);
       const hasCapitalLetter = /[A-Z]/.test(password);

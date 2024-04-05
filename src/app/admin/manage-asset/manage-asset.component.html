@@ -14,6 +14,7 @@
           <option value="Taluk">Taluk</option>
           <option value="ward">Ward</option>
           <option value="surveyNumber">Survey Number</option>
+          <option value="subdivision">Subdivision Number</option>
           <option value="ownership">Ownership Type</option>
           <option value="LandUseType">Land Use Type</option>
         </select>
@@ -26,13 +27,30 @@
   </div>
 
 <br>
-  <div id="demo" *ngIf="page1Data.length > 0"> 
-    <angular-slickgrid  gridId="grid1" [columnDefinitions]="columnDefinitions" 
-      [gridOptions]="gridOptions" [dataset]="dataset"  
-      ></angular-slickgrid>
-  </div>
-  
-  <div *ngIf="page1Data.length === 0"> 
-    No data available.
-  </div>
+ 
 </div>
+
+
+
+
+
+<div class="card shadow border-0 mb-7" style="margin-left: 39px;">
+ 
+ 
+<br>
+  <div class="table-responsive">
+    <div id="demo" *ngIf="page1Data.length > 0"> 
+      <angular-slickgrid  gridId="grid1" [columnDefinitions]="columnDefinitions" 
+        [gridOptions]="gridOptions" [dataset]="dataset"  
+        ></angular-slickgrid>
+    </div>
+    
+    <div *ngIf="page1Data.length === 0"> 
+      No data available.
+    </div>
+  </div>
+
+</div>
+
+
+

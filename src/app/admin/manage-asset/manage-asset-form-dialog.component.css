@@ -69,6 +69,9 @@ div {
   }
   .close {
     display: inline-block; /* Ensures the button behaves like inline element */
-    margin-right: 10px; /* Adjust the margin between the button and the heading */
+    margin-right: 30px; /* Adjust the margin between the button and the heading */
   }
   
+  .bi.bi-x {
+    font-size: 24px; /* Adjust the size as needed */
+}

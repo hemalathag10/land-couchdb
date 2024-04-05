@@ -23,8 +23,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input'; 
 import { ProfileComponent } from './profile/profile.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
-import { CustomInputFilter } from './stats/custom-inputFilter';
 @NgModule({
   declarations: [
     ManageAssetComponent,
@@ -52,10 +52,11 @@ import { CustomInputFilter } from './stats/custom-inputFilter';
     MatDialogModule,
     MatFormFieldModule, 
     MatInputModule,
+    MatAutocompleteModule,
     AngularSlickgridModule.forRoot()
 
   ],
-  providers: [AssetService, AuthService, CustomInputFilter,],
+  providers: [AssetService, AuthService,],
   bootstrap: []
 })
 export class AdminModule { }

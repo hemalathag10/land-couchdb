@@ -3,7 +3,7 @@ import { AssetService } from 'src/app/services/asset.service';
 import {
   AngularGridInstance,
   FieldType,
-  Filters,FlatpickrOption
+  Filters,Formatters
 } from 'node_modules/angular-slickgrid';
 
 
@@ -85,9 +85,7 @@ export class StatsComponent implements OnInit {
   dataTable(){
     this.columnDefinitions = [
       { id: 'id', name: 'S.No', field: 'id', sortable: true, maxWidth: 90 ,  filterable: true, filter: { model: Filters.compoundInputNumber }},
-      { id: 'Date', name: 'Date', field: 'Date', sortable: true, maxWidth: 120, type: FieldType.dateUsShort, exportWithFormatter: true, filterable: true, filter: { model: Filters.compoundDate }
-    },
-
+      { id: 'Date', name: 'Date', field: 'Date', sortable: true, maxWidth: 120,formatter: Formatters.dateIso,      type: FieldType.date, filterable: true, filter: { model: Filters.compoundDate }},
       { id: 'landArea', name: 'Land Area', field: 'landArea', sortable: true, maxWidth: 90, filterable: true, filter: { model: Filters.compoundInputNumber} },
       { id: 'State', name: 'State', field: 'State', sortable: true, maxWidth: 110, filterable: true, filter: { model: Filters.compoundInputText } },
       { id: 'District', name: 'District', field: 'District', sortable: true,maxWidth: 120,filterable:true, filter: { model: Filters.compoundInputText } },
@@ -100,7 +98,7 @@ export class StatsComponent implements OnInit {
     ];
 
 
-      this.dataset = this.recentRegistrationsData.map((registration, index) => ({
+      this.dataset = this.recentRegistrationsData.reverse().map((registration, index) => ({
       id: index + 1,
       Date: registration.owners[registration.owners.length - 1].ownershipDurationFrom,
       landArea: registration.landArea,
@@ -140,12 +138,10 @@ export class StatsComponent implements OnInit {
   applyFilter() {
     if (this.selectedFilterType && this.searchQuery) {
       this.filteredDataset = this.recentRegistrationsData.filter(data => {
-        const fieldValue = data[this.selectedFilterType];
        
         
         console.log("jjj",data[this.selectedFilterType],data, typeof(this.searchQuery))
       
-          // Check if the field value is defined before converting to lowercase
           console.log("value",data[this.selectedFilterType])
 
         
@@ -153,10 +149,8 @@ export class StatsComponent implements OnInit {
 
             this.searchQueryLower = this.searchQuery.toLowerCase();
 
-                console.log("fff",this.fieldValueString)
           return this.fieldValueString==this.searchQueryLower;
         
-        return false; // Exclude data if the selected field is not defined
       });
     } 
     // Update the dataset used by SlickGrid to the filtered dataset

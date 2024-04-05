@@ -1,9 +1,13 @@
 import { Component, OnInit, } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { AssetService } from 'src/app/services/asset.service';
-import { FormGroup } from '@angular/forms';
-
-
+import { FormGroup,FormControl } from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+interface WardData {
+  year: number;
+  price: number;
+}
 @Component({
   selector: 'app-reports-analytics',
   templateUrl: './reports-analytics.component.html',
@@ -15,11 +19,21 @@ export class ReportsAnalyticsComponent implements OnInit {
   searchDistrict: string = '';
   searchTaluk: string = '';
   selectedDistrict: string = '';
+  selectedDistrictOption:string="";
+  selectedTalukOption:string="";
+
   selectedTaluk: string = '';
   filteredDistricts: string[] = [];
   filteredTaluks: string[] = [];
+  myControl = new FormControl('');
+  Control = new FormControl('');
+  talukList:string[]=[];
+  opt:string=""
+  filteredOptions!: Observable<string[]>;
+  filteredTaluk!: Observable<string[]>;
+  ta:string[]=["che","mdu"]
+  wards: { [key: number]: WardData[] } = {};
 
- 
   onDistrictSearch() {
     this.filteredDistricts = this.filterItems(this.districts, this.searchDistrict);
   }
@@ -41,19 +55,31 @@ export class ReportsAnalyticsComponent implements OnInit {
     constructor(private assetService: AssetService) { }
 
   ngOnInit() {
+    console.log("taluks",this.taluks)
+
     this.fetchAssetData();
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value ?? '')),
+      
+    );
+    
+    }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log("dist",this.districts)
+    return this.districts.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+ 
+  
   private fetchAssetData() {
     this.assetService.getAllAssets().subscribe(
       (data) => {
         this.assetData = data;
         this.drawDoughnutChart();
         this.drawPieChart();
-
-
-
-
       },
       (error) => {
         console.error('Error fetching asset data:', error);
@@ -68,40 +94,40 @@ export class ReportsAnalyticsComponent implements OnInit {
 
 private drawLineChart() {
   console.log(this.selectedDistrict,this.selectedTaluk)
-  const landValueRange = this.extractLandValueFromDatabase(this.selectedDistrict, this.selectedTaluk);
 
-  // Convert the data to arrays for labels and data
+  const landValueRange = this.extractLandValueFromDatabase(this.selectedDistrictOption, this.selectedTalukOption);
+
   const years = Object.keys(landValueRange).map(Number);
-  const purchasePricesArray = Object.values(landValueRange);
 
-  // Create a single dataset with points sorted by x-axis (year)
-  const dataset: { x: number; y: number }[] = [];
-console.log("purchases",purchasePricesArray)
-  purchasePricesArray.forEach((prices, index) => {
-    // Add each point to the dataset
-    prices.forEach((price: number) => {
-      dataset.push({ x: years[index], y: price });
+  const dataset: { x: number; y: number }[][] = []; 
+
+  const wardNumbers = Object.keys(this.wards);
+  
+  wardNumbers.forEach((wardNumber: any, index) => {
+    const wardData = this.wards[wardNumber];
+    const datas: { x: number; y: number }[] = [];
+  
+    wardData.forEach((wardEntry) => {
+      datas.push({ x: wardEntry.year, y: wardEntry.price });
     });
+  
+    dataset.push(datas);
+  
+    console.log("data", wardNumbers);
   });
+  
+  console.log("dataset", dataset);
+  
 
-  // Sort dataset points based on the x-axis values (years)
-  dataset.sort((a, b) => a.x - b.x);
-
+ 
   const chart = new Chart(document.getElementById("lineChart") as HTMLCanvasElement, {
     type: 'line',
     data: {
       labels: years,
-      datasets: [{
-        label: 'Land Value Range (Rs)',
-        data: dataset,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgb(255, 99, 132)',
-      }],
+      datasets: [],
     },
     options: {
-      aspectRatio: 2.4,
+      aspectRatio: 2.8,
       scales: {
         y: {
           title: {
@@ -135,13 +161,18 @@ console.log("purchases",purchasePricesArray)
           },
           callbacks: {
             label: (context: any) => {
+              console.log("label",context)
               const currentValue = Math.abs(context.dataset.data[context.dataIndex].y);
               const index = context.dataIndex;
               const previousValue = Math.abs(index > 0 ? context.dataset.data[index - 1].y : null);
               const currentYear = context.dataset.data[context.dataIndex].x;
-              // const previousYear = index > 0 ? context.dataset.data[index - 1].x : null;
-          console.log("current",currentValue)
+          console.log("current",currentYear)
           console.log("previous",previousValue)
+
+          let wardInfo = '';
+    if (this.wards.hasOwnProperty(currentYear)) {
+      wardInfo = ` | Ward: ${this.wards[currentYear].join(', ')}`;
+    }
               let Change = previousValue !== 0 ? (((currentValue - previousValue)).toFixed(2)) : '0.00';
               console.log((((currentValue - previousValue) ).toFixed(2)))
               if (isNaN(parseFloat(Change))) {
@@ -157,7 +188,7 @@ console.log("purchases",purchasePricesArray)
                 }
               }
           
-              return `${currentYear}: Rs.${currentValue.toFixed(2)} | ${Change}`;
+              return `${currentYear}: Rs.${currentValue.toFixed(2)} | ${Change}${wardInfo}`;
             },
           },
           
@@ -172,6 +203,15 @@ console.log("purchases",purchasePricesArray)
       }
     }
   });
+  for(let index:number=0;index<wardNumbers.length;index++){
+  chart.data.datasets.push({
+    label: 'Ward'+ wardNumbers[index],
+    data: dataset[index],
+    borderColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
+    backgroundColor: `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
+    borderWidth: 2,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  })}
 }
 
 
@@ -179,13 +219,14 @@ console.log("purchases",purchasePricesArray)
 
 
 
-  private extractLandValueFromDatabase(searchDistrict: string, searchTaluk: string): { [key: number]: number[] } {
+  private extractLandValueFromDatabase(searchDistrict: string, searchTaluk: string): { [key: number]: number[] }{
     const landValueRange: { [key: number]: number[] } = {};
   
-    if (this.assetData && this.assetData.asset) {
+    if (this.assetData ?.asset) {
       this.assetData.asset.forEach((landArray: any[]) => {
         landArray.forEach((land: any) => {
-          if (land.selectedDistrict === searchDistrict && land.selectedTaluk === searchTaluk) {
+
+          if (land.selectedDistrict == searchDistrict && land.selectedTaluk == searchTaluk) {
             land.owners.forEach((owner: any) => {
               const ownershipDurationFrom = owner.ownershipDurationFrom;
   
@@ -193,16 +234,21 @@ console.log("purchases",purchasePricesArray)
                 const year = new Date(ownershipDurationFrom).getFullYear();
                 const purchasePrice = this.getPurchasePrice(owner);
                 const landArea = land.landArea || 0;
-
+                console.log("land",land.ward,year,purchasePrice)
+                if (this.wards.hasOwnProperty(land.ward)) {
+                    this.wards[land.ward].push({ year:year,price: (Math.floor(purchasePrice / landArea) )});
+                  
+              } else {
+                  this.wards[land.ward] = [{ year:year,price:Math.floor (purchasePrice / landArea) }];
+              }
+console.log("www",this.wards)
 
   
                 if (!isNaN(year) && !isNaN(purchasePrice)) {
                  if (!landValueRange.hasOwnProperty(year)) {
-                  // If the year doesn't exist, create a new array with the purchase price
                   landValueRange[year] = [(purchasePrice / landArea)];
                   console.log("p",purchasePrice,landArea,Math.floor(purchasePrice / landArea))
                 } else {
-                  // If the year already exists, add the purchase price to the existing array
                   landValueRange[year].push(Math.floor(purchasePrice/landArea));
                 }
                 }
@@ -214,7 +260,7 @@ console.log("purchases",purchasePricesArray)
       });
     }
   
-  
+  console.log("landvalue",landValueRange)
     return landValueRange;
   }
   
@@ -243,7 +289,6 @@ search(){
   private drawDoughnutChart() {
     const ctx = document.getElementById('doughnutChart') as HTMLCanvasElement;
     const landUseTypes = this.extractLandUseTypesFromDatabase();
-   // Initialize count for each land use type
    const landUseTypeCount: { [key: string]: number }  = {
     'Industrial': 0,
     'Residential': 0,
@@ -252,7 +297,6 @@ search(){
     'Agricultural': 0
   };
 
-  // Increment count based on data from the database
   landUseTypes.forEach(landUseType => {
     if (landUseTypeCount.hasOwnProperty(landUseType)) {
       landUseTypeCount[landUseType]++;
@@ -267,7 +311,7 @@ console.log(landUseTypeCount)
       labels: allLabels,
       datasets: [{
         data: dataValues,
-        backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFD700', '#c800ff'],
+        backgroundColor: ['#fa8e7d', '#92e089', '#8e90ed', '#FFD700', '#e8a0e8'],
       }]
     },
       options: {
@@ -293,7 +337,6 @@ console.log(landUseTypeCount)
       'Inam': 0
     };
   
-    // Increment count based on data from the database
     ownership.forEach(ownershipType => {
       if (ownershipTypeCount.hasOwnProperty(ownershipType)) {
         ownershipTypeCount[ownershipType]++;
@@ -308,7 +351,7 @@ console.log(landUseTypeCount)
         labels: allLabels,
         datasets: [{
           data: dataValues,
-          backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFD700', '#c800ff'],
+          backgroundColor: ['#fa8e7d', '#92e089', '#8e90ed', '#FFD700', '#e8a0e8'],
         }]
       },
       options: {
@@ -329,9 +372,9 @@ console.log(landUseTypeCount)
   private extractLandUseTypesFromDatabase(): string[] {
     const landUseTypes: string[] = [];
   
-    if (this.assetData && this.assetData.asset) {
-      this.assetData.asset.forEach((landArray: any[]) => { // Specify type as any[]
-        landArray.forEach((land: any) => { // Specify type as any
+    if (this.assetData ?.asset) {
+      this.assetData.asset.forEach((landArray: any[]) => { 
+        landArray.forEach((land: any) => { 
           landUseTypes.push(land.landUseType);
         });
       });
@@ -355,9 +398,9 @@ console.log(landUseTypeCount)
   private extractOwnershipFromDatabase(): string[] {
     const ownershipTypes: string[] = [];
   
-    if (this.assetData && this.assetData.asset) {
-      this.assetData.asset.forEach((ownershipArray: any[]) => { // Specify type as any[]
-        ownershipArray.forEach((owner: any) => { // Specify type as any
+    if (this.assetData ?.asset) {
+      this.assetData.asset.forEach((ownershipArray: any[]) => { 
+        ownershipArray.forEach((owner: any) => { 
           ownershipTypes.push(owner.ownership);
         });
       });
@@ -381,10 +424,7 @@ console.log(landUseTypeCount)
     'Chennai': ['none', 'Alandur', 'Ambattur', 'Aminjikarai', 'Ayanavaram', 'Egmore', 'Guindy', 'Madhavaram', 'Maduravoyal', 'Mambalam', 'Mylapore', 'Perambur', 'Purasawalkam', 'Sholinganallur', 'Thiruvottiyur', 'Tondiarpet', 'Velachery'],
     'Madurai': ['none', 'Kalligudi', 'Madurai East', 'Madurai North', 'Madurai(South)', 'Madurai West', 'Melur', 'Peraiyur', 'Thirupparankundram', 'Tirumangalam', 'Usilampatti', 'Vadipatti'],
   };
-  onDistrictChange() {
-    const selectedDistrict = this.form.get('selectedDistrict')?.value;
-    this.form.get('selectedTaluk')?.setValue(this.taluks[selectedDistrict][0]);
-  }
+
 
   
  

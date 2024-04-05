@@ -1,8 +1,7 @@
-// login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormGroup,FormBuilder,Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-login',
@@ -10,35 +9,41 @@ import { FormGroup,FormBuilder,Validators} from '@angular/forms';
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent {
-    loginForm!: FormGroup;
+  loginForm!: FormGroup;
   isLoginSuccess?: boolean;
   isFormSubmitted: boolean = false; // Add this flag
-  successMessage : string=''
-  errorMessage:string=''
+  successMessage: string = ''
+  errorMessage: string = ''
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      userName: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  ngOnInit() {
+    // Disable back button on the browser
+    history.pushState(null, '', window.location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
   }
 
   onSubmit() {
     this.isFormSubmitted = true;
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.adminLogin(email, password).subscribe(
+      const { userName, password } = this.loginForm.value;
+      this.authService.adminLogin(userName, password).subscribe(
         (isValidUser) => {
           this.isLoginSuccess = isValidUser;
           if (isValidUser) {
             console.log('Login successful');
-            this.successMessage='Login Success';
+            this.successMessage = 'Login Success';
             this.router.navigate(['./admin']);
-
           } else {
-            this.errorMessage='Invalid email or password'
+            this.errorMessage = 'Invalid email or password'
             console.error('Invalid email or password');
-            alert("invalid user or password")
           }
         },
         (error) => {

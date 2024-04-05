@@ -1,5 +1,5 @@
 
-import { Component, Inject, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -14,11 +14,9 @@ export class MapComponent  {
         private dialogRef: MatDialogRef<MapComponent>
       ) { }
     openMap(): void {
-        const latitude = 37.7749;
-        const longitude = -122.4194;
-        const zoomLevel = 14;
+        
     
-        const googleMapsUrl = `https://www.google.com/maps/d/u/0/`;
+        const googleMapsUrl = `https://www.google.com/maps/d/u/0/edit?mid=1dhWELnJMEYCYl-jGKkQgwTCy47tXM3c&ll=19.982951829951606%2C82.75998700000002&z=4`;
         window.open(googleMapsUrl, '_blank');
       }
 

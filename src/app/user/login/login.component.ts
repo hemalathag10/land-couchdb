@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
 import { DialogService } from 'src/app/services/dialog.service';
-import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
