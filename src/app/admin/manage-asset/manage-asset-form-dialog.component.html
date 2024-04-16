@@ -1,8 +1,7 @@
 <!-- manage-asset-dialog.component.html -->
-<div>
-  <h2>Manage Asset Form</h2>
-  <button type="button" class="close" (click)="dialogRef.close()"><i class="bi bi-x"></i>
-  </button>
+<div style="position: relative;">
+  <h2 style="display: inline-block; margin-right: 20px;">Manage Asset Form</h2>
+  <button type="button" class="close" (click)="dialogRef.close()" style="position: absolute; top: 0; right: 0;"><i class="bi bi-x"></i></button>
   <form [formGroup]="currentPage === 1 ? page1Form : page2Form" (ngSubmit)="onSubmitting()">
     
     <app-page1 *ngIf="currentPage === 1" [form]="page1Form"></app-page1>
@@ -10,7 +9,7 @@
 
     <button *ngIf="currentPage === 1" type="button" [disabled]="!page1Form.valid" (click)="nextPage()">Next</button>
     <button *ngIf="currentPage > 1" type="button" (click)="previousPage()">Previous</button>
-    <button *ngIf="currentPage === 2" type="submit" class="right">Submit</button>
+    <button *ngIf="currentPage === 2" type="submit"[disabled]="!page2Form.valid" class="right">Submit</button>
     <h4>{{this.success}}</h4>
   </form>
 </div>

@@ -17,6 +17,10 @@ export class AuthService {
 
   private apiUrl = 'http://localhost:5984/project'; 
   private baseUrl = 'http://localhost:5984/project/form'; 
+  CouchURL: string = 'https://localhost:5984';
+  dbName: string = 'land';
+  dbUserName: string = 'admin';
+  dbPassword: string = 'admin';
 
 
   private headers = new HttpHeaders({
@@ -158,6 +162,15 @@ export class AuthService {
         throw error;
       })
     );
+  }
+
+  userRegistration(document: any) {
+    const createUrl = `${this.CouchURL}/${this.dbName}`;
+    return this.http.post(createUrl, document, {
+      headers: {
+        'Authorization': 'Basic ' + btoa(this.dbUserName + ':' + this.dbPassword)
+      }
+    });
   }
 
 }

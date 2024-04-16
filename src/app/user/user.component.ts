@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-user',
   templateUrl:'./user.component.html',
-  styleUrls: ['./user.component.css']  // Ensure this line includes the correct path to your CSS file
+  styleUrls: ['./user.component.css']  
 
 })
 export class UserComponent {}

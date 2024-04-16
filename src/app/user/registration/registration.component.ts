@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders ,HttpErrorResponse} from '@angular/common/http';
 import { DialogService } from 'src/app/services/dialog.service';
 import * as CryptoJS from 'crypto-js';
-
+import { AuthService } from 'src/app/services/auth.service';
 
 import { MatDialogRef} from '@angular/material/dialog';
 
@@ -27,7 +27,8 @@ export class RegistrationComponent {
   errorMessage: string = '';
   errorPasswordMessage: string = '';
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private dialogService: DialogService, public dialogRef: MatDialogRef<RegistrationComponent> ) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private authService:AuthService,
+    private dialogService: DialogService, public dialogRef: MatDialogRef<RegistrationComponent> ) {
     this.myForm = this.fb.group({
       emailId: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -42,7 +43,19 @@ export class RegistrationComponent {
   onSubmit() {
     this.successMessage = '';
     this.errorMessage = '';
-  
+  const dbData={
+    data:{
+      emailId:this.myForm.value.emailId,
+      password:CryptoJS.AES.encrypt(this.myForm.value.password, 'secret key').toString(),
+      type:'user'
+    }
+  }
+
+  this.authService.userRegistration(dbData).subscribe((response:any)=>{
+    console.log(response)
+  })
+
+
     if (this.myForm.valid) {
       const formData = this.myForm.value as User;
   

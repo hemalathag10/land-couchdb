@@ -134,18 +134,15 @@ onSubmit() {
   this.assetService.updateAsset(existingData._id, formData[0]).subscribe(
     (response: any) => {
       console.log('Data updated in the database successfully:', response);
-      // Optionally, you can navigate to another page or perform other actions after successful update
     },
     (error) => {
       console.error('Error updating data in the database:', error);
-      // Handle error (show error message, log, etc.)
     });
 
   // Close the dialog
   this.dialogRef.close();
 }
 
-// Function to handle form submission
 onSubmitting() {
   
   const existingData = this.data;
