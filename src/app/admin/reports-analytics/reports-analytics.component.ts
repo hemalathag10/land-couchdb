@@ -210,8 +210,8 @@ private drawLineChart() {
     chart.data.datasets.push({
       label: 'Ward'+ wardNumbers[index],
       data: dataset[index],
-      borderColor: `rgb(${Math.floor(randomNumber)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
-      backgroundColor: `rgb(${Math.floor(randomNumber)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`,
+      borderColor: `rgb(${Math.floor(randomNumber)}, ${Math.floor(randomNumber)}, ${Math.floor(randomNumber)})`,
+      backgroundColor: `rgb(${Math.floor(randomNumber)}, ${Math.floor(randomNumber)}, ${Math.floor(randomNumber)})`,
       borderWidth: 2,
       pointBackgroundColor: 'rgb(255, 99, 132)',
     })}
