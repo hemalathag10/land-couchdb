@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 declare const Html5QrcodeScanner: any;
@@ -23,7 +23,9 @@ declare const Html5QrcodeScanner: any;
     }
   `]
 })
-export class QrCodeScannerComponent implements OnInit {
+export class QrCodeScannerComponent implements OnInit, OnDestroy {
+  private htmlScanner: any;
+
   constructor(
     private dialogRef: MatDialogRef<QrCodeScannerComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
@@ -32,37 +34,37 @@ export class QrCodeScannerComponent implements OnInit {
   ngOnInit(): void {
     this.initQrCodeScanner();
   }
-  
+
+  ngOnDestroy(): void {
+    this.stopScanner();
+  }
 
   private initQrCodeScanner(): void {
     const onScanSuccess = (decodeText: string, decodeResult: any): void => {
-      console.log(decodeText)
-      console.log("data",this.data.barcodeControl)
+      console.log(decodeText);
+      console.log("data", this.data.barcodeControl);
       this.data.onScanSuccess(decodeText);
-      this.stopCamera()
 
+      // Close the dialog after scanning
+      this.closeScanner();
+    };
 
-      };
-
-    const htmlScanner = new Html5QrcodeScanner('my-qr-reader', { fps: 10, qrbos: 250 });
-    htmlScanner.render(onScanSuccess);
-    
+    this.htmlScanner = new Html5QrcodeScanner('my-qr-reader', { fps: 10, qrbos: 250 });
+    this.htmlScanner.render(onScanSuccess);
   }
 
-  stopCamera(): void {
-    const videoElement = document.querySelector('video');
-    if (videoElement instanceof HTMLVideoElement) {
-      const stream = videoElement.srcObject as MediaStream;
-      const tracks = stream.getTracks();
-
-      tracks.forEach(track => {
-        track.stop();
+  private stopScanner(): void {
+    if (this.htmlScanner) {
+      this.htmlScanner.clear().then(() => {
+        console.log("QR Code scanning is stopped.");
+      }).catch((err: any) => {
+        console.error("Failed to stop QR Code scanning:", err);
       });
-
     }
   }
 
   closeScanner(): void {
+    // Close the dialog
     this.dialogRef.close();
   }
 }
