@@ -68,20 +68,12 @@ export class MapComponent  {
                 if (emailExists) {
                   const updatedFormData = { ...existingFormData };
                   updatedFormData.attachment = updatedFormData.attachment || {};
-                    // Check if the attachment with the given id already exists
-        if (updatedFormData.attachment[id]) {
-            // Append the new data to the existing attachment
+              
             updatedFormData.attachment[id] = {
               content_type: 'application/pdf',
               data: pdfData,
             };
-          } else {
-            // Create a new attachment with the given id
-            updatedFormData.attachment[id] = {
-              content_type: 'application/pdf',
-              data: pdfData,
-            };
-          }
+          
     
                   this.http.put('http://localhost:5984/project/pdf', updatedFormData, { headers })
                     .subscribe(

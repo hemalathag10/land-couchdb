@@ -102,7 +102,7 @@ export class PageComponent implements OnInit, AfterViewInit {
   
     const years = dataset.map(data => data.x);
   
-    new Chart(document.getElementById("lineChart") as HTMLCanvasElement, {
+    const chart =new Chart(document.getElementById("lineChart") as HTMLCanvasElement, {
       type: 'line',
       data: {
         labels: years.map(year => year.toString()), 

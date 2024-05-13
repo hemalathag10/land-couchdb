@@ -308,7 +308,7 @@ search(){
 console.log(landUseTypeCount)
   const allLabels = Object.keys(landUseTypeCount);
   const dataValues = Object.values(landUseTypeCount);
-  new Chart(ctx, {
+  const chart =new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: allLabels,
@@ -348,7 +348,7 @@ console.log(landUseTypeCount)
   console.log(ownershipTypeCount)
     const allLabels = Object.keys(ownershipTypeCount);
     const dataValues = Object.values(ownershipTypeCount);
-    new Chart(ctx, {
+    const chart=new Chart(ctx, {
       type: 'pie',
       data: {
         labels: allLabels,
